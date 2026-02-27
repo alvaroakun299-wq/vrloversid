@@ -1,0 +1,1735 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VR LOVERS INDONESIA | Alvaro Kendang Cilik Universe</title>
+    
+    <!-- SEO & Open Graph Meta Tags -->
+    <meta name="description" content="Platform digital fanbase resmi VR LOVERS INDONESIA untuk Alfaro Achmad Higuain (Alvaro Kendang Cilik). Jelajahi universe kami, ikuti update terbaru, dan jadilah bagian dari misi galaksi kami!">
+    <meta name="keywords" content="VR LOVERS INDONESIA, Alfaro Achmad Higuain, Alvaro Kendang Cilik, Bolangers, Musisi Cilik, Fanbase">
+    <meta name="author" content="VR LOVERS INDONESIA">
+    <meta property="og:title" content="VR LOVERS INDONESIA Universe">
+    <meta property="og:description" content="Platform digital fanbase resmi Alfaro Achmad Higuain (Alvaro Kendang Cilik).">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vrloversindonesia.com">
+    <meta property="og:image" content="https://placehold.co/1200x630/0b1d3a/00f3ff?text=VR+LOVERS+INDONESIA">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        space: {
+                            dark: '#030712', // Very dark black
+                            navy: '#0b1d3a', // Midnight blue
+                            blue: '#1d4ed8', // Cosmic blue
+                        },
+                        neon: {
+                            cyan: '#00f3ff',
+                            purple: '#9d4edd',
+                            pink: '#ff00ff'
+                        }
+                    },
+                    fontFamily: {
+                        orbitron: ['Orbitron', 'sans-serif'],
+                        rajdhani: ['Rajdhani', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --neon-cyan: #00f3ff;
+            --neon-purple: #9d4edd;
+            --neon-pink: #ff00ff;
+        }
+
+        body {
+            background-color: #030712;
+            color: #ffffff;
+            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+
+        h1, h2, h3, h4, .font-heading {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .font-subheading {
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        /* 3D Canvas Background */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        @media (min-width: 768px) {
+            ::-webkit-scrollbar {
+                width: 8px;
+            }
+        }
+        ::-webkit-scrollbar-track {
+            background: #030712;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, var(--neon-purple), var(--neon-cyan));
+            border-radius: 10px;
+        }
+
+        /* Scroll Progress Bar */
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink), var(--neon-purple));
+            width: 0%;
+            z-index: 1000;
+            box-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-pink);
+            transition: width 0.1s ease-out;
+        }
+
+        /* Loading Screen */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: #030712;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        .rocket-loader {
+            font-size: 3rem;
+            color: var(--neon-cyan);
+            animation: liftoff 2s infinite ease-in-out alternate;
+            text-shadow: 0 0 20px var(--neon-cyan);
+        }
+        @media (min-width: 768px) {
+            .rocket-loader { font-size: 4rem; }
+        }
+        @keyframes liftoff {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(-30px) scale(1.1); text-shadow: 0 20px 30px var(--neon-pink); }
+        }
+
+        /* Glassmorphism Panels */
+        .glass-panel {
+            background: linear-gradient(135deg, rgba(11, 29, 58, 0.5) 0%, rgba(3, 7, 18, 0.8) 100%);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 243, 255, 0.15);
+            border-top: 1px solid rgba(0, 243, 255, 0.4);
+            border-left: 1px solid rgba(0, 243, 255, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.05);
+        }
+
+        /* Micro Interactions & Glows */
+        .hover-glow {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .hover-glow:hover {
+            box-shadow: 0 10px 30px rgba(0, 243, 255, 0.2), inset 0 0 15px rgba(0, 243, 255, 0.3);
+            border-color: rgba(0, 243, 255, 0.6);
+            transform: translateY(-5px);
+        }
+        .text-glow {
+            text-shadow: 0 0 12px rgba(0, 243, 255, 0.8), 0 0 25px rgba(157, 78, 221, 0.6);
+        }
+
+        /* Buttons */
+        .btn-cosmic {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(270deg, #1d4ed8, #9d4edd, #ff00ff, #00f3ff, #1d4ed8);
+            background-size: 400% 400%;
+            animation: cosmicGradient 8s ease infinite;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            z-index: 1;
+            box-shadow: 0 0 15px rgba(157, 78, 221, 0.4);
+        }
+        @keyframes cosmicGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .btn-cosmic::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+            z-index: -1;
+        }
+        .btn-cosmic:hover::before {
+            left: 100%;
+        }
+        .btn-cosmic:hover {
+            box-shadow: 0 0 20px var(--neon-purple);
+        }
+
+        /* 3D Tilt Card */
+        .tilt-card {
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+            transition: transform 0.3s ease;
+        }
+        .tilt-card:hover {
+            transform: perspective(1000px) rotateX(5deg) rotateY(-5deg) scale(1.02);
+            box-shadow: -5px 5px 20px rgba(157, 78, 221, 0.4);
+        }
+
+        /* Orbit Timeline */
+        .orbit-path {
+            position: relative;
+            border-left: 2px dashed rgba(0, 243, 255, 0.3);
+            padding-left: 20px;
+            margin-left: 10px;
+        }
+        @media (min-width: 768px) {
+            .orbit-path {
+                padding-left: 30px;
+                margin-left: 20px;
+            }
+        }
+        .orbit-node {
+            position: absolute;
+            left: -31px;
+            top: 4px;
+            width: 20px;
+            height: 20px;
+            background: var(--neon-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 15px var(--neon-cyan);
+            transition: all 0.3s ease;
+        }
+        @media (min-width: 768px) {
+            .orbit-node {
+                left: -41px;
+            }
+        }
+        .timeline-item:hover .orbit-node {
+            background: var(--neon-pink);
+            box-shadow: 0 0 25px var(--neon-pink);
+            transform: scale(1.3);
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 10px;
+        }
+        @media (min-width: 640px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 15px;
+            }
+        }
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            cursor: pointer;
+            aspect-ratio: 1/1;
+            border: 2px solid transparent;
+            transition: all 0.4s ease;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease, filter 0.5s ease;
+            filter: brightness(0.7) grayscale(0.3);
+        }
+        .gallery-item:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
+            z-index: 10;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.1);
+            filter: brightness(1) grayscale(0);
+        }
+
+        /* Modal Galaksi */
+        #gallery-modal {
+            background: rgba(3, 7, 18, 0.95);
+            backdrop-filter: blur(15px);
+        }
+        .modal-content-img {
+            box-shadow: 0 0 50px rgba(157, 78, 221, 0.6);
+            border: 2px solid var(--neon-cyan);
+            border-radius: 16px;
+        }
+
+        /* Floating Animation */
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        .animate-float-delayed {
+            animation: float 6s ease-in-out 3s infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        /* Input Focus Glow */
+        .input-glow:focus {
+            outline: none;
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+            background: rgba(11, 29, 58, 0.8);
+        }
+
+        /* Portal QR Code Modal */
+        #qr-modal-content {
+            background: radial-gradient(circle at center, #1d4ed8 0%, #030712 100%);
+            border: 2px solid var(--neon-cyan);
+            box-shadow: 0 0 50px var(--neon-cyan), inset 0 0 30px var(--neon-purple);
+            animation: portalPulse 3s infinite alternate;
+        }
+        @keyframes portalPulse {
+            0% { box-shadow: 0 0 30px var(--neon-cyan), inset 0 0 20px var(--neon-purple); }
+            100% { box-shadow: 0 0 60px var(--neon-pink), inset 0 0 40px var(--neon-cyan); }
+        }
+
+        /* Futuristic Mobile Menu */
+        #mobile-menu {
+            transform-origin: top right;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+            transform: scale(0.95) translateY(-10px);
+            pointer-events: none;
+            visibility: hidden;
+        }
+        #mobile-menu.active {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            pointer-events: auto;
+            visibility: visible;
+        }
+        .menu-link {
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        .menu-link::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background: var(--neon-cyan);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+            transform-origin: bottom;
+            box-shadow: 0 0 10px var(--neon-cyan);
+        }
+        .menu-link:hover::before {
+            transform: scaleY(1);
+            transform-origin: top;
+        }
+        .menu-link:hover {
+            background: rgba(0, 243, 255, 0.1);
+            color: var(--neon-cyan);
+            padding-left: 1.5rem; /* Memberikan kesan bergeser saat hover */
+        }
+
+        /* Back to top rocket */
+        #back-to-top {
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        #back-to-top:hover {
+            transform: translateY(-10px) scale(1.1);
+        }
+        
+        /* Custom Select Styling */
+        select option {
+            background-color: #0b1d3a;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-neon-cyan selection:text-space-dark">
+
+    <!-- Loading Screen -->
+    <div id="loader">
+        <i class="fas fa-rocket rocket-loader"></i>
+        <h2 class="font-orbitron text-xl md:text-2xl mt-6 tracking-widest text-glow animate-pulse text-center px-4">INITIATING LAUNCH...</h2>
+    </div>
+
+    <!-- Scroll Progress -->
+    <div id="progress-bar"></div>
+
+    <!-- 3D Canvas -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-3 md:py-4 glass-panel border-t-0 border-l-0 border-r-0 rounded-none opacity-0 translate-y-[-100%]">
+        <div class="container mx-auto px-4 lg:px-12 flex justify-between items-center relative">
+            <a href="#" class="flex items-center gap-2 md:gap-3 group">
+                <i class="fas fa-meteor text-2xl md:text-3xl text-neon-cyan group-hover:rotate-45 transition-transform duration-500"></i>
+                <div>
+                    <h1 class="font-orbitron text-lg md:text-2xl font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-neon-purple">VR LOVERS</h1>
+                    <p class="font-rajdhani text-[10px] md:text-xs tracking-[0.3em] text-gray-300 hidden sm:block">INDONESIA</p>
+                </div>
+            </a>
+            
+            <!-- Actions: Join Mission & Hamburger -->
+            <div class="flex items-center gap-3 md:gap-6 font-rajdhani font-semibold tracking-wide">
+                <a href="#join" class="btn-cosmic px-4 py-1.5 md:px-6 md:py-2 rounded-full text-white text-xs md:text-lg whitespace-nowrap">Join Mission</a>
+                <button id="mobile-menu-btn" class="text-xl md:text-2xl text-neon-cyan hover:text-neon-pink transition-all duration-300 focus:outline-none w-8 h-8 flex items-center justify-center relative">
+                    <i class="fas fa-bars absolute transition-all duration-300 transform" id="icon-bars"></i>
+                    <i class="fas fa-xmark absolute transition-all duration-300 transform scale-0 opacity-0 rotate-90" id="icon-close"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Hamburger Dropdown Menu Panel -->
+        <div id="mobile-menu" class="absolute top-full left-4 right-4 lg:left-auto lg:right-12 mt-4 lg:w-56 glass-panel border border-neon-cyan/50 rounded-xl flex flex-col py-2 font-rajdhani text-base md:text-xl shadow-[0_0_30px_rgba(0,243,255,0.3)] backdrop-blur-xl z-50 overflow-hidden">
+            <a href="#hero" class="menu-link px-4 py-3 border-b border-gray-800/50 text-gray-200">
+                <i class="fas fa-home w-8 text-neon-cyan text-center"></i> Home
+            </a>
+            <a href="#about-alfaro" class="menu-link px-4 py-3 border-b border-gray-800/50 text-gray-200">
+                <i class="fas fa-user-astronaut w-8 text-neon-purple text-center"></i> Alfaro Achmad
+            </a>
+            <a href="#gallery" class="menu-link px-4 py-3 border-b border-gray-800/50 text-gray-200">
+                <i class="fas fa-images w-8 text-neon-pink text-center"></i> Gallery
+            </a>
+            <a href="#members" class="menu-link px-4 py-3 border-b border-gray-800/50 text-gray-200">
+                <i class="fas fa-users w-8 text-neon-cyan text-center"></i> Anggota Resmi
+            </a>
+            <a href="#news" class="menu-link px-4 py-3 text-gray-200">
+                <i class="fas fa-satellite-dish w-8 text-white text-center"></i> Updates
+            </a>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <header id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 md:pt-20 px-4">
+            <div class="container mx-auto z-10 text-center flex flex-col items-center">
+                <h1 class="gsap-hero-elem font-orbitron text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6 leading-tight text-glow tracking-wide">
+                    Welcome to <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan via-white to-neon-pink">VR LOVERS INDONESIA</span><br>
+                    Universe
+                </h1>
+                
+                <p class="gsap-hero-elem font-rajdhani text-lg sm:text-xl md:text-3xl text-gray-300 mb-8 md:mb-10 max-w-2xl mx-auto tracking-wide leading-relaxed">
+                    The Official Digital Fanbase for <span class="text-neon-cyan font-bold">Alfaro Achmad Higuain</span> (Alvaro Kendang Cilik). Explore the galaxy of music and bolangers!
+                </p>
+
+                <div class="gsap-hero-elem flex flex-col sm:flex-row gap-4 sm:gap-6 w-full sm:w-auto">
+                    <a href="#about-alfaro" class="btn-cosmic px-6 py-3 md:px-8 md:py-4 rounded-full font-orbitron font-bold text-sm md:text-lg tracking-wider flex items-center justify-center gap-3 w-full sm:w-auto">
+                        <i class="fas fa-rocket"></i> Explore Galaxy
+                    </a>
+                    <a href="#join" class="glass-panel hover-glow border border-neon-cyan px-6 py-3 md:px-8 md:py-4 rounded-full font-orbitron font-bold text-sm md:text-lg tracking-wider flex items-center justify-center gap-3 text-neon-cyan w-full sm:w-auto">
+                        <i class="fas fa-user-astronaut"></i> Join Mission
+                    </a>
+                </div>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce">
+                <span class="font-rajdhani text-xs md:text-sm tracking-widest text-gray-400 mb-2">SCROLL DOWN</span>
+                <i class="fas fa-chevron-down text-neon-cyan"></i>
+            </div>
+        </header>
+
+        <!-- About VR LOVERS Section -->
+        <section id="about-vr" class="py-16 md:py-24 relative">
+            <div class="container mx-auto px-4 md:px-6 relative z-10">
+                <div class="glass-panel rounded-3xl p-6 md:p-12 lg:p-16 max-w-5xl mx-auto flex flex-col-reverse md:flex-row items-center gap-8 md:gap-12 hover-glow">
+                    <div class="w-full md:w-1/2 text-center md:text-left">
+                        <h2 class="font-orbitron text-2xl md:text-4xl font-bold mb-4 md:mb-6 border-l-4 border-neon-pink pl-3 md:pl-4 inline-block md:block">About VR LOVERS INDONESIA</h2>
+                        <p class="font-inter text-gray-300 leading-relaxed text-sm md:text-lg mb-4 md:mb-6">
+                            Kami adalah pangkalan pusat (Mission Control) bagi seluruh pendukung setia Alfaro Achmad Higuain. Terbentuk dari kecintaan terhadap bakat luar biasa sang maestro kendang cilik, kami membangun sebuah komunitas yang solid, suportif, dan penuh energi seperti sistem tata suria yang terus berkembang.
+                        </p>
+                        <p class="font-inter text-gray-300 leading-relaxed text-sm md:text-lg">
+                            Di universe ini, tidak ada jarak. Kita terhubung melalui orbit musik dan karya-karya Alfaro.
+                        </p>
+                    </div>
+                    <div class="w-full md:w-1/2 flex justify-center relative mb-8 md:mb-0">
+                        <!-- Decorative floating planets -->
+                        <div class="w-32 h-32 md:w-40 md:h-40 bg-gradient-to-tr from-neon-pink to-space-blue rounded-full animate-float opacity-80 blur-[2px]"></div>
+                        <div class="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-tr from-neon-cyan to-white rounded-full animate-float-delayed absolute top-[-10px] md:top-[-20px] right-[10%] md:right-[20px] shadow-[0_0_30px_#00f3ff]"></div>
+                        <i class="fas fa-users text-5xl md:text-6xl text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 drop-shadow-lg"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Alfaro Section & Timeline -->
+        <section id="about-alfaro" class="py-16 md:py-24 relative overflow-hidden">
+            <!-- Background glow -->
+            <div class="absolute top-1/4 left-0 w-64 h-64 md:w-96 md:h-96 bg-neon-purple rounded-full mix-blend-screen filter blur-[100px] md:blur-[150px] opacity-20"></div>
+
+            <div class="container mx-auto px-4 md:px-6 relative z-10">
+                <div class="text-center mb-12 md:mb-16 gsap-slide-up">
+                    <h2 class="font-orbitron text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-white inline-block">Captain of the Ship</h2>
+                    <p class="font-rajdhani text-xl md:text-2xl mt-2 md:mt-4 text-neon-pink">Alfaro Achmad Higuain (Alvaro Kendang Cilik)</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-start">
+                    <!-- Storytelling -->
+                    <div class="gsap-slide-up space-y-8 md:space-y-6">
+                        <div class="glass-panel p-6 md:p-8 rounded-2xl relative border-t-4 border-t-neon-cyan mt-6 md:mt-0">
+                            <i class="fas fa-user-astronaut absolute -top-8 -right-2 md:-right-4 text-4xl md:text-5xl text-neon-cyan bg-space-dark rounded-full p-2 animate-float"></i>
+                            <h3 class="font-orbitron text-xl md:text-2xl mb-3 md:mb-4">Sang Maestro Cilik</h3>
+                            <p class="font-inter text-sm md:text-base text-gray-300 leading-relaxed">
+                                Dikenal luas sebagai <strong>Alvaro Kendang Cilik</strong>, Alfaro Achmad Higuain adalah fenomena dalam blantika musik tradisional modern Indonesia. Bakatnya memukul kendang dengan rentak yang tepat dan tenaga luar biasa menjadikannya bintang sejak usia yang sangat muda.
+                            </p>
+                        </div>
+                        
+                        <div class="glass-panel p-6 md:p-8 rounded-2xl relative border-t-4 border-t-neon-purple tilt-card mt-8 md:mt-0">
+                            <i class="fas fa-drum absolute -top-8 -left-2 md:-left-4 text-4xl md:text-5xl text-neon-purple bg-space-dark rounded-full p-2 animate-float-delayed"></i>
+                            <h3 class="font-orbitron text-xl md:text-2xl mb-3 md:mb-4">Musik & Bolangers</h3>
+                            <p class="font-inter text-sm md:text-base text-gray-300 leading-relaxed">
+                                Tidak hanya jago bermain musik, Alfaro juga dikenal sebagai "Bolangers" sejati—jiwa petualang yang mengeksplorasi berbagai panggung. Setiap pukulannya di atas kendang bukan sekadar nota musik, melainkan sinyal kosmik yang menyatukan jutaan penggemar.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Career Timeline (Orbit Path) -->
+                    <div class="gsap-slide-up glass-panel p-6 md:p-8 rounded-3xl">
+                        <h3 class="font-orbitron text-xl md:text-2xl mb-6 md:mb-8 flex items-center gap-3">
+                            <i class="fas fa-route text-neon-cyan"></i> Orbit Perjalanan Karier
+                        </h3>
+                        <div class="orbit-path space-y-10 md:space-y-12">
+                            <div class="timeline-item relative">
+                                <div class="orbit-node"></div>
+                                <h4 class="font-rajdhani text-lg md:text-xl font-bold text-neon-cyan mb-1 md:mb-2">Awal Mula Misi</h4>
+                                <p class="text-sm md:text-base text-gray-400 leading-relaxed">Menemukan ketertarikan pada alat musik kendang, memulai pukulan-pukulan kecil yang kelak mengguncang panggung.</p>
+                            </div>
+                            <div class="timeline-item relative">
+                                <div class="orbit-node"></div>
+                                <h4 class="font-rajdhani text-lg md:text-xl font-bold text-neon-pink mb-1 md:mb-2">Viral di Galaksi Internet</h4>
+                                <p class="text-sm md:text-base text-gray-400 leading-relaxed">Penampilannya mulai terdeteksi oleh radar publik. Gelaran "Alvaro Kendang Cilik" bergema di berbagai platform digital.</p>
+                            </div>
+                            <div class="timeline-item relative">
+                                <div class="orbit-node"></div>
+                                <h4 class="font-rajdhani text-lg md:text-xl font-bold text-neon-purple mb-1 md:mb-2">Panggung-Panggung Besar</h4>
+                                <p class="text-sm md:text-base text-gray-400 leading-relaxed">Berkolaborasi dengan musisi ternama, menghiasi acara televisi, dan menjadi ikon musisi cilik berbakat Indonesia.</p>
+                            </div>
+                            <div class="timeline-item relative">
+                                <div class="orbit-node"></div>
+                                <h4 class="font-rajdhani text-lg md:text-xl font-bold text-white mb-1 md:mb-2">Terbentuknya VR LOVERS</h4>
+                                <p class="text-sm md:text-base text-gray-400 leading-relaxed">Pembentukan armada fanbase resmi untuk mendukung setiap langkah kosmik Alvaro di masa depan.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- News / Update Section (Galactic Transmission) -->
+        <section id="news" class="py-16 md:py-24 bg-space-navy bg-opacity-30 relative border-y border-neon-cyan/20">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 md:mb-12 gsap-slide-up text-center md:text-left">
+                    <div class="w-full">
+                        <h2 class="font-orbitron text-2xl md:text-4xl font-bold"><i class="fas fa-satellite-dish text-neon-cyan mr-2 md:mr-3"></i> Galactic Transmission</h2>
+                        <p class="font-rajdhani text-lg md:text-xl text-gray-400 mt-2">Update & Berita Terbaru dari Alfaro</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
+                    <!-- News Card 1 -->
+                    <article class="glass-panel rounded-2xl overflow-hidden hover-glow gsap-slide-up flex flex-col h-full">
+                        <a href="https://instagram.com/vrlovers_indonesia" target="_blank" class="block h-40 md:h-48 bg-gray-800 relative overflow-hidden group">
+                            <!-- Custom Image (Fallback ke Placehold.co jika fail tidak wujud) -->
+                            <img src="images/news1.jpg" alt="Jadwal Tur" onerror="this.src='https://placehold.co/600x400/0b1d3a/00f3ff?text=Jadwal+Manggung'" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute top-3 right-3 md:top-4 md:right-4 bg-neon-purple text-[10px] md:text-xs font-bold px-2 py-1 md:px-3 md:py-1 rounded-full text-white font-orbitron">NEW</div>
+                        </a>
+                        <div class="p-5 md:p-6 flex flex-col flex-grow">
+                            <p class="text-[10px] md:text-xs text-neon-cyan font-rajdhani mb-2"><i class="far fa-calendar-alt"></i> 15 Agustus 2026</p>
+                            <h3 class="font-orbitron text-base md:text-lg font-bold mb-3 line-clamp-2"><a href="https://instagram.com/vrlovers_indonesia" target="_blank" class="hover:text-neon-cyan transition-colors">Jadwal Tur Antar Kota: Alvaro Siap Mengguncang Panggung Jawa Timur!</a></h3>
+                            <div class="mt-auto pt-3 md:pt-4">
+                                <!-- Active Hyperlink -->
+                                <a href="https://instagram.com/vrlovers_indonesia" target="_blank" class="text-xs md:text-sm text-neon-pink hover:text-white transition-colors flex items-center gap-2 w-max">
+                                    Baca Selengkapnya <i class="fas fa-external-link-alt text-[10px] md:text-xs"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- News Card 2 -->
+                    <article class="glass-panel rounded-2xl overflow-hidden hover-glow gsap-slide-up flex flex-col h-full" style="transition-delay: 100ms;">
+                        <a href="https://youtube.com/c/AlvaroKendang" target="_blank" class="block h-40 md:h-48 bg-gray-800 relative overflow-hidden group">
+                            <!-- Custom Image -->
+                            <img src="images/news2.jpg" alt="Kolaborasi Baru" onerror="this.src='https://placehold.co/600x400/0b1d3a/ff00ff?text=Kolaborasi'" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        </a>
+                        <div class="p-5 md:p-6 flex flex-col flex-grow">
+                            <p class="text-[10px] md:text-xs text-neon-cyan font-rajdhani mb-2"><i class="far fa-calendar-alt"></i> 02 Agustus 2026</p>
+                            <h3 class="font-orbitron text-base md:text-lg font-bold mb-3 line-clamp-2"><a href="https://youtube.com/c/AlvaroKendang" target="_blank" class="hover:text-neon-cyan transition-colors">Kolaborasi Kejutan! Single Baru dengan Nuansa Etnik Modern Segera Dirilis</a></h3>
+                            <div class="mt-auto pt-3 md:pt-4">
+                                <!-- Active Hyperlink -->
+                                <a href="https://youtube.com/c/AlvaroKendang" target="_blank" class="text-xs md:text-sm text-neon-pink hover:text-white transition-colors flex items-center gap-2 w-max">
+                                    Lihat Video <i class="fas fa-play-circle text-[10px] md:text-xs"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- News Card 3 -->
+                    <article class="glass-panel rounded-2xl overflow-hidden hover-glow gsap-slide-up flex flex-col h-full" style="transition-delay: 200ms;">
+                        <a href="https://wa.me/6285708845405" target="_blank" class="block h-40 md:h-48 bg-gray-800 relative overflow-hidden group">
+                            <!-- Custom Image -->
+                            <img src="images/news3.jpg" alt="Merchandise Resmi" onerror="this.src='https://placehold.co/600x400/0b1d3a/9d4edd?text=Merchandise'" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        </a>
+                        <div class="p-5 md:p-6 flex flex-col flex-grow">
+                            <p class="text-[10px] md:text-xs text-neon-cyan font-rajdhani mb-2"><i class="far fa-calendar-alt"></i> 28 Juli 2026</p>
+                            <h3 class="font-orbitron text-base md:text-lg font-bold mb-3 line-clamp-2"><a href="https://wa.me/6285708845405" target="_blank" class="hover:text-neon-cyan transition-colors">Merchandise Resmi VR LOVERS Edisi 'Space Explorer' Kini Tersedia</a></h3>
+                            <div class="mt-auto pt-3 md:pt-4">
+                                <!-- Active Hyperlink -->
+                                <a href="https://wa.me/6285708845405" target="_blank" class="text-xs md:text-sm text-neon-pink hover:text-white transition-colors flex items-center gap-2 w-max">
+                                    Beli Sekarang <i class="fas fa-shopping-cart text-[10px] md:text-xs"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Countdowns & YouTube Section -->
+        <section id="media-count" class="py-16 md:py-24 relative">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+                    <!-- Control Panel Countdowns -->
+                    <div class="glass-panel p-6 md:p-8 rounded-3xl border-2 border-gray-700 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] gsap-slide-up">
+                        <h2 class="font-orbitron text-xl md:text-2xl mb-6 md:mb-8 border-b border-gray-600 pb-4 text-center"><i class="fas fa-clock text-neon-pink"></i> Mission Timers</h2>
+                        
+                        <div class="mb-8 md:mb-10">
+                            <h3 class="font-rajdhani text-lg md:text-xl text-center mb-4 text-neon-cyan tracking-widest uppercase">Alfaro's Birthday Launch</h3>
+                            <div class="flex justify-center gap-2 sm:gap-4 text-center font-orbitron" id="bday-countdown">
+                                <div class="bg-space-dark border border-neon-cyan p-2 sm:p-3 rounded-lg min-w-[60px] sm:min-w-[70px]">
+                                    <span class="text-2xl sm:text-3xl text-white" id="bday-d">00</span><br><span class="text-[10px] sm:text-xs text-neon-cyan">DAYS</span>
+                                </div>
+                                <div class="text-xl sm:text-2xl pt-2 text-neon-cyan">:</div>
+                                <div class="bg-space-dark border border-neon-cyan p-2 sm:p-3 rounded-lg min-w-[60px] sm:min-w-[70px]">
+                                    <span class="text-2xl sm:text-3xl text-white" id="bday-h">00</span><br><span class="text-[10px] sm:text-xs text-neon-cyan">HOURS</span>
+                                </div>
+                                <div class="text-xl sm:text-2xl pt-2 text-neon-cyan">:</div>
+                                <div class="bg-space-dark border border-neon-cyan p-2 sm:p-3 rounded-lg min-w-[60px] sm:min-w-[70px]">
+                                    <span class="text-2xl sm:text-3xl text-white" id="bday-m">00</span><br><span class="text-[10px] sm:text-xs text-neon-cyan">MINS</span>
+                                </div>
+                                <div class="text-xl sm:text-2xl pt-2 text-neon-cyan">:</div>
+                                <div class="bg-space-dark border border-neon-cyan p-2 sm:p-3 rounded-lg min-w-[60px] sm:min-w-[70px]">
+                                    <span class="text-2xl sm:text-3xl text-neon-pink" id="bday-s">00</span><br><span class="text-[10px] sm:text-xs text-neon-cyan">SECS</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="font-rajdhani text-lg md:text-xl text-center mb-4 text-neon-purple tracking-widest uppercase">VR LOVERS Anniversary</h3>
+                            <div class="flex justify-center gap-2 sm:gap-4 text-center font-orbitron" id="anniv-countdown">
+                                <div class="bg-space-dark border border-neon-purple p-2 sm:p-3 rounded-lg min-w-[60px] sm:min-w-[70px]">
+                                    <span class="text-2xl sm:text-3xl text-white" id="anniv-d">00</span><br><span class="text-[10px] sm:text-xs text-neon-purple">DAYS</span>
+                                </div>
+                                <div class="text-xl sm:text-2xl pt-2 text-neon-purple">:</div>
+                                <div class="bg-space-dark border border-neon-purple p-2 sm:p-3 rounded-lg min-w-[60px] sm:min-w-[70px]">
+                                    <span class="text-2xl sm:text-3xl text-white" id="anniv-h">00</span><br><span class="text-[10px] sm:text-xs text-neon-purple">HOURS</span>
+                                </div>
+                                <div class="text-xl sm:text-2xl pt-2 text-neon-purple">:</div>
+                                <div class="bg-space-dark border border-neon-purple p-2 sm:p-3 rounded-lg min-w-[60px] sm:min-w-[70px]">
+                                    <span class="text-2xl sm:text-3xl text-white" id="anniv-m">00</span><br><span class="text-[10px] sm:text-xs text-neon-purple">MINS</span>
+                                </div>
+                                <div class="text-xl sm:text-2xl pt-2 text-neon-purple">:</div>
+                                <div class="bg-space-dark border border-neon-purple p-2 sm:p-3 rounded-lg min-w-[60px] sm:min-w-[70px]">
+                                    <span class="text-2xl sm:text-3xl text-neon-pink" id="anniv-s">00</span><br><span class="text-[10px] sm:text-xs text-neon-purple">SECS</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Spaceship Monitor YouTube -->
+                    <div class="glass-panel p-4 rounded-3xl border-4 border-gray-800 relative gsap-slide-up shadow-[0_0_30px_rgba(0,0,0,0.8)]">
+                        <div class="absolute top-2 left-1/2 transform -translate-x-1/2 w-16 md:w-20 h-1.5 md:h-2 bg-neon-cyan rounded-full animate-pulse opacity-50"></div>
+                        <h2 class="font-orbitron text-lg md:text-xl mb-4 pl-2 md:pl-4 pt-4"><i class="fab fa-youtube text-red-500"></i> Video Transmission Log</h2>
+                        <div class="aspect-video w-full rounded-xl overflow-hidden border border-gray-700 bg-black">
+                            <!-- Dummy/Placeholder YouTube Embed -->
+                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/videoseries?list=PLx0sYbCqOb8TBPRdmBHs5Iftvv9TPboYG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="filter grayscale-[20%] hover:grayscale-0 transition-all duration-500"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section (Exactly 40 manual images) -->
+        <section id="gallery" class="py-16 md:py-24 relative bg-space-dark z-20">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="text-center mb-12 md:mb-16 gsap-slide-up">
+                    <h2 class="font-orbitron text-3xl md:text-5xl font-bold"><i class="fas fa-images text-neon-purple"></i> Constellation Gallery</h2>
+                    <p class="font-rajdhani text-lg md:text-xl mt-2 md:mt-4 text-gray-400">Arsip memori perjalanan Alfaro dan VR LOVERS INDONESIA</p>
+                </div>
+
+                <!-- STRICT 40 IMAGES MANUAL REQUIREMENT -->
+                <div class="gallery-grid" id="gallery-container">
+                    <img src="image/VRLID1.jpg" alt="Memori 1" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/00f3ff?text=Galeri+1'">
+                    <img src="image/VRLID2.jpg" alt="Memori 2" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/9d4edd?text=Galeri+2'">
+                    <img src="image/VRLID3.jpg" alt="Memori 3" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/ff00ff?text=Galeri+3'">
+                    <img src="image/VRLID4.jpg" alt="Memori 4" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/00f3ff?text=Galeri+4'">
+                    <img src="image/VRLID5.jpg" alt="Memori 5" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/9d4edd?text=Galeri+5'">
+                    <img src="image/VRLID6.jpg" alt="Memori 6" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/ff00ff?text=Galeri+6'">
+                    <img src="image/VRLID7.jpg" alt="Memori 7" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/00f3ff?text=Galeri+7'">
+                    <img src="image/VRLID8.jpg" alt="Memori 8" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/9d4edd?text=Galeri+8'">
+                    <img src="image/VRLID9.jpg" alt="Memori 9" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/ff00ff?text=Galeri+9'">
+                    <img src="image/VRLID10.jpg" alt="Memori 10" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/9d4edd?text=Galeri+1'">
+                    
+                    <img src="image/VRLID11.jpg" alt="Memori 11" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/9d4edd?text=Galeri+11'">
+                    <img src="image/VRLID12.jpg" alt="Memori 12" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/ff00ff?text=Galeri+12'">
+                    <img src="image/VRLID13.jpg" alt="Memori 13" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/00f3ff?text=Galeri+13'">
+                    <img src="image/VRLID14.jpg" alt="Memori 14" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/9d4edd?text=Galeri+14'">
+                    <img src="image/VRLID15.jpg" alt="Memori 15" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/ff00ff?text=Galeri+15'">
+                    <img src="image/VRLID16.jpg" alt="Memori 16" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/00f3ff?text=Galeri+16'">
+                    <img src="image/VRLID17.jpg" alt="Memori 17" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/9d4edd?text=Galeri+17'">
+                    <img src="image/VRLID18.jpg" alt="Memori 18" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/ff00ff?text=Galeri+18'">
+                    <img src="image/VRLID19.jpg" alt="Memori 19" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/00f3ff?text=Galeri+19'">
+                    <img src="image/VRLID20.jpg" alt="Memori 20" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/9d4edd?text=Galeri+20'">
+                    
+                    <img src="image/VRLID21.jpg" alt="Memori 21" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/ff00ff?text=Galeri+21'">
+                    <img src="image/VRLID22.jpg" alt="Memori 22" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/00f3ff?text=Galeri+22'">
+                    <img src="image/VRLID23.jpg" alt="Memori 23" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/9d4edd?text=Galeri+23'">
+                    <img src="image/VRLID24.jpg" alt="Memori 24" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/ff00ff?text=Galeri+24'">
+                    <img src="image/VRLID25.jpg" alt="Memori 25" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/00f3ff?text=Galeri+25'">
+                    <img src="image/VRLID26.jpg" alt="Memori 26" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/9d4edd?text=Galeri+26'">
+                    <img src="image/VRLID27.jpg" alt="Memori 27" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/ff00ff?text=Segera+Hadir'">
+                    <img src="image/VRLID28.jpg" alt="Memori 28" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/00f3ff?text=Galeri+28'">
+                    <img src="image/VRLID29.jpg" alt="Memori 29" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/9d4edd?text=Galeri+29'">
+                    <img src="image/VRLID30.jpg" alt="Memori 30" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/ff00ff?text=Galeri+30'">
+                    
+                    <img src="image/VRLID31.jpg" alt="Memori 31" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/00f3ff?text=Galeri+31'">
+                    <img src="image/VRLID32.jpg" alt="Memori 32" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/9d4edd?text=Galeri+32'">
+                    <img src="image/VRLID33.jpg" alt="Memori 33" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/ff00ff?text=Galeri+33'">
+                    <img src="image/VRLID34.jpg" alt="Memori 34" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/00f3ff?text=Galeri+34'">
+                    <img src="image/VRLID35.jpg" alt="Memori 35" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/9d4edd?text=Galeri+35'">
+                    <img src="image/VRLID36.jpg" alt="Memori 36" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/ff00ff?text=Galeri+36'">
+                    <img src="image/VRLID37.jpg" alt="Memori 37" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/00f3ff?text=Galeri+37'">
+                    <img src="image/VRLID38.jpg" alt="Memori 38" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/9d4edd?text=Galeri+38'">
+                    <img src="image/VRLID39.jpg" alt="Memori 39" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/ff00ff?text=Galeri+39'">
+                    <img src="image/VRLID40.jpg" alt="Memori 40" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/00f3ff?text=Galeri+40'">
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Modal -->
+        <div id="gallery-modal" class="fixed inset-0 z-[100] hidden flex justify-center items-center opacity-0 transition-opacity duration-300">
+            <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="closeModal()"></div>
+            <!-- Stars animation in modal bg -->
+            <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
+                <div class="absolute w-2 h-2 bg-white rounded-full animate-ping" style="top: 20%; left: 30%;"></div>
+                <div class="absolute w-2 h-2 bg-white rounded-full animate-ping" style="top: 70%; left: 80%; animation-delay: 1s;"></div>
+            </div>
+            
+            <button onclick="closeModal()" class="absolute top-4 right-6 md:top-6 md:right-8 text-white text-3xl md:text-4xl hover:text-neon-pink transition-colors z-[101]">&times;</button>
+            <img id="modal-img" src="" alt="Zoomed" class="modal-content-img max-w-[95vw] md:max-w-[90vw] max-h-[85vh] object-contain relative z-[101]">
+        </div>
+
+        <!-- Official Members Section -->
+        <section id="members" class="py-16 md:py-24 relative overflow-hidden bg-space-navy/20 border-t border-neon-cyan/20">
+            <div class="container mx-auto px-4 md:px-6 relative z-10">
+                <div class="text-center mb-10 md:mb-12 gsap-slide-up">
+                    <h2 class="font-orbitron text-2xl md:text-4xl font-bold"><i class="fas fa-users text-neon-cyan"></i> Database Anggota Resmi</h2>
+                    <p class="font-rajdhani text-gray-400 mt-2 text-base md:text-lg">Cari akun VR Lovers dari seluruh galaksi.</p>
+                </div>
+
+                <!-- Search & Sort Bar -->
+                <div class="max-w-3xl mx-auto mb-8 md:mb-10 relative gsap-slide-up flex flex-col md:flex-row gap-4">
+                    <div class="relative flex-grow">
+                        <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-neon-cyan"></i>
+                        <input type="text" id="search-member" placeholder="Ketik nama atau username..." class="w-full bg-space-dark/80 border border-neon-cyan/50 rounded-full py-3 md:py-4 pl-12 pr-6 text-sm md:text-base text-white input-glow transition-all shadow-[0_0_20px_rgba(0,243,255,0.1)] focus:shadow-[0_0_20px_rgba(0,243,255,0.4)]">
+                    </div>
+                    <div class="relative md:w-64">
+                        <i class="fas fa-sort absolute left-4 top-1/2 transform -translate-y-1/2 text-neon-purple"></i>
+                        <select id="sort-member" class="w-full bg-space-dark/80 border border-neon-purple/50 rounded-full py-3 md:py-4 pl-12 pr-10 text-sm md:text-base text-white input-glow transition-all appearance-none cursor-pointer focus:border-neon-purple focus:shadow-[0_0_20px_rgba(157,78,221,0.4)]">
+                            <option value="newest">Terbaru</option>
+                            <option value="oldest">Terlama</option>
+                        </select>
+                        <i class="fas fa-chevron-down absolute right-5 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+                    </div>
+                </div>
+
+                <!-- Members Grid -->
+                <div id="members-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 gsap-slide-up">
+                    <!-- Cards will be generated via JavaScript -->
+                </div>
+
+                <!-- Not Found / Add New Prompt -->
+                <div id="not-found-msg" class="hidden text-center mt-8 glass-panel max-w-lg mx-auto p-6 md:p-8 rounded-2xl border-dashed border-neon-pink">
+                    <i class="fas fa-user-astronaut text-3xl md:text-4xl text-gray-500 mb-4"></i>
+                    <h3 class="font-orbitron text-lg md:text-xl text-white mb-2">Sinyal Tidak Ditemukan</h3>
+                    <p class="font-inter text-xs md:text-sm text-gray-400 mb-6">Nama atau akun tersebut belum terdaftar di database pusat kami.</p>
+                    <button onclick="openAddMemberModal()" class="btn-cosmic px-5 py-2.5 md:px-6 md:py-3 rounded-full font-orbitron font-bold text-xs md:text-sm tracking-widest flex items-center justify-center gap-2 mx-auto">
+                        <i class="fas fa-plus-circle"></i> Daftarkan Akun
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Join Member Section -->
+        <section id="join" class="py-16 md:py-24 relative overflow-hidden">
+            <div class="container mx-auto px-4 md:px-6 relative z-10">
+                <div class="max-w-3xl mx-auto glass-panel p-6 md:p-10 rounded-3xl relative">
+                    <!-- Deco lines -->
+                    <div class="absolute top-0 left-6 md:left-10 w-16 md:w-20 h-1 bg-neon-cyan"></div>
+                    <div class="absolute bottom-0 right-6 md:right-10 w-16 md:w-20 h-1 bg-neon-pink"></div>
+
+                    <div class="text-center mb-8 md:mb-10">
+                        <i class="fas fa-id-card text-4xl md:text-5xl text-neon-cyan mb-3 md:mb-4"></i>
+                        <h2 class="font-orbitron text-2xl md:text-3xl font-bold">Mission Control Registration</h2>
+                        <p class="font-rajdhani text-sm md:text-base text-gray-400 mt-2">Daftar sebagai anggota resmi VR LOVERS INDONESIA</p>
+                    </div>
+
+                    <!-- Added 'name' attributes for Google Sheets FormData mapping -->
+                    <form id="join-form" class="space-y-5 md:space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+                            <div>
+                                <label class="block font-rajdhani text-xs md:text-sm text-neon-cyan mb-1 tracking-widest uppercase">Call Sign (Nama Lengkap)</label>
+                                <input type="text" id="fname" name="nama" required class="w-full bg-space-dark/50 border border-gray-600 rounded-lg p-3 text-sm md:text-base text-white input-glow transition-all" placeholder="Astronaut John">
+                            </div>
+                            <div>
+                                <label class="block font-rajdhani text-xs md:text-sm text-neon-cyan mb-1 tracking-widest uppercase">Comms Channel (No. WhatsApp)</label>
+                                <input type="tel" id="fphone" name="telepon" required class="w-full bg-space-dark/50 border border-gray-600 rounded-lg p-3 text-sm md:text-base text-white input-glow transition-all" placeholder="08xx xxxx xxxx">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block font-rajdhani text-xs md:text-sm text-neon-cyan mb-1 tracking-widest uppercase">Base Coordinates (Kota Asal)</label>
+                            <input type="text" id="fcity" name="alamat" required class="w-full bg-space-dark/50 border border-gray-600 rounded-lg p-3 text-sm md:text-base text-white input-glow transition-all" placeholder="Banyuwangi">
+                        </div>
+                        <button type="submit" class="w-full btn-cosmic py-3 md:py-4 rounded-xl font-orbitron font-bold text-sm md:text-lg mt-2 md:mt-4 flex justify-center items-center gap-2">
+                            <i class="fas fa-satellite-dish"></i> TRANSMIT DATA
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Prompt Add to Database Modal -->
+        <div id="prompt-add-database-modal" class="fixed inset-0 z-[100] hidden flex justify-center items-center opacity-0 transition-opacity duration-300">
+            <div class="absolute inset-0 bg-black/90 backdrop-blur-lg"></div>
+            
+            <div class="relative z-[101] p-6 md:p-10 glass-panel border border-neon-cyan rounded-3xl text-center max-w-md w-full mx-4 shadow-[0_0_40px_rgba(0,243,255,0.2)]">
+                <i class="fas fa-check-circle text-4xl md:text-5xl text-neon-cyan mb-4 animate-bounce"></i>
+                <h3 class="font-orbitron text-xl md:text-2xl font-bold text-white mb-2 text-glow">Pendaftaran Berhasil!</h3>
+                <p class="font-rajdhani text-gray-300 mb-6 md:mb-8 text-sm md:text-lg leading-relaxed">Seterusnya, apakah Anda ingin mendaftarkan akun fans Anda ke dalam Database Anggota Resmi VR LOVERS sekarang?</p>
+                
+                <div class="flex flex-col gap-3 md:gap-4">
+                    <button onclick="promptAction('sekarang')" class="w-full btn-cosmic py-3 rounded-xl font-orbitron text-sm md:text-base font-bold tracking-wider hover-glow">
+                        Tambahkan Sekarang
+                    </button>
+                    <button onclick="promptAction('nanti')" class="w-full bg-space-dark/50 border border-gray-600 hover:border-neon-pink hover:text-neon-pink transition-colors py-3 rounded-xl font-orbitron text-gray-400 text-sm md:text-base font-bold tracking-wider">
+                        Tambahkan Nanti
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- QR Code Portal Modal -->
+        <div id="qr-modal" class="fixed inset-0 z-[100] hidden flex justify-center items-center opacity-0 transition-opacity duration-300">
+            <div class="absolute inset-0 bg-black/90 backdrop-blur-lg" onclick="closeQRModal()"></div>
+            
+            <div id="qr-modal-content" class="relative z-[101] p-6 md:p-10 rounded-3xl text-center max-w-sm w-full mx-4">
+                <button onclick="closeQRModal()" class="absolute top-3 right-4 md:top-4 right-4 text-gray-400 hover:text-white transition-colors text-2xl">&times;</button>
+                
+                <h3 class="font-orbitron text-xl md:text-2xl font-bold text-white mb-2 text-glow">Access Granted!</h3>
+                <p class="font-rajdhani text-xs md:text-sm text-neon-cyan mb-5 md:mb-6">Scan portal ini untuk masuk ke grup pusat VR LOVERS INDONESIA</p>
+                
+                <div class="bg-white p-3 md:p-4 rounded-xl inline-block shadow-[0_0_20px_#fff]">
+                    <!-- QR Code akan di generate disini -->
+                    <div id="qrcode"></div>
+                </div>
+                
+                <p class="mt-4 md:mt-6 text-[10px] md:text-xs text-gray-400 font-inter">Welcome aboard, new explorer.</p>
+            </div>
+        </div>
+
+        <!-- Add Member Form Modal -->
+        <div id="add-member-modal" class="fixed inset-0 z-[100] hidden flex justify-center items-center opacity-0 transition-opacity duration-300">
+            <div class="absolute inset-0 bg-black/90 backdrop-blur-lg" onclick="closeAddMemberModal()"></div>
+            
+            <div class="relative z-[101] p-6 md:p-8 glass-panel border border-neon-cyan rounded-3xl text-center max-w-md w-full mx-4 max-h-[90vh] overflow-y-auto">
+                <button onclick="closeAddMemberModal()" class="absolute top-3 right-4 md:top-4 right-4 text-gray-400 hover:text-white transition-colors text-2xl">&times;</button>
+                
+                <h3 class="font-orbitron text-lg md:text-xl font-bold text-white mb-1 text-glow"><i class="fas fa-id-badge text-neon-cyan"></i> Pendaftaran Database</h3>
+                <p class="font-rajdhani text-xs md:text-sm text-gray-400 mb-5 md:mb-6">Masukkan data akun untuk verifikasi sistem.</p>
+                
+                <form id="add-member-form" class="space-y-3 md:space-y-4 text-left">
+                    <div>
+                        <label class="block font-rajdhani text-[10px] md:text-xs text-neon-cyan mb-1 tracking-widest uppercase">Nama Lengkap</label>
+                        <input type="text" name="nama" required class="w-full bg-space-dark/60 border border-gray-600 rounded-lg p-2.5 md:p-3 text-sm text-white input-glow focus:border-neon-cyan">
+                    </div>
+                    <div>
+                        <label class="block font-rajdhani text-[10px] md:text-xs text-neon-cyan mb-1 tracking-widest uppercase">Alamat Asal / Kota</label>
+                        <input type="text" name="alamat" required class="w-full bg-space-dark/60 border border-gray-600 rounded-lg p-2.5 md:p-3 text-sm text-white input-glow focus:border-neon-cyan">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 md:gap-4">
+                        <div>
+                            <label class="block font-rajdhani text-[10px] md:text-xs text-neon-cyan mb-1 tracking-widest uppercase">No. WhatsApp</label>
+                            <input type="tel" name="telepon" required class="w-full bg-space-dark/60 border border-gray-600 rounded-lg p-2.5 md:p-3 text-sm text-white input-glow focus:border-neon-cyan">
+                        </div>
+                        <div>
+                            <label class="block font-rajdhani text-[10px] md:text-xs text-neon-cyan mb-1 tracking-widest uppercase">Username IG</label>
+                            <input type="text" name="ig" required class="w-full bg-space-dark/60 border border-gray-600 rounded-lg p-2.5 md:p-3 text-sm text-white input-glow focus:border-neon-cyan" placeholder="@username">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block font-rajdhani text-[10px] md:text-xs text-neon-cyan mb-1 tracking-widest uppercase">Status Grup WA</label>
+                        <select id="add-group-status" name="status_grup" required class="w-full bg-space-dark/60 border border-gray-600 rounded-lg p-2.5 md:p-3 text-sm text-white input-glow focus:border-neon-cyan appearance-none">
+                            <option value="" disabled selected>Pilih Status...</option>
+                            <option value="sudah">Sudah Bergabung</option>
+                            <option value="belum">Belum Bergabung</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Conditional QR Code -->
+                    <div id="add-qr-container" class="hidden bg-gray-900/50 p-3 md:p-4 rounded-xl border border-neon-pink text-center flex flex-col items-center mt-2 animate-pulse">
+                        <p class="font-rajdhani text-[10px] md:text-xs text-neon-pink mb-2 md:mb-3 font-bold">Anda belum bergabung? Scan ini!</p>
+                        <div id="add-qrcode" class="bg-white p-1.5 md:p-2 rounded-lg inline-block"></div>
+                    </div>
+
+                    <button type="submit" class="w-full btn-cosmic py-3 rounded-xl font-orbitron font-bold text-sm md:text-base mt-4 md:mt-6 tracking-wider">
+                        DAFTARKAN AKUN
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Global Success Modal -->
+        <div id="success-modal" class="fixed inset-0 z-[120] hidden flex justify-center items-center opacity-0 transition-opacity duration-300">
+            <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeSuccessModal()"></div>
+            <div id="success-modal-content" class="relative z-[121] p-6 md:p-8 glass-panel border border-neon-cyan rounded-3xl text-center max-w-sm w-full mx-4 transform scale-75 opacity-0 transition-all duration-500 cubic-bezier(0.175, 0.885, 0.32, 1.275) shadow-[0_0_50px_rgba(0,243,255,0.3)]">
+                <div class="w-16 h-16 md:w-20 md:h-20 mx-auto bg-space-dark rounded-full border-2 border-neon-cyan flex items-center justify-center mb-4 md:mb-6 shadow-[0_0_20px_rgba(0,243,255,0.5)] relative">
+                    <div class="absolute inset-0 rounded-full border-2 border-neon-cyan animate-ping opacity-50"></div>
+                    <i class="fas fa-check text-3xl md:text-4xl text-neon-cyan"></i>
+                </div>
+                <h3 class="font-orbitron text-xl md:text-2xl font-bold text-white mb-2 text-glow">Berhasil!</h3>
+                <p id="success-modal-msg" class="font-inter text-xs md:text-sm text-gray-300 mb-6 md:mb-8">Tindakan berhasil dilakukan.</p>
+                <button onclick="closeSuccessModal()" class="w-full btn-cosmic py-2.5 md:py-3 rounded-xl font-orbitron font-bold text-sm md:text-base tracking-wider hover-glow">
+                    LANJUTKAN <i class="fas fa-rocket ml-2"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Contact & Maps Section -->
+        <section id="contact" class="py-16 md:py-24 relative border-t border-gray-800 bg-space-dark">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+                    <div class="gsap-slide-up text-center md:text-left">
+                        <h2 class="font-orbitron text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-neon-cyan"><i class="fas fa-map-marker-alt"></i> Base Station</h2>
+                        <p class="font-inter text-sm md:text-base text-gray-300 mb-6 md:mb-8 leading-relaxed">Punya pertanyaan atau ingin mengundang Alfaro Achmad Higuain? Kirimkan sinyal komunikasi Anda ke stasiun pusat kami.</p>
+                        
+                        <div class="space-y-4 md:space-y-6 text-left">
+                            <div class="flex items-center gap-3 md:gap-4 glass-panel p-3 md:p-4 rounded-xl hover-glow">
+                                <div class="w-10 h-10 md:w-12 md:h-12 bg-space-navy rounded-full flex justify-center items-center border border-neon-cyan shrink-0">
+                                    <i class="fab fa-whatsapp text-lg md:text-xl text-neon-cyan"></i>
+                                </div>
+                                <div>
+                                    <p class="font-rajdhani text-[10px] md:text-sm text-gray-400 uppercase tracking-widest">Comm Link</p>
+                                    <p class="font-orbitron text-sm md:text-lg">0857 0884 5405</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center gap-3 md:gap-4 glass-panel p-3 md:p-4 rounded-xl hover-glow">
+                                <div class="w-10 h-10 md:w-12 md:h-12 bg-space-navy rounded-full flex justify-center items-center border border-neon-pink shrink-0">
+                                    <i class="fas fa-envelope text-lg md:text-xl text-neon-pink"></i>
+                                </div>
+                                <div>
+                                    <p class="font-rajdhani text-[10px] md:text-sm text-gray-400 uppercase tracking-widest">Email Signal</p>
+                                    <p class="font-inter text-xs md:text-base break-all">alvarofans29@gmail.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center gap-3 md:gap-4 glass-panel p-3 md:p-4 rounded-xl hover-glow">
+                                <div class="w-10 h-10 md:w-12 md:h-12 bg-space-navy rounded-full flex justify-center items-center border border-neon-purple shrink-0">
+                                    <i class="fas fa-home text-lg md:text-xl text-neon-purple"></i>
+                                </div>
+                                <div>
+                                    <p class="font-rajdhani text-[10px] md:text-sm text-gray-400 uppercase tracking-widest">Coordinates</p>
+                                    <p class="font-inter text-xs md:text-sm leading-snug">Jl. Banyuwangi Jember No.253, DusJawa Timurun Pandasari, Sraten, Kec. Srono, Kabupaten Banyuwangi, Jawa Timur 68482</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Google Maps Embed -->
+                    <div class="glass-panel p-2 rounded-2xl border-2 border-gray-700 gsap-slide-up h-[300px] md:h-[400px]">
+                        <iframe 
+                            src="https://maps.app.goo.gl/bMpCnph8oSgsbcon7" 
+                            width="100%" height="100%" style="border:0; border-radius: 12px; filter: invert(90%) hue-rotate(180deg);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-space-dark border-t border-gray-800 pt-12 md:pt-16 pb-8 relative z-10 text-center md:text-left">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 md:mb-12 border-b border-gray-800 pb-8 md:pb-12">
+                <div class="text-center md:text-left">
+                    <h2 class="font-orbitron text-xl md:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-neon-purple mb-3 md:mb-4">VR LOVERS</h2>
+                    <p class="font-inter text-gray-400 text-xs md:text-sm">Official Fanbase Alfaro Achmad Higuain (Alvaro Kendang Cilik). Mengorbit bersama dalam karya dan kebersamaan.</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <h3 class="font-orbitron text-base md:text-lg mb-3 md:mb-4 text-white">Quick Navigate</h3>
+                    <ul class="space-y-2 font-rajdhani text-sm md:text-base text-gray-400 text-center">
+                        <li><a href="#about-alfaro" class="hover:text-neon-cyan transition-colors">About Captain</a></li>
+                        <li><a href="#gallery" class="hover:text-neon-cyan transition-colors">Constellation Gallery</a></li>
+                        <li><a href="#join" class="hover:text-neon-cyan transition-colors">Join Mission</a></li>
+                    </ul>
+                </div>
+                <div class="flex flex-col items-center md:items-end">
+                    <h3 class="font-orbitron text-base md:text-lg mb-3 md:mb-4 text-white">Social Comms</h3>
+                    <div class="flex justify-center md:justify-end gap-3 md:gap-4">
+                        <a href="https://www.instagram.com/alfaro.higuain_official?igsh=MTQ0Y3I5YW44MA==" target="_blank" class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-space-navy flex items-center justify-center text-white hover:bg-neon-pink hover:shadow-[0_0_15px_#ff00ff] transition-all text-sm md:text-base"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/@alvarokendangcilik_real" target="_blank" class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-space-navy flex items-center justify-center text-white hover:bg-red-600 hover:shadow-[0_0_15px_#dc2626] transition-all text-sm md:text-base"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.tiktok.com/@alfaroachmadhiguain20?_r=1&_t=ZS-94GZlnqkzoI" target="_blank" class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-space-navy flex items-center justify-center text-white hover:bg-black hover:shadow-[0_0_15px_#ffffff] border border-transparent hover:border-white transition-all text-sm md:text-base"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center font-inter text-gray-500 text-[10px] md:text-xs">
+                <p>&copy; <span id="current-year"></span> VR LOVERS INDONESIA. All rights reserved in the universe.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#hero" id="back-to-top" class="fixed bottom-6 right-4 md:bottom-8 md:right-8 w-10 h-10 md:w-12 md:h-12 bg-neon-cyan text-space-dark rounded-full flex items-center justify-center text-lg md:text-xl shadow-[0_0_20px_var(--neon-cyan)] opacity-0 invisible z-50 transition-all duration-300">
+        <i class="fas fa-rocket transform -rotate-45"></i>
+    </a>
+
+    <!-- Scripts -->
+    <!-- GSAP for Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Three.js for 3D Background -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- QR Code Generator -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set Current Year
+            const yearSpan = document.getElementById('current-year');
+            if (yearSpan) {
+                yearSpan.textContent = new Date().getFullYear();
+            }
+
+            // 1. Loading Screen Logic
+            const loader = document.getElementById('loader');
+            if (loader) {
+                window.addEventListener('load', () => {
+                    setTimeout(() => {
+                        loader.style.opacity = '0';
+                        loader.style.visibility = 'hidden';
+                        
+                        // Initialize Hero GSAP animations AFTER loader disappears
+                        if (typeof gsap !== 'undefined') {
+                            gsap.from(".gsap-hero-elem", {
+                                y: 50,
+                                opacity: 0,
+                                duration: 1,
+                                stagger: 0.2,
+                                ease: "power3.out",
+                                delay: 0.2
+                            });
+                        }
+                    }, 1000);
+                });
+            }
+
+            // 2. Scroll Progress Bar & Navbar & Back to Top
+            window.addEventListener('scroll', () => {
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                
+                const progressBar = document.getElementById('progress-bar');
+                if (progressBar) progressBar.style.width = scrolled + "%";
+
+                // Navbar
+                const navbar = document.getElementById('navbar');
+                if (navbar) {
+                    if (winScroll > 50) {
+                        navbar.classList.remove('opacity-0', 'translate-y-[-100%]');
+                    } else {
+                        navbar.classList.add('opacity-0', 'translate-y-[-100%]');
+                    }
+                }
+
+                // Back to Top
+                const btt = document.getElementById('back-to-top');
+                if (btt) {
+                    if (winScroll > 300) {
+                        btt.classList.remove('opacity-0', 'invisible');
+                    } else {
+                        btt.classList.add('opacity-0', 'invisible');
+                    }
+                }
+            });
+
+            // Mobile Menu Toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const iconBars = document.getElementById('icon-bars');
+            const iconClose = document.getElementById('icon-close');
+
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('active');
+                    
+                    // Icon animation logic
+                    if (mobileMenu.classList.contains('active')) {
+                        iconBars.classList.add('scale-0', 'opacity-0', '-rotate-90');
+                        iconClose.classList.remove('scale-0', 'opacity-0', 'rotate-90');
+                        iconClose.classList.add('scale-100', 'opacity-100', 'rotate-0');
+                    } else {
+                        iconBars.classList.remove('scale-0', 'opacity-0', '-rotate-90');
+                        iconClose.classList.remove('scale-100', 'opacity-100', 'rotate-0');
+                        iconClose.classList.add('scale-0', 'opacity-0', 'rotate-90');
+                    }
+                });
+                
+                // Close menu when a link is clicked
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.remove('active');
+                        iconBars.classList.remove('scale-0', 'opacity-0', '-rotate-90');
+                        iconClose.classList.remove('scale-100', 'opacity-100', 'rotate-0');
+                        iconClose.classList.add('scale-0', 'opacity-0', 'rotate-90');
+                    });
+                });
+            }
+
+            // 3. Three.js Setup (Lightweight 3D Space Background)
+            const canvas = document.getElementById('bg-canvas');
+            if (canvas && typeof THREE !== 'undefined') {
+                const scene = new THREE.Scene();
+                // Fog for depth
+                scene.fog = new THREE.FogExp2(0x030712, 0.001);
+
+                const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+                
+                renderer.setPixelRatio(window.devicePixelRatio);
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                camera.position.set(0, 0, 50);
+
+                // Lights
+                const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+                scene.add(ambientLight);
+                const pointLight = new THREE.PointLight(0x00f3ff, 2, 100);
+                pointLight.position.set(10, 10, 10);
+                scene.add(pointLight);
+                const pinkLight = new THREE.PointLight(0xff00ff, 2, 100);
+                pinkLight.position.set(-10, -10, 10);
+                scene.add(pinkLight);
+
+                // Starfield
+                const starGeometry = new THREE.BufferGeometry();
+                const starCount = 1000;
+                const starPosArray = new Float32Array(starCount * 3);
+                for(let i=0; i < starCount * 3; i++) {
+                    starPosArray[i] = (Math.random() - 0.5) * 200; // spread
+                }
+                starGeometry.setAttribute('position', new THREE.BufferAttribute(starPosArray, 3));
+                const starMaterial = new THREE.PointsMaterial({
+                    color: 0xffffff,
+                    size: 0.2,
+                    transparent: true,
+                    opacity: 0.8
+                });
+                const starMesh = new THREE.Points(starGeometry, starMaterial);
+                scene.add(starMesh);
+
+                // Asteroids/Small Planets (Cartoonish)
+                const planets = [];
+                const planetGeo = new THREE.IcosahedronGeometry(2, 0); // Flat shading 3D Look
+                const planetMat1 = new THREE.MeshPhongMaterial({ 
+                    color: 0x0b1d3a, 
+                    emissive: 0x00f3ff, 
+                    emissiveIntensity: 0.3,
+                    shininess: 80,
+                    flatShading: true
+                });
+                const planetMat2 = new THREE.MeshPhongMaterial({ 
+                    color: 0x1d4ed8, 
+                    emissive: 0x9d4edd, 
+                    emissiveIntensity: 0.3,
+                    shininess: 80,
+                    flatShading: true
+                });
+                
+                for(let i=0; i<8; i++) {
+                    const mesh = new THREE.Mesh(planetGeo, i % 2 === 0 ? planetMat1 : planetMat2);
+                    mesh.position.x = (Math.random() - 0.5) * 100;
+                    mesh.position.y = (Math.random() - 0.5) * 100;
+                    mesh.position.z = (Math.random() - 0.5) * 60 - 20;
+                    
+                    const scale = Math.random() * 1.5 + 0.5;
+                    mesh.scale.set(scale, scale, scale);
+                    
+                    scene.add(mesh);
+                    planets.push({
+                        mesh: mesh,
+                        rotX: Math.random() * 0.02,
+                        rotY: Math.random() * 0.02
+                    });
+                }
+
+                // Parallax Scroll Effect for Camera
+                let mouseX = 0;
+                let mouseY = 0;
+                let targetX = 0;
+                let targetY = 0;
+                const windowHalfX = window.innerWidth / 2;
+                const windowHalfY = window.innerHeight / 2;
+
+                document.addEventListener('mousemove', (event) => {
+                    mouseX = (event.clientX - windowHalfX);
+                    mouseY = (event.clientY - windowHalfY);
+                });
+
+                // Animation Loop
+                function animate() {
+                    requestAnimationFrame(animate);
+
+                    // Rotate stars slowly
+                    starMesh.rotation.y += 0.0005;
+                    starMesh.rotation.x += 0.0002;
+
+                    // Rotate planets
+                    planets.forEach(p => {
+                        p.mesh.rotation.x += p.rotX;
+                        p.mesh.rotation.y += p.rotY;
+                    });
+
+                    // Parallax based on mouse and scroll
+                    targetX = mouseX * 0.01;
+                    targetY = mouseY * 0.01 - (window.scrollY * 0.05);
+
+                    camera.position.x += (targetX - camera.position.x) * 0.05;
+                    camera.position.y += (-targetY - camera.position.y) * 0.05;
+                    camera.lookAt(scene.position);
+
+                    renderer.render(scene, camera);
+                }
+                animate();
+
+                // Resize handler
+                window.addEventListener('resize', () => {
+                    camera.aspect = window.innerWidth / window.innerHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(window.innerWidth, window.innerHeight);
+                });
+            }
+
+            // 4. GSAP ScrollTrigger Animations
+            if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                gsap.registerPlugin(ScrollTrigger);
+
+                gsap.utils.toArray('.gsap-slide-up').forEach(elem => {
+                    gsap.from(elem, {
+                        scrollTrigger: {
+                            trigger: elem,
+                            start: "top 85%",
+                            toggleActions: "play none none none"
+                        },
+                        y: 50,
+                        opacity: 0,
+                        duration: 0.8,
+                        ease: "power2.out"
+                    });
+                });
+            }
+
+            // 5. Gallery Modal Logic
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const modal = document.getElementById('gallery-modal');
+            const modalImg = document.getElementById('modal-img');
+
+            galleryItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    if(modal && modalImg) {
+                        modal.classList.remove('hidden');
+                        // Trigger reflow
+                        void modal.offsetWidth;
+                        modal.classList.add('opacity-100');
+                        modalImg.src = this.src;
+                        // Block body scroll
+                        document.body.style.overflow = 'hidden';
+                    }
+                });
+            });
+
+            window.closeModal = function() {
+                if (modal && modalImg) {
+                    modal.classList.remove('opacity-100');
+                    setTimeout(() => {
+                        modal.classList.add('hidden');
+                        modalImg.src = '';
+                        document.body.style.overflow = 'auto';
+                    }, 300);
+                }
+            };
+
+            // 6. Countdown Timers Logic
+            // Fungsi untuk mendapatkan tanggal target, otomatis tambah 1 tahun jika sudah lewat
+            function getNextTargetDate(month, day) {
+                const now = new Date();
+                let targetDate = new Date(now.getFullYear(), month, day, 0, 0, 0);
+                if (now.getTime() > targetDate.getTime()) {
+                    targetDate.setFullYear(now.getFullYear() + 1);
+                }
+                return targetDate.getTime();
+            }
+
+            // Ulang Tahun: 20 Oktober (Bulan ke-9 dalam format JavaScript 0-indexed)
+            const bdayTarget = getNextTargetDate(9, 20); 
+            // Anniversary: 20 Juli (Bulan ke-6 dalam format JavaScript 0-indexed)
+            const annivTarget = getNextTargetDate(6, 20); 
+
+            function updateCountdown(target, prefix) {
+                const currentTime = new Date().getTime();
+                const distance = target - currentTime;
+
+                const elemD = document.getElementById(`${prefix}-d`);
+                const elemH = document.getElementById(`${prefix}-h`);
+                const elemM = document.getElementById(`${prefix}-m`);
+                const elemS = document.getElementById(`${prefix}-s`);
+
+                if (!elemD || !elemH || !elemM || !elemS) return;
+
+                if (distance < 0) {
+                    elemD.innerText = "00";
+                    elemH.innerText = "00";
+                    elemM.innerText = "00";
+                    elemS.innerText = "00";
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                elemD.innerText = days.toString().padStart(2, '0');
+                elemH.innerText = hours.toString().padStart(2, '0');
+                elemM.innerText = minutes.toString().padStart(2, '0');
+                elemS.innerText = seconds.toString().padStart(2, '0');
+            }
+
+            setInterval(() => {
+                updateCountdown(bdayTarget, 'bday');
+                updateCountdown(annivTarget, 'anniv');
+            }, 1000);
+
+            // 7. Form Registration (Mission Control) & QR Code Generator
+            const form = document.getElementById('join-form');
+            const qrModal = document.getElementById('qr-modal');
+            const qrcodeContainer = document.getElementById('qrcode');
+            let qrCodeObj = null;
+
+            if (form && qrModal && qrcodeContainer) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const btn = form.querySelector('button');
+                    const originalText = btn.innerHTML;
+                    btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> MENGIRIM...';
+                    btn.disabled = true;
+
+                    // Mengambil data form menggunakan FormData
+                    const formData = new FormData(form);
+
+                    // =========================================================
+                    // CARA MENGHUBUNGKAN KE GOOGLE SHEETS ASLI:
+                    // Masukkan URL Web App Google Apps Script ke variabel ini
+                    // =========================================================
+                    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyb-B83yzl76DerA1gdLNjVDJlI23I_4wfA9ZBuiQKoKCFs3YBfS_52SSSObbfYiGClpA/exec'; 
+
+                    // delay 1.5 detik untuk efek loading
+                    setTimeout(() => {
+
+                        // MENGIRIM DATA ASLI KE GOOGLE SHEETS
+                        fetch(GOOGLE_SCRIPT_URL, {
+                            method: 'POST',
+                            body: formData
+                        })
+                        .then(response => response.json())
+                        .then(data => { 
+                            console.log('Sukses:', data);
+                            
+                            // Setelah sukses simpan, muat ulang data dari server
+                            fetchMembersFromDatabase();
+
+                            btn.innerHTML = originalText;
+                            btn.disabled = false;
+                            addMemberForm.reset();
+                            addQrContainer.classList.add('hidden');
+                            
+                            closeAddMemberModal();
+                            
+                            setTimeout(() => {
+                                showSuccessModal('Sinyal pendaftaran akun Anda telah diteruskan ke Database VR Lovers.');
+                            }, 400);
+                        })
+                        .catch(error => { 
+                            console.error('Error:', error); 
+                            btn.innerHTML = originalText;
+                            btn.disabled = false;
+                            alert("Gagal mengirim data. Periksa koneksi Anda.");
+                        });
+
+                        // Generate QR Code containing a mock group link (Prepared beforehand)
+                        qrcodeContainer.innerHTML = ''; // clear prev
+                        if (typeof QRCode !== 'undefined') {
+                            qrCodeObj = new QRCode(qrcodeContainer, {
+                                text: "https://chat.whatsapp.com/Cu64WbV0fgt5MtPY0uUHWi?mode=hq2tcla",
+                                width: 200,
+                                height: 200,
+                                colorDark : "#030712",
+                                colorLight : "#ffffff",
+                                correctLevel : QRCode.CorrectLevel.H
+                            });
+                        }
+
+                        // Show PROMPT Modal instead of QR Modal
+                        const promptModal = document.getElementById('prompt-add-database-modal');
+                        if (promptModal) {
+                            promptModal.classList.remove('hidden');
+                            void promptModal.offsetWidth;
+                            promptModal.classList.add('opacity-100');
+                            
+                            // Animasi Pop-up Konten
+                            const content = promptModal.querySelector('.relative.z-\\[101\\]');
+                            if(content) {
+                                content.classList.add('transform', 'scale-75', 'opacity-0', 'transition-all', 'duration-500');
+                                setTimeout(() => {
+                                    content.classList.remove('scale-75', 'opacity-0');
+                                    content.classList.add('scale-100', 'opacity-100');
+                                }, 50);
+                            }
+                        }
+
+                    }, 1500);
+                });
+
+                // Logic for Prompt Action
+                window.promptAction = function(action) {
+                    const promptModal = document.getElementById('prompt-add-database-modal');
+                    if (promptModal) {
+                        promptModal.classList.remove('opacity-100');
+                        setTimeout(() => {
+                            promptModal.classList.add('hidden');
+                            if (action === 'sekarang') {
+                                // Buka modal tambah database
+                                openAddMemberModal();
+                            } else if (action === 'nanti') {
+                                // Buka modal QR Code Grup
+                                qrModal.classList.remove('hidden');
+                                void qrModal.offsetWidth;
+                                qrModal.classList.add('opacity-100');
+                            }
+                        }, 300);
+                    }
+                };
+
+                window.closeQRModal = function() {
+                    qrModal.classList.remove('opacity-100');
+                    setTimeout(() => {
+                        qrModal.classList.add('hidden');
+                    }, 300);
+                }
+            }
+
+            // 8. Official Members & Search/Sort Logic
+            let idCounter = 1;
+            let membersData = [
+                { id: idCounter++, name: 'Alfaro Achmad Higuain', ig: '@alfaro.higuain_official', city: 'Banyuwangi', status: 'Captain' }, // Terlama
+                { id: idCounter++, name: 'Alvaro.-', ig: '@v4ro.fn', city: '---', status: 'Member' },
+                { id: idCounter++, name: 'Alvaro E4K', ig: '@vr_edits4k', city: 'Bandung', status: 'Member' },
+                { id: idCounter++, name: 'Alvaro Lovers Cianjur', ig: '@varo.cjr', city: 'Cianjur', status: 'Member' }, // Terbaru
+            ];
+
+            const searchInput = document.getElementById('search-member');
+            const sortSelect = document.getElementById('sort-member');
+            const membersGrid = document.getElementById('members-grid');
+            const notFoundDiv = document.getElementById('not-found-msg');
+
+            function renderMembers() {
+                if(!membersGrid) return;
+                membersGrid.innerHTML = '';
+                
+                const query = searchInput ? searchInput.value.toLowerCase() : '';
+                const sortType = sortSelect ? sortSelect.value : 'newest';
+
+                // 1. Filter by Search
+                let filtered = membersData.filter(m => 
+                    m.name.toLowerCase().includes(query) || 
+                    m.ig.toLowerCase().includes(query)
+                );
+
+                // 2. Sort Logic
+                if (sortType === 'newest') {
+                    // Terbaru (ID terbesar ke terkecil)
+                    filtered.sort((a, b) => b.id - a.id);
+                } else {
+                    // Terlama (ID terkecil ke terbesar)
+                    filtered.sort((a, b) => a.id - b.id);
+                }
+
+                if (filtered.length > 0) {
+                    notFoundDiv.classList.add('hidden');
+                    filtered.forEach(m => {
+                        const card = document.createElement('div');
+                        card.className = 'glass-panel p-6 rounded-2xl hover-glow flex flex-col items-center text-center';
+                        card.innerHTML = `
+                            <div class="w-16 h-16 bg-space-dark rounded-full border-2 border-neon-cyan flex items-center justify-center mb-4 shadow-[0_0_15px_rgba(0,243,255,0.4)]">
+                                <i class="fas fa-user-astronaut text-2xl text-neon-cyan"></i>
+                            </div>
+                            <h4 class="font-orbitron font-bold text-lg text-white mb-1 line-clamp-1">${m.name}</h4>
+                            <p class="font-inter text-sm text-neon-pink mb-4"><i class="fab fa-instagram"></i> ${m.ig}</p>
+                            <div class="w-full border-t border-gray-700/50 pt-3 flex justify-between text-xs text-gray-400 font-rajdhani uppercase tracking-wider">
+                                <span><i class="fas fa-map-marker-alt text-neon-purple"></i> ${m.city}</span>
+                                <span class="bg-neon-cyan/20 text-neon-cyan px-2 py-0.5 rounded">${m.status}</span>
+                            </div>
+                        `;
+                        membersGrid.appendChild(card);
+                    });
+                } else {
+                    notFoundDiv.classList.remove('hidden');
+                }
+            }
+
+            if(searchInput) searchInput.addEventListener('input', renderMembers);
+            if(sortSelect) sortSelect.addEventListener('change', renderMembers);
+            
+            // =========================================================
+            // FITUR FETCH GET DARI GOOGLE SHEETS
+            // =========================================================
+            const GOOGLE_SCRIPT_URL_GET = 'Ihttps://script.google.com/macros/s/AKfycbyb-B83yzl76DerA1gdLNjVDJlI23I_4wfA9ZBuiQKoKCFs3YBfS_52SSSObbfYiGClpA/exec'; // Pastikan URL ini benar
+
+            async function fetchMembersFromDatabase() {
+                if(!membersGrid) return;
+                
+                membersGrid.innerHTML = `
+                    <div class="col-span-full text-center text-neon-cyan py-12">
+                        <i class="fas fa-satellite-dish fa-spin text-5xl mb-4"></i>
+                        <p class="font-orbitron tracking-widest animate-pulse mt-2">Menerima sinyal data dari pusat...</p>
+                    </div>
+                `;
+
+                try {
+                    // MENGAMBIL DATA ASLI DARI GOOGLE SHEETS
+                    const response = await fetch(GOOGLE_SCRIPT_URL_GET);
+                    const data = await response.json();
+                    
+                    if (data && data.length > 0) {
+                        membersData = []; // Kosongkan data awal
+                        idCounter = 1;
+                        
+                        data.forEach(row => {
+                            membersData.push({
+                                id: idCounter++,
+                                name: row.nama || 'Unknown',
+                                ig: row.ig || '-',
+                                city: row.alamat || 'Unknown Base',
+                                status: row.status_grup === 'sudah' ? 'Member' : 'Pending'
+                            });
+                        });
+                    }
+                    
+                    renderMembers(); // Render data asli
+                    
+                } catch (error) {
+                    console.error("Gagal mengambil data dari orbit:", error);
+                    renderMembers(); // Tampilkan data awal (fallback) jika gagal
+                }
+            }
+            // Panggil fungsi GET saat halaman pertama kali dimuat
+            fetchMembersFromDatabase();
+
+            // Add Member Modal Logic
+            const addMemberModal = document.getElementById('add-member-modal');
+            const groupStatusSelect = document.getElementById('add-group-status');
+            const addQrContainer = document.getElementById('add-qr-container');
+            let addQrObj = null;
+
+            window.openAddMemberModal = function() {
+                addMemberModal.classList.remove('hidden');
+                void addMemberModal.offsetWidth;
+                addMemberModal.classList.add('opacity-100');
+                
+                // Animasi Pop-up Konten
+                const content = addMemberModal.querySelector('.relative.z-\\[101\\]');
+                if(content) {
+                    content.classList.add('transform', 'scale-75', 'opacity-0', 'transition-all', 'duration-500');
+                    setTimeout(() => {
+                        content.classList.remove('scale-75', 'opacity-0');
+                        content.classList.add('scale-100', 'opacity-100');
+                    }, 50);
+                }
+            };
+
+            window.closeAddMemberModal = function() {
+                addMemberModal.classList.remove('opacity-100');
+                setTimeout(() => {
+                    addMemberModal.classList.add('hidden');
+                }, 300);
+            };
+
+            if(groupStatusSelect && addQrContainer) {
+                groupStatusSelect.addEventListener('change', function() {
+                    if (this.value === 'belum') {
+                        addQrContainer.classList.remove('hidden');
+                        if (!addQrObj && typeof QRCode !== 'undefined') {
+                            const qrDiv = document.getElementById('add-qrcode');
+                            qrDiv.innerHTML = '';
+                            addQrObj = new QRCode(qrDiv, {
+                                text: "https://chat.whatsapp.com/Cu64WbV0fgt5MtPY0uUHWi?mode=hq2tcla",
+                                width: 100,
+                                height: 100,
+                                colorDark : "#030712",
+                                colorLight : "#ffffff",
+                                correctLevel : QRCode.CorrectLevel.L
+                            });
+                        }
+                    } else {
+                        addQrContainer.classList.add('hidden');
+                    }
+                });
+            }
+
+            // Google Sheets Simulation Logic (Add Member Database)
+            const addMemberForm = document.getElementById('add-member-form');
+            if(addMemberForm) {
+                addMemberForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const btn = addMemberForm.querySelector('button[type="submit"]');
+                    const originalText = btn.innerHTML;
+                    btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> MENGIRIM DATA...';
+                    btn.disabled = true;
+
+                    // Mengambil data form menggunakan FormData
+                    const formData = new FormData(addMemberForm);
+                    
+                    // =========================================================
+                    // CARA MENGHUBUNGKAN KE GOOGLE SHEETS ASLI:
+                    // Masukkan URL Web App tersebut ke variabel GOOGLE_SCRIPT_URL di bawah ini:
+                    // =========================================================
+                    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyb-B83yzl76DerA1gdLNjVDJlI23I_4wfA9ZBuiQKoKCFs3YBfS_52SSSObbfYiGClpA/exec'; 
+
+                    // MENGIRIM DATA ASLI KE GOOGLE SHEETS
+                    fetch(GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => { 
+                        console.log('Sukses:', data);
+                        
+                        // Setelah sukses simpan, muat ulang data dari server
+                        fetchMembersFromDatabase();
+
+                        btn.innerHTML = originalText;
+                        btn.disabled = false;
+                        addMemberForm.reset();
+                        addQrContainer.classList.add('hidden');
+                        
+                        closeAddMemberModal();
+                        
+                        setTimeout(() => {
+                            showSuccessModal('Sinyal pendaftaran akun Anda telah diteruskan ke Database VR Lovers.');
+                        }, 400);
+                    })
+                    .catch(error => { 
+                        console.error('Error:', error); 
+                        btn.innerHTML = originalText;
+                        btn.disabled = false;
+                        alert("Gagal mengirim data. Periksa koneksi Anda.");
+                    });
+                });
+            }
+            
+            // =========================================================
+            // FUNGSI GLOBAL SUCCESS MODAL
+            // =========================================================
+            window.showSuccessModal = function(message) {
+                const modal = document.getElementById('success-modal');
+                const content = document.getElementById('success-modal-content');
+                const msgEl = document.getElementById('success-modal-msg');
+                
+                if (modal && content && msgEl) {
+                    msgEl.textContent = message;
+                    modal.classList.remove('hidden');
+                    void modal.offsetWidth; // Trigger reflow
+                    modal.classList.add('opacity-100');
+                    
+                    // Pop up animation
+                    setTimeout(() => {
+                        content.classList.remove('scale-75', 'opacity-0');
+                        content.classList.add('scale-100', 'opacity-100');
+                    }, 50);
+                }
+            };
+
+            window.closeSuccessModal = function() {
+                const modal = document.getElementById('success-modal');
+                const content = document.getElementById('success-modal-content');
+                
+                if (modal && content) {
+                    content.classList.remove('scale-100', 'opacity-100');
+                    content.classList.add('scale-75', 'opacity-0');
+                    
+                    setTimeout(() => {
+                        modal.classList.remove('opacity-100');
+                        setTimeout(() => {
+                            modal.classList.add('hidden');
+                        }, 300);
+                    }, 300);
+                }
+            };
+
+        });
+    </script>
+</body>
+</html>
