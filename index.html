@@ -434,8 +434,16 @@
             <a href="#members" class="menu-link px-4 py-3 border-b border-gray-800/50 text-gray-200">
                 <i class="fas fa-users w-8 text-neon-cyan text-center"></i> Anggota Resmi
             </a>
-            <a href="#news" class="menu-link px-4 py-3 text-gray-200">
+            <a href="#news" class="menu-link px-4 py-3 border-b border-gray-800/50 text-gray-200">
                 <i class="fas fa-satellite-dish w-8 text-white text-center"></i> Updates
+            </a>
+            
+            <!-- Admin Login Button -->
+            <a href="#" onclick="openLoginModal()" id="admin-login-link" class="menu-link px-4 py-3 text-neon-pink hover:bg-neon-pink/10">
+                <i class="fas fa-lock w-8 text-neon-pink text-center"></i> Admin Access
+            </a>
+            <a href="#" onclick="adminLogout()" id="admin-logout-link" class="menu-link px-4 py-3 text-red-500 hover:bg-red-500/10 hidden">
+                <i class="fas fa-sign-out-alt w-8 text-red-500 text-center"></i> Logout Admin
             </a>
         </div>
     </nav>
@@ -572,7 +580,7 @@
                     <article class="glass-panel rounded-2xl overflow-hidden hover-glow gsap-slide-up flex flex-col h-full">
                         <a href="https://instagram.com/vrlovers_indonesia" target="_blank" class="block h-40 md:h-48 bg-gray-800 relative overflow-hidden group">
                             <!-- Custom Image (Fallback ke Placehold.co jika fail tidak wujud) -->
-                            <img src="images/news1.jpg" alt="Jadwal Tur" onerror="this.src='https://placehold.co/600x400/0b1d3a/00f3ff?text=Berita+Segera+Hadir+!'" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <img src="images/news1.jpg" alt="Jadwal Tur" onerror="this.src='https://placehold.co/600x400/0b1d3a/00f3ff?text=Jadwal+Manggung'" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                             <div class="absolute top-3 right-3 md:top-4 md:right-4 bg-neon-purple text-[10px] md:text-xs font-bold px-2 py-1 md:px-3 md:py-1 rounded-full text-white font-orbitron">NEW</div>
                         </a>
                         <div class="p-5 md:p-6 flex flex-col flex-grow">
@@ -591,7 +599,7 @@
                     <article class="glass-panel rounded-2xl overflow-hidden hover-glow gsap-slide-up flex flex-col h-full" style="transition-delay: 100ms;">
                         <a href="https://youtube.com/c/AlvaroKendang" target="_blank" class="block h-40 md:h-48 bg-gray-800 relative overflow-hidden group">
                             <!-- Custom Image -->
-                            <img src="images/news2.jpg" alt="Kolaborasi Baru" onerror="this.src='https://placehold.co/600x400/0b1d3a/ff00ff?text=Berita+Segera+Hadir+!'" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <img src="images/news2.jpg" alt="Kolaborasi Baru" onerror="this.src='https://placehold.co/600x400/0b1d3a/ff00ff?text=Kolaborasi'" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         </a>
                         <div class="p-5 md:p-6 flex flex-col flex-grow">
                             <p class="text-[10px] md:text-xs text-neon-cyan font-rajdhani mb-2"><i class="far fa-calendar-alt"></i> 02 Agustus 2026</p>
@@ -609,7 +617,7 @@
                     <article class="glass-panel rounded-2xl overflow-hidden hover-glow gsap-slide-up flex flex-col h-full" style="transition-delay: 200ms;">
                         <a href="https://wa.me/6285708845405" target="_blank" class="block h-40 md:h-48 bg-gray-800 relative overflow-hidden group">
                             <!-- Custom Image -->
-                            <img src="images/news3.jpg" alt="Merchandise Resmi" onerror="this.src='https://placehold.co/600x400/0b1d3a/9d4edd?text=Berita+Segera+Hadir+!'" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <img src="images/news3.jpg" alt="Merchandise Resmi" onerror="this.src='https://placehold.co/600x400/0b1d3a/9d4edd?text=Merchandise'" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         </a>
                         <div class="p-5 md:p-6 flex flex-col flex-grow">
                             <p class="text-[10px] md:text-xs text-neon-cyan font-rajdhani mb-2"><i class="far fa-calendar-alt"></i> 28 Juli 2026</p>
@@ -683,14 +691,14 @@
                         <h2 class="font-orbitron text-lg md:text-xl mb-4 pl-2 md:pl-4 pt-4"><i class="fab fa-youtube text-red-500"></i> Video Transmission Log</h2>
                         <div class="aspect-video w-full rounded-xl overflow-hidden border border-gray-700 bg-black">
                             <!-- Dummy/Placeholder YouTube Embed -->
-                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/ssDWATYul1g&list=RDssDWATYul1g&start_radio=1" title="Video Terbaru Alvaro" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="filter grayscale-[20%] hover:grayscale-0 transition-all duration-500"></iframe>
+                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/videoseries?list=PLx0sYbCqOb8TBPRdmBHs5Iftvv9TPboYG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="filter grayscale-[20%] hover:grayscale-0 transition-all duration-500"></iframe>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Gallery Section (Exactly 40 manual images) -->
+        <!-- Gallery Section -->
         <section id="gallery" class="py-16 md:py-24 relative bg-space-dark z-20">
             <div class="container mx-auto px-4 md:px-6">
                 <div class="text-center mb-12 md:mb-16 gsap-slide-up">
@@ -698,7 +706,6 @@
                     <p class="font-rajdhani text-lg md:text-xl mt-2 md:mt-4 text-gray-400">Arsip memori perjalanan Alfaro dan VR LOVERS INDONESIA</p>
                 </div>
 
-                <!-- STRICT 40 IMAGES MANUAL REQUIREMENT -->
                 <div class="gallery-grid" id="gallery-container">
                     <img src="image/VRLID1.jpg" alt="Memori 1" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/00f3ff?text=Galeri+1'">
                     <img src="image/VRLID2.jpg" alt="Memori 2" class="gallery-item" loading="lazy" onerror="this.src='https://placehold.co/400x400/0b1d3a/9d4edd?text=Galeri+2'">
@@ -750,7 +757,6 @@
         <!-- Gallery Modal -->
         <div id="gallery-modal" class="fixed inset-0 z-[100] hidden flex justify-center items-center opacity-0 transition-opacity duration-300">
             <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="closeModal()"></div>
-            <!-- Stars animation in modal bg -->
             <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
                 <div class="absolute w-2 h-2 bg-white rounded-full animate-ping" style="top: 20%; left: 30%;"></div>
                 <div class="absolute w-2 h-2 bg-white rounded-full animate-ping" style="top: 70%; left: 80%; animation-delay: 1s;"></div>
@@ -766,6 +772,13 @@
                 <div class="text-center mb-10 md:mb-12 gsap-slide-up">
                     <h2 class="font-orbitron text-2xl md:text-4xl font-bold"><i class="fas fa-users text-neon-cyan"></i> Database Anggota Resmi</h2>
                     <p class="font-rajdhani text-gray-400 mt-2 text-base md:text-lg">Cari akun VR Lovers dari seluruh galaksi.</p>
+                    
+                    <!-- Admin Panel Button (Hidden by default) -->
+                    <div id="admin-panel-controls" class="hidden mt-6 flex justify-center gap-4">
+                        <button onclick="openAddMemberModal()" class="bg-neon-purple/20 border border-neon-purple text-neon-purple hover:bg-neon-purple hover:text-white transition-all px-4 py-2 rounded-full font-orbitron text-sm flex items-center gap-2">
+                            <i class="fas fa-user-plus"></i> Tambah Manual (Admin)
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Search & Sort Bar -->
@@ -789,6 +802,17 @@
                     <!-- Cards will be generated via JavaScript -->
                 </div>
 
+                <!-- Pagination Controls -->
+                <div id="pagination-controls" class="hidden flex justify-center items-center mt-10 gap-4 gsap-slide-up">
+                    <button id="prev-page" class="glass-panel text-neon-cyan hover:bg-neon-cyan hover:text-space-dark px-4 py-2 md:px-6 md:py-3 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed font-orbitron font-bold text-sm md:text-base flex items-center gap-2">
+                        <i class="fas fa-chevron-left"></i> Prev
+                    </button>
+                    <span id="page-info" class="font-rajdhani text-white text-base md:text-lg bg-space-dark/80 border border-neon-purple px-4 py-2 rounded-full">Halaman 1 / 1</span>
+                    <button id="next-page" class="glass-panel text-neon-cyan hover:bg-neon-cyan hover:text-space-dark px-4 py-2 md:px-6 md:py-3 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed font-orbitron font-bold text-sm md:text-base flex items-center gap-2">
+                        Next <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+
                 <!-- Not Found / Add New Prompt -->
                 <div id="not-found-msg" class="hidden text-center mt-8 glass-panel max-w-lg mx-auto p-6 md:p-8 rounded-2xl border-dashed border-neon-pink">
                     <i class="fas fa-user-astronaut text-3xl md:text-4xl text-gray-500 mb-4"></i>
@@ -801,11 +825,10 @@
             </div>
         </section>
 
-        <!-- Join Member Section -->
+        <!-- Join Member Section (Pendaftaran - Data TIDAK ditampilkan di Web) -->
         <section id="join" class="py-16 md:py-24 relative overflow-hidden">
             <div class="container mx-auto px-4 md:px-6 relative z-10">
                 <div class="max-w-3xl mx-auto glass-panel p-6 md:p-10 rounded-3xl relative">
-                    <!-- Deco lines -->
                     <div class="absolute top-0 left-6 md:left-10 w-16 md:w-20 h-1 bg-neon-cyan"></div>
                     <div class="absolute bottom-0 right-6 md:right-10 w-16 md:w-20 h-1 bg-neon-pink"></div>
 
@@ -815,21 +838,20 @@
                         <p class="font-rajdhani text-sm md:text-base text-gray-400 mt-2">Daftar sebagai anggota resmi VR LOVERS INDONESIA</p>
                     </div>
 
-                    <!-- Added 'name' attributes for Google Sheets FormData mapping -->
                     <form id="join-form" class="space-y-5 md:space-y-6">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
                             <div>
                                 <label class="block font-rajdhani text-xs md:text-sm text-neon-cyan mb-1 tracking-widest uppercase">Call Sign (Nama Lengkap)</label>
-                                <input type="text" id="fname" name="nama" required class="w-full bg-space-dark/50 border border-gray-600 rounded-lg p-3 text-sm md:text-base text-white input-glow transition-all" placeholder="Astronaut John">
+                                <input type="text" name="nama" required class="w-full bg-space-dark/50 border border-gray-600 rounded-lg p-3 text-sm md:text-base text-white input-glow transition-all" placeholder="Astronaut John">
                             </div>
                             <div>
                                 <label class="block font-rajdhani text-xs md:text-sm text-neon-cyan mb-1 tracking-widest uppercase">Comms Channel (No. WhatsApp)</label>
-                                <input type="tel" id="fphone" name="telepon" required class="w-full bg-space-dark/50 border border-gray-600 rounded-lg p-3 text-sm md:text-base text-white input-glow transition-all" placeholder="08xx xxxx xxxx">
+                                <input type="tel" name="telepon" required class="w-full bg-space-dark/50 border border-gray-600 rounded-lg p-3 text-sm md:text-base text-white input-glow transition-all" placeholder="08xx xxxx xxxx">
                             </div>
                         </div>
                         <div>
                             <label class="block font-rajdhani text-xs md:text-sm text-neon-cyan mb-1 tracking-widest uppercase">Base Coordinates (Kota Asal)</label>
-                            <input type="text" id="fcity" name="alamat" required class="w-full bg-space-dark/50 border border-gray-600 rounded-lg p-3 text-sm md:text-base text-white input-glow transition-all" placeholder="Banyuwangi">
+                            <input type="text" name="alamat" required class="w-full bg-space-dark/50 border border-gray-600 rounded-lg p-3 text-sm md:text-base text-white input-glow transition-all" placeholder="Banyuwangi">
                         </div>
                         <button type="submit" class="w-full btn-cosmic py-3 md:py-4 rounded-xl font-orbitron font-bold text-sm md:text-lg mt-2 md:mt-4 flex justify-center items-center gap-2">
                             <i class="fas fa-satellite-dish"></i> TRANSMIT DATA
@@ -846,14 +868,14 @@
             <div class="relative z-[101] p-6 md:p-10 glass-panel border border-neon-cyan rounded-3xl text-center max-w-md w-full mx-4 shadow-[0_0_40px_rgba(0,243,255,0.2)]">
                 <i class="fas fa-check-circle text-4xl md:text-5xl text-neon-cyan mb-4 animate-bounce"></i>
                 <h3 class="font-orbitron text-xl md:text-2xl font-bold text-white mb-2 text-glow">Pendaftaran Berhasil!</h3>
-                <p class="font-rajdhani text-gray-300 mb-6 md:mb-8 text-sm md:text-lg leading-relaxed">Seterusnya, apakah Anda ingin mendaftarkan akun fans Anda ke dalam Database Anggota Resmi VR LOVERS sekarang?</p>
+                <p class="font-rajdhani text-gray-300 mb-6 md:mb-8 text-sm md:text-lg leading-relaxed">Seterusnya, apakah Anda ingin mendaftarkan akun fans Anda ke dalam Database Anggota Resmi VR LOVERS agar muncul di website?</p>
                 
                 <div class="flex flex-col gap-3 md:gap-4">
                     <button onclick="promptAction('sekarang')" class="w-full btn-cosmic py-3 rounded-xl font-orbitron text-sm md:text-base font-bold tracking-wider hover-glow">
-                        Tambahkan Sekarang
+                        Tambahkan ke Database
                     </button>
                     <button onclick="promptAction('nanti')" class="w-full bg-space-dark/50 border border-gray-600 hover:border-neon-pink hover:text-neon-pink transition-colors py-3 rounded-xl font-orbitron text-gray-400 text-sm md:text-base font-bold tracking-wider">
-                        Tambahkan Nanti
+                        Sembunyikan Akun Saya (Nanti)
                     </button>
                 </div>
             </div>
@@ -870,7 +892,6 @@
                 <p class="font-rajdhani text-xs md:text-sm text-neon-cyan mb-5 md:mb-6">Scan portal ini untuk masuk ke grup pusat VR LOVERS INDONESIA</p>
                 
                 <div class="bg-white p-3 md:p-4 rounded-xl inline-block shadow-[0_0_20px_#fff]">
-                    <!-- QR Code akan di generate disini -->
                     <div id="qrcode"></div>
                 </div>
                 
@@ -878,15 +899,15 @@
             </div>
         </div>
 
-        <!-- Add Member Form Modal -->
+        <!-- Add Member Form Modal (Database VR - Data MUNCUL di Web) -->
         <div id="add-member-modal" class="fixed inset-0 z-[100] hidden flex justify-center items-center opacity-0 transition-opacity duration-300">
             <div class="absolute inset-0 bg-black/90 backdrop-blur-lg" onclick="closeAddMemberModal()"></div>
             
             <div class="relative z-[101] p-6 md:p-8 glass-panel border border-neon-cyan rounded-3xl text-center max-w-md w-full mx-4 max-h-[90vh] overflow-y-auto">
                 <button onclick="closeAddMemberModal()" class="absolute top-3 right-4 md:top-4 right-4 text-gray-400 hover:text-white transition-colors text-2xl">&times;</button>
                 
-                <h3 class="font-orbitron text-lg md:text-xl font-bold text-white mb-1 text-glow"><i class="fas fa-id-badge text-neon-cyan"></i> Pendaftaran Database</h3>
-                <p class="font-rajdhani text-xs md:text-sm text-gray-400 mb-5 md:mb-6">Masukkan data akun untuk verifikasi sistem.</p>
+                <h3 class="font-orbitron text-lg md:text-xl font-bold text-white mb-1 text-glow"><i class="fas fa-id-badge text-neon-cyan"></i> Database Terbuka</h3>
+                <p class="font-rajdhani text-xs md:text-sm text-gray-400 mb-5 md:mb-6">Data ini akan ditampilkan secara publik di website.</p>
                 
                 <form id="add-member-form" class="space-y-3 md:space-y-4 text-left">
                     <div>
@@ -916,14 +937,42 @@
                         </select>
                     </div>
                     
-                    <!-- Conditional QR Code -->
                     <div id="add-qr-container" class="hidden bg-gray-900/50 p-3 md:p-4 rounded-xl border border-neon-pink text-center flex flex-col items-center mt-2 animate-pulse">
                         <p class="font-rajdhani text-[10px] md:text-xs text-neon-pink mb-2 md:mb-3 font-bold">Anda belum bergabung? Scan ini!</p>
                         <div id="add-qrcode" class="bg-white p-1.5 md:p-2 rounded-lg inline-block"></div>
                     </div>
 
+                    <!-- Hidden parameter for Apps Script -->
+                    <input type="hidden" name="action" value="add">
+                    <input type="hidden" name="role" value="Member">
+
                     <button type="submit" class="w-full btn-cosmic py-3 rounded-xl font-orbitron font-bold text-sm md:text-base mt-4 md:mt-6 tracking-wider">
-                        DAFTARKAN AKUN
+                        TAMBAHKAN KE WEB
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Admin Login Modal -->
+        <div id="login-modal" class="fixed inset-0 z-[130] hidden flex justify-center items-center opacity-0 transition-opacity duration-300">
+            <div class="absolute inset-0 bg-black/90 backdrop-blur-lg" onclick="closeLoginModal()"></div>
+            
+            <div class="relative z-[131] p-6 md:p-8 glass-panel border border-neon-pink rounded-3xl text-center max-w-sm w-full mx-4">
+                <button onclick="closeLoginModal()" class="absolute top-3 right-4 md:top-4 right-4 text-gray-400 hover:text-white transition-colors text-2xl">&times;</button>
+                
+                <h3 class="font-orbitron text-lg md:text-xl font-bold text-neon-pink mb-2 text-glow"><i class="fas fa-user-shield"></i> System Override</h3>
+                <p class="font-rajdhani text-xs md:text-sm text-gray-400 mb-6">Masukkan kredensial admin untuk mengakses kontrol database.</p>
+                
+                <form id="login-form" class="space-y-4 text-left">
+                    <div>
+                        <input type="text" id="admin-user" required class="w-full bg-space-dark/60 border border-gray-600 rounded-lg p-3 text-sm text-white input-glow focus:border-neon-pink" placeholder="Username">
+                    </div>
+                    <div>
+                        <input type="password" id="admin-pass" required class="w-full bg-space-dark/60 border border-gray-600 rounded-lg p-3 text-sm text-white input-glow focus:border-neon-pink" placeholder="Password">
+                    </div>
+                    <p id="login-error" class="text-red-500 text-xs text-center hidden">Akses Ditolak. Kredensial tidak valid.</p>
+                    <button type="submit" class="w-full bg-neon-pink hover:bg-pink-600 text-white py-3 rounded-xl font-orbitron font-bold text-sm md:text-base transition-colors tracking-wider shadow-[0_0_15px_rgba(255,0,255,0.4)]">
+                        LOGIN ADMIN
                     </button>
                 </form>
             </div>
@@ -1036,21 +1085,31 @@
     </a>
 
     <!-- Scripts -->
-    <!-- GSAP for Animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <!-- Three.js for 3D Background -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <!-- QR Code Generator -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
     <script>
+        // =======================================================================
+        // KONFIGURASI LINK GOOGLE SHEETS (HARAP DIISI DENGAN URL APPS SCRIPT ANDA)
+        // =======================================================================
+        
+        // 1. URL untuk menampung Pendaftaran Baru (Form Join Mission Bawah) 
+        // Data yang masuk ke sini TIDAK AKAN DITAMPILKAN di website
+        const URL_PENDAFTARAN = 'https://script.google.com/macros/s/AKfycbw9K6O208L63GUjcTYYCpPySVEyHzb95pKnHWADm72I2wiLxNmRtujeI31GogoTwUBK/exec';
+
+        // 2. URL untuk Database Anggota Resmi (Form Tambah Web & Fitur Hapus Admin)
+        // Data yang masuk ke sini AKAN MUNCUL di bagian Database Anggota Resmi di website
+        const URL_DATABASE_VR = 'https://script.google.com/macros/s/AKfycbyb-B83yzl76DerA1gdLNjVDJlI23I_4wfA9ZBuiQKoKCFs3YBfS_52SSSObbfYiGClpA/exec';
+
+        // =======================================================================
+
+
         document.addEventListener('DOMContentLoaded', () => {
             // Set Current Year
             const yearSpan = document.getElementById('current-year');
-            if (yearSpan) {
-                yearSpan.textContent = new Date().getFullYear();
-            }
+            if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
             // 1. Loading Screen Logic
             const loader = document.getElementById('loader');
@@ -1059,23 +1118,14 @@
                     setTimeout(() => {
                         loader.style.opacity = '0';
                         loader.style.visibility = 'hidden';
-                        
-                        // Initialize Hero GSAP animations AFTER loader disappears
                         if (typeof gsap !== 'undefined') {
-                            gsap.from(".gsap-hero-elem", {
-                                y: 50,
-                                opacity: 0,
-                                duration: 1,
-                                stagger: 0.2,
-                                ease: "power3.out",
-                                delay: 0.2
-                            });
+                            gsap.from(".gsap-hero-elem", { y: 50, opacity: 0, duration: 1, stagger: 0.2, ease: "power3.out", delay: 0.2 });
                         }
                     }, 1000);
                 });
             }
 
-            // 2. Scroll Progress Bar & Navbar & Back to Top
+            // 2. Scroll Logic & Mobile Menu
             window.addEventListener('scroll', () => {
                 const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
                 const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -1084,28 +1134,19 @@
                 const progressBar = document.getElementById('progress-bar');
                 if (progressBar) progressBar.style.width = scrolled + "%";
 
-                // Navbar
                 const navbar = document.getElementById('navbar');
                 if (navbar) {
-                    if (winScroll > 50) {
-                        navbar.classList.remove('opacity-0', 'translate-y-[-100%]');
-                    } else {
-                        navbar.classList.add('opacity-0', 'translate-y-[-100%]');
-                    }
+                    if (winScroll > 50) navbar.classList.remove('opacity-0', 'translate-y-[-100%]');
+                    else navbar.classList.add('opacity-0', 'translate-y-[-100%]');
                 }
 
-                // Back to Top
                 const btt = document.getElementById('back-to-top');
                 if (btt) {
-                    if (winScroll > 300) {
-                        btt.classList.remove('opacity-0', 'invisible');
-                    } else {
-                        btt.classList.add('opacity-0', 'invisible');
-                    }
+                    if (winScroll > 300) btt.classList.remove('opacity-0', 'invisible');
+                    else btt.classList.add('opacity-0', 'invisible');
                 }
             });
 
-            // Mobile Menu Toggle
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
             const iconBars = document.getElementById('icon-bars');
@@ -1114,8 +1155,6 @@
             if (mobileMenuBtn && mobileMenu) {
                 mobileMenuBtn.addEventListener('click', () => {
                     mobileMenu.classList.toggle('active');
-                    
-                    // Icon animation logic
                     if (mobileMenu.classList.contains('active')) {
                         iconBars.classList.add('scale-0', 'opacity-0', '-rotate-90');
                         iconClose.classList.remove('scale-0', 'opacity-0', 'rotate-90');
@@ -1127,7 +1166,6 @@
                     }
                 });
                 
-                // Close menu when a link is clicked
                 mobileMenu.querySelectorAll('a').forEach(link => {
                     link.addEventListener('click', () => {
                         mobileMenu.classList.remove('active');
@@ -1138,21 +1176,18 @@
                 });
             }
 
-            // 3. Three.js Setup (Lightweight 3D Space Background)
+            // 3. Three.js Background
             const canvas = document.getElementById('bg-canvas');
             if (canvas && typeof THREE !== 'undefined') {
                 const scene = new THREE.Scene();
-                // Fog for depth
                 scene.fog = new THREE.FogExp2(0x030712, 0.001);
 
                 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
                 const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
-                
                 renderer.setPixelRatio(window.devicePixelRatio);
                 renderer.setSize(window.innerWidth, window.innerHeight);
                 camera.position.set(0, 0, 50);
 
-                // Lights
                 const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
                 scene.add(ambientLight);
                 const pointLight = new THREE.PointLight(0x00f3ff, 2, 100);
@@ -1162,98 +1197,55 @@
                 pinkLight.position.set(-10, -10, 10);
                 scene.add(pinkLight);
 
-                // Starfield
                 const starGeometry = new THREE.BufferGeometry();
                 const starCount = 1000;
                 const starPosArray = new Float32Array(starCount * 3);
                 for(let i=0; i < starCount * 3; i++) {
-                    starPosArray[i] = (Math.random() - 0.5) * 200; // spread
+                    starPosArray[i] = (Math.random() - 0.5) * 200;
                 }
                 starGeometry.setAttribute('position', new THREE.BufferAttribute(starPosArray, 3));
-                const starMaterial = new THREE.PointsMaterial({
-                    color: 0xffffff,
-                    size: 0.2,
-                    transparent: true,
-                    opacity: 0.8
-                });
+                const starMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 0.2, transparent: true, opacity: 0.8 });
                 const starMesh = new THREE.Points(starGeometry, starMaterial);
                 scene.add(starMesh);
 
-                // Asteroids/Small Planets (Cartoonish)
                 const planets = [];
-                const planetGeo = new THREE.IcosahedronGeometry(2, 0); // Flat shading 3D Look
-                const planetMat1 = new THREE.MeshPhongMaterial({ 
-                    color: 0x0b1d3a, 
-                    emissive: 0x00f3ff, 
-                    emissiveIntensity: 0.3,
-                    shininess: 80,
-                    flatShading: true
-                });
-                const planetMat2 = new THREE.MeshPhongMaterial({ 
-                    color: 0x1d4ed8, 
-                    emissive: 0x9d4edd, 
-                    emissiveIntensity: 0.3,
-                    shininess: 80,
-                    flatShading: true
-                });
+                const planetGeo = new THREE.IcosahedronGeometry(2, 0);
+                const planetMat1 = new THREE.MeshPhongMaterial({ color: 0x0b1d3a, emissive: 0x00f3ff, emissiveIntensity: 0.3, shininess: 80, flatShading: true });
+                const planetMat2 = new THREE.MeshPhongMaterial({ color: 0x1d4ed8, emissive: 0x9d4edd, emissiveIntensity: 0.3, shininess: 80, flatShading: true });
                 
                 for(let i=0; i<8; i++) {
                     const mesh = new THREE.Mesh(planetGeo, i % 2 === 0 ? planetMat1 : planetMat2);
                     mesh.position.x = (Math.random() - 0.5) * 100;
                     mesh.position.y = (Math.random() - 0.5) * 100;
                     mesh.position.z = (Math.random() - 0.5) * 60 - 20;
-                    
                     const scale = Math.random() * 1.5 + 0.5;
                     mesh.scale.set(scale, scale, scale);
-                    
                     scene.add(mesh);
-                    planets.push({
-                        mesh: mesh,
-                        rotX: Math.random() * 0.02,
-                        rotY: Math.random() * 0.02
-                    });
+                    planets.push({ mesh: mesh, rotX: Math.random() * 0.02, rotY: Math.random() * 0.02 });
                 }
 
-                // Parallax Scroll Effect for Camera
-                let mouseX = 0;
-                let mouseY = 0;
-                let targetX = 0;
-                let targetY = 0;
-                const windowHalfX = window.innerWidth / 2;
-                const windowHalfY = window.innerHeight / 2;
+                let mouseX = 0, mouseY = 0, targetX = 0, targetY = 0;
+                const windowHalfX = window.innerWidth / 2, windowHalfY = window.innerHeight / 2;
 
                 document.addEventListener('mousemove', (event) => {
                     mouseX = (event.clientX - windowHalfX);
                     mouseY = (event.clientY - windowHalfY);
                 });
 
-                // Animation Loop
                 function animate() {
                     requestAnimationFrame(animate);
-
-                    // Rotate stars slowly
                     starMesh.rotation.y += 0.0005;
                     starMesh.rotation.x += 0.0002;
-
-                    // Rotate planets
-                    planets.forEach(p => {
-                        p.mesh.rotation.x += p.rotX;
-                        p.mesh.rotation.y += p.rotY;
-                    });
-
-                    // Parallax based on mouse and scroll
+                    planets.forEach(p => { p.mesh.rotation.x += p.rotX; p.mesh.rotation.y += p.rotY; });
                     targetX = mouseX * 0.01;
                     targetY = mouseY * 0.01 - (window.scrollY * 0.05);
-
                     camera.position.x += (targetX - camera.position.x) * 0.05;
                     camera.position.y += (-targetY - camera.position.y) * 0.05;
                     camera.lookAt(scene.position);
-
                     renderer.render(scene, camera);
                 }
                 animate();
 
-                // Resize handler
                 window.addEventListener('resize', () => {
                     camera.aspect = window.innerWidth / window.innerHeight;
                     camera.updateProjectionMatrix();
@@ -1261,26 +1253,15 @@
                 });
             }
 
-            // 4. GSAP ScrollTrigger Animations
+            // 4. GSAP Animations
             if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
                 gsap.registerPlugin(ScrollTrigger);
-
                 gsap.utils.toArray('.gsap-slide-up').forEach(elem => {
-                    gsap.from(elem, {
-                        scrollTrigger: {
-                            trigger: elem,
-                            start: "top 85%",
-                            toggleActions: "play none none none"
-                        },
-                        y: 50,
-                        opacity: 0,
-                        duration: 0.8,
-                        ease: "power2.out"
-                    });
+                    gsap.from(elem, { scrollTrigger: { trigger: elem, start: "top 85%", toggleActions: "play none none none" }, y: 50, opacity: 0, duration: 0.8, ease: "power2.out" });
                 });
             }
 
-            // 5. Gallery Modal Logic
+            // 5. Gallery Modal
             const galleryItems = document.querySelectorAll('.gallery-item');
             const modal = document.getElementById('gallery-modal');
             const modalImg = document.getElementById('modal-img');
@@ -1289,11 +1270,9 @@
                 item.addEventListener('click', function() {
                     if(modal && modalImg) {
                         modal.classList.remove('hidden');
-                        // Trigger reflow
                         void modal.offsetWidth;
                         modal.classList.add('opacity-100');
                         modalImg.src = this.src;
-                        // Block body scroll
                         document.body.style.overflow = 'hidden';
                     }
                 });
@@ -1302,143 +1281,72 @@
             window.closeModal = function() {
                 if (modal && modalImg) {
                     modal.classList.remove('opacity-100');
-                    setTimeout(() => {
-                        modal.classList.add('hidden');
-                        modalImg.src = '';
-                        document.body.style.overflow = 'auto';
-                    }, 300);
+                    setTimeout(() => { modal.classList.add('hidden'); modalImg.src = ''; document.body.style.overflow = 'auto'; }, 300);
                 }
             };
 
-            // 6. Countdown Timers Logic
-            // Fungsi untuk mendapatkan tanggal target, otomatis tambah 1 tahun jika sudah lewat
+            // 6. Countdown Timers
             function getNextTargetDate(month, day) {
                 const now = new Date();
                 let targetDate = new Date(now.getFullYear(), month, day, 0, 0, 0);
-                if (now.getTime() > targetDate.getTime()) {
-                    targetDate.setFullYear(now.getFullYear() + 1);
-                }
+                if (now.getTime() > targetDate.getTime()) targetDate.setFullYear(now.getFullYear() + 1);
                 return targetDate.getTime();
             }
 
-            // Ulang Tahun: 20 Oktober (Bulan ke-9 dalam format JavaScript 0-indexed)
             const bdayTarget = getNextTargetDate(9, 20); 
-            // Anniversary: 20 Juli (Bulan ke-6 dalam format JavaScript 0-indexed)
             const annivTarget = getNextTargetDate(6, 20); 
 
             function updateCountdown(target, prefix) {
-                const currentTime = new Date().getTime();
-                const distance = target - currentTime;
-
-                const elemD = document.getElementById(`${prefix}-d`);
-                const elemH = document.getElementById(`${prefix}-h`);
-                const elemM = document.getElementById(`${prefix}-m`);
-                const elemS = document.getElementById(`${prefix}-s`);
-
+                const distance = target - new Date().getTime();
+                const elemD = document.getElementById(`${prefix}-d`), elemH = document.getElementById(`${prefix}-h`), elemM = document.getElementById(`${prefix}-m`), elemS = document.getElementById(`${prefix}-s`);
                 if (!elemD || !elemH || !elemM || !elemS) return;
 
                 if (distance < 0) {
-                    elemD.innerText = "00";
-                    elemH.innerText = "00";
-                    elemM.innerText = "00";
-                    elemS.innerText = "00";
-                    return;
+                    elemD.innerText = "00"; elemH.innerText = "00"; elemM.innerText = "00"; elemS.innerText = "00"; return;
                 }
 
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                elemD.innerText = days.toString().padStart(2, '0');
-                elemH.innerText = hours.toString().padStart(2, '0');
-                elemM.innerText = minutes.toString().padStart(2, '0');
-                elemS.innerText = seconds.toString().padStart(2, '0');
+                elemD.innerText = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+                elemH.innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+                elemM.innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+                elemS.innerText = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
             }
 
-            setInterval(() => {
-                updateCountdown(bdayTarget, 'bday');
-                updateCountdown(annivTarget, 'anniv');
-            }, 1000);
+            setInterval(() => { updateCountdown(bdayTarget, 'bday'); updateCountdown(annivTarget, 'anniv'); }, 1000);
 
-            // 7. Form Registration (Mission Control) & QR Code Generator
-            const form = document.getElementById('join-form');
+            // ===========================================================================================
+            // 7. FORM PENDAFTARAN RAHASIA (JOIN MISSION) -> Mengarah ke URL_PENDAFTARAN
+            // ===========================================================================================
+            const formJoin = document.getElementById('join-form');
             const qrModal = document.getElementById('qr-modal');
             const qrcodeContainer = document.getElementById('qrcode');
             let qrCodeObj = null;
 
-            if (form && qrModal && qrcodeContainer) {
-                form.addEventListener('submit', function(e) {
+            if (formJoin && qrModal && qrcodeContainer) {
+                formJoin.addEventListener('submit', function(e) {
                     e.preventDefault();
-                    
-                    const btn = form.querySelector('button');
+                    const btn = formJoin.querySelector('button');
                     const originalText = btn.innerHTML;
                     btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> MENGIRIM...';
                     btn.disabled = true;
 
-                    // Mengambil data form menggunakan FormData
-                    const formData = new FormData(form);
+                    const formData = new FormData(formJoin);
 
-                    // =========================================================
-                    // CARA MENGHUBUNGKAN KE GOOGLE SHEETS ASLI:
-                    // Masukkan URL Web App Google Apps Script ke variabel ini
-                    // =========================================================
-                    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyb-B83yzl76DerA1gdLNjVDJlI23I_4wfA9ZBuiQKoKCFs3YBfS_52SSSObbfYiGClpA/exec'; 
-
-                    // delay 1.5 detik untuk efek loading
-                    setTimeout(() => {
-
-                        // MENGIRIM DATA ASLI KE GOOGLE SHEETS
-                        fetch(GOOGLE_SCRIPT_URL, {
-                            method: 'POST',
-                            body: formData
-                        })
-                        .then(response => response.json())
-                        .then(data => { 
-                            console.log('Sukses:', data);
-                            
-                            // Setelah sukses simpan, muat ulang data dari server
-                            fetchMembersFromDatabase();
-
-                            btn.innerHTML = originalText;
-                            btn.disabled = false;
-                            addMemberForm.reset();
-                            addQrContainer.classList.add('hidden');
-                            
-                            closeAddMemberModal();
-                            
-                            setTimeout(() => {
-                                showSuccessModal('Sinyal pendaftaran akun Anda telah diteruskan ke Database VR Lovers.');
-                            }, 400);
-                        })
-                        .catch(error => { 
-                            console.error('Error:', error); 
-                            btn.innerHTML = originalText;
-                            btn.disabled = false;
-                            alert("Gagal mengirim data. Periksa koneksi Anda.");
-                        });
-
-                        // Generate QR Code containing a mock group link (Prepared beforehand)
-                        qrcodeContainer.innerHTML = ''; // clear prev
-                        if (typeof QRCode !== 'undefined') {
-                            qrCodeObj = new QRCode(qrcodeContainer, {
-                                text: "https://chat.whatsapp.com/Cu64WbV0fgt5MtPY0uUHWi?mode=hq2tcla",
-                                width: 200,
-                                height: 200,
-                                colorDark : "#030712",
-                                colorLight : "#ffffff",
-                                correctLevel : QRCode.CorrectLevel.H
-                            });
-                        }
-
-                        // Show PROMPT Modal instead of QR Modal
+                    // MENGIRIM DATA KE LINK PENDAFTARAN (TIDAK MUNCUL DI WEB)
+                    fetch(URL_PENDAFTARAN, {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => { 
+                        btn.innerHTML = originalText;
+                        btn.disabled = false;
+                        formJoin.reset();
+                        
                         const promptModal = document.getElementById('prompt-add-database-modal');
                         if (promptModal) {
                             promptModal.classList.remove('hidden');
                             void promptModal.offsetWidth;
                             promptModal.classList.add('opacity-100');
-                            
-                            // Animasi Pop-up Konten
                             const content = promptModal.querySelector('.relative.z-\\[101\\]');
                             if(content) {
                                 content.classList.add('transform', 'scale-75', 'opacity-0', 'transition-all', 'duration-500');
@@ -1449,10 +1357,23 @@
                             }
                         }
 
-                    }, 1500);
+                        // Buat QR grup WA
+                        qrcodeContainer.innerHTML = '';
+                        if (typeof QRCode !== 'undefined') {
+                            qrCodeObj = new QRCode(qrcodeContainer, {
+                                text: "https://chat.whatsapp.com/Cu64WbV0fgt5MtPY0uUHWi?mode=hq2tcla",
+                                width: 200, height: 200, colorDark : "#030712", colorLight : "#ffffff", correctLevel : QRCode.CorrectLevel.H
+                            });
+                        }
+                    })
+                    .catch(error => { 
+                        console.error('Error Pendaftaran:', error); 
+                        btn.innerHTML = originalText;
+                        btn.disabled = false;
+                        alert("Gagal mengirim data pendaftaran. Cek apakah Anda sudah mengisi URL_PENDAFTARAN dengan benar.");
+                    });
                 });
 
-                // Logic for Prompt Action
                 window.promptAction = function(action) {
                     const promptModal = document.getElementById('prompt-add-database-modal');
                     if (promptModal) {
@@ -1460,10 +1381,8 @@
                         setTimeout(() => {
                             promptModal.classList.add('hidden');
                             if (action === 'sekarang') {
-                                // Buka modal tambah database
-                                openAddMemberModal();
+                                openAddMemberModal(); // Buka form untuk masuk Web
                             } else if (action === 'nanti') {
-                                // Buka modal QR Code Grup
                                 qrModal.classList.remove('hidden');
                                 void qrModal.offsetWidth;
                                 qrModal.classList.add('opacity-100');
@@ -1474,25 +1393,32 @@
 
                 window.closeQRModal = function() {
                     qrModal.classList.remove('opacity-100');
-                    setTimeout(() => {
-                        qrModal.classList.add('hidden');
-                    }, 300);
+                    setTimeout(() => { qrModal.classList.add('hidden'); }, 300);
                 }
             }
 
-            // 8. Official Members & Search/Sort Logic
+
+            // ===========================================================================================
+            // 8. DATABASE ANGGOTA RESMI & ADMIN KONTROL -> Mengarah ke URL_DATABASE_VR
+            // ===========================================================================================
             let idCounter = 1;
-            let membersData = [
-                { id: idCounter++, name: 'Alfaro Achmad Higuain', ig: '@alfaro.higuain_official', city: 'Banyuwangi', status: 'Captain' }, // Terlama
-                { id: idCounter++, name: 'Alvaro.-', ig: '@v4ro.fn', city: '---', status: 'Member' },
-                { id: idCounter++, name: 'Alvaro E4K', ig: '@vr_edits4k', city: 'Bandung', status: 'Member' },
-                { id: idCounter++, name: 'Alvaro Lovers Cianjur', ig: '@varo.cjr', city: 'Cianjur', status: 'Member' }, // Terbaru
-            ];
+            let membersData = []; // Kosong secara default sebelum di fetch
+            let isAdmin = false;
+            
+            // Variabel untuk Paginasi
+            let currentPage = 1; 
+            const itemsPerPage = 10; 
 
             const searchInput = document.getElementById('search-member');
             const sortSelect = document.getElementById('sort-member');
             const membersGrid = document.getElementById('members-grid');
             const notFoundDiv = document.getElementById('not-found-msg');
+            
+            // Elemen UI Paginasi
+            const paginationControls = document.getElementById('pagination-controls'); 
+            const prevPageBtn = document.getElementById('prev-page'); 
+            const nextPageBtn = document.getElementById('next-page'); 
+            const pageInfo = document.getElementById('page-info'); 
 
             function renderMembers() {
                 if(!membersGrid) return;
@@ -1501,93 +1427,175 @@
                 const query = searchInput ? searchInput.value.toLowerCase() : '';
                 const sortType = sortSelect ? sortSelect.value : 'newest';
 
-                // 1. Filter by Search
                 let filtered = membersData.filter(m => 
                     m.name.toLowerCase().includes(query) || 
                     m.ig.toLowerCase().includes(query)
                 );
 
-                // 2. Sort Logic
-                if (sortType === 'newest') {
-                    // Terbaru (ID terbesar ke terkecil)
-                    filtered.sort((a, b) => b.id - a.id);
-                } else {
-                    // Terlama (ID terkecil ke terbesar)
-                    filtered.sort((a, b) => a.id - b.id);
-                }
+                if (sortType === 'newest') filtered.sort((a, b) => b.id - a.id);
+                else filtered.sort((a, b) => a.id - b.id);
 
                 if (filtered.length > 0) {
                     notFoundDiv.classList.add('hidden');
-                    filtered.forEach(m => {
+                    
+                    // --- LOGIKA PAGINASI ---
+                    const totalPages = Math.ceil(filtered.length / itemsPerPage);
+                    
+                    // Memastikan currentPage tidak keluar dari batas
+                    if (currentPage > totalPages) currentPage = totalPages;
+                    if (currentPage < 1) currentPage = 1;
+                    
+                    const startIndex = (currentPage - 1) * itemsPerPage;
+                    const endIndex = startIndex + itemsPerPage;
+                    const paginatedItems = filtered.slice(startIndex, endIndex);
+
+                    paginatedItems.forEach(m => {
                         const card = document.createElement('div');
-                        card.className = 'glass-panel p-6 rounded-2xl hover-glow flex flex-col items-center text-center';
+                        card.className = 'glass-panel p-6 rounded-2xl hover-glow flex flex-col items-center text-center relative group';
+                        
+                        let deleteBtnHTML = '';
+                        if (isAdmin) {
+                            deleteBtnHTML = `
+                                <button onclick="deleteMember('${m.name}')" class="absolute top-3 right-3 w-8 h-8 bg-red-500/20 text-red-500 border border-red-500/50 rounded-full flex justify-center items-center hover:bg-red-500 hover:text-white transition-colors cursor-pointer z-10" title="Hapus Anggota">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            `;
+                        }
+
+                        const currentRole = m.role ? m.role.toLowerCase() : 'member';
+                        let roleColorClass = 'bg-neon-cyan/20 text-neon-cyan';
+                        let roleIcon = '';
+                        let avatarBadge = '';
+                        
+                        if (currentRole === 'captain') {
+                            roleColorClass = 'bg-yellow-500/20 text-yellow-500 border border-yellow-500/50';
+                            roleIcon = '<i class="fas fa-star text-[10px]"></i> ';
+                            avatarBadge = '<div class="absolute -top-1 -right-1 bg-yellow-500 text-space-dark rounded-full w-6 h-6 flex items-center justify-center text-[10px] shadow-[0_0_10px_#eab308]"><i class="fas fa-star"></i></div>';
+                        } else if (currentRole === 'admin') {
+                            roleColorClass = 'bg-neon-pink/20 text-neon-pink border border-neon-pink/50';
+                            roleIcon = '<i class="fas fa-shield-alt text-[10px]"></i> ';
+                            avatarBadge = '<div class="absolute -top-1 -right-1 bg-neon-pink text-white rounded-full w-6 h-6 flex items-center justify-center text-[10px] shadow-[0_0_10px_#ff00ff]"><i class="fas fa-shield-alt"></i></div>';
+                        }
+
+                        let roleControlHTML = `<span class="${roleColorClass} px-2 py-0.5 rounded flex items-center gap-1">${roleIcon}${m.role}</span>`;
+                        
+                        if (isAdmin) {
+                            roleControlHTML = `
+                                <select onchange="updateRole('${m.name}', this.value)" class="bg-space-dark border border-gray-600 rounded px-1 py-1 text-[10px] md:text-xs text-white outline-none focus:border-neon-purple cursor-pointer">
+                                    <option value="Member" ${currentRole === 'member' ? 'selected' : ''}>Member</option>
+                                    <option value="Captain" ${currentRole === 'captain' ? 'selected' : ''}>Captain</option>
+                                    <option value="Admin" ${currentRole === 'admin' ? 'selected' : ''}>Admin</option>
+                                </select>
+                            `;
+                        }
+
                         card.innerHTML = `
-                            <div class="w-16 h-16 bg-space-dark rounded-full border-2 border-neon-cyan flex items-center justify-center mb-4 shadow-[0_0_15px_rgba(0,243,255,0.4)]">
+                            ${deleteBtnHTML}
+                            <div class="w-16 h-16 bg-space-dark rounded-full border-2 border-neon-cyan flex items-center justify-center mb-4 shadow-[0_0_15px_rgba(0,243,255,0.4)] relative">
                                 <i class="fas fa-user-astronaut text-2xl text-neon-cyan"></i>
+                                ${avatarBadge}
                             </div>
                             <h4 class="font-orbitron font-bold text-lg text-white mb-1 line-clamp-1">${m.name}</h4>
                             <p class="font-inter text-sm text-neon-pink mb-4"><i class="fab fa-instagram"></i> ${m.ig}</p>
-                            <div class="w-full border-t border-gray-700/50 pt-3 flex justify-between text-xs text-gray-400 font-rajdhani uppercase tracking-wider">
+                            <div class="w-full border-t border-gray-700/50 pt-3 flex justify-between items-center text-xs text-gray-400 font-rajdhani uppercase tracking-wider">
                                 <span><i class="fas fa-map-marker-alt text-neon-purple"></i> ${m.city}</span>
-                                <span class="bg-neon-cyan/20 text-neon-cyan px-2 py-0.5 rounded">${m.status}</span>
+                                ${roleControlHTML}
                             </div>
                         `;
                         membersGrid.appendChild(card);
                     });
+
+                    // --- MEMPERBARUI TAMPILAN TOMBOL PAGINASI ---
+                    if (totalPages > 1) {
+                        if (paginationControls) paginationControls.classList.remove('hidden');
+                        if (pageInfo) pageInfo.textContent = `Halaman ${currentPage} / ${totalPages}`;
+                        if (prevPageBtn) prevPageBtn.disabled = currentPage === 1;
+                        if (nextPageBtn) nextPageBtn.disabled = currentPage === totalPages;
+                    } else {
+                        if (paginationControls) paginationControls.classList.add('hidden');
+                    }
+
                 } else {
                     notFoundDiv.classList.remove('hidden');
+                    if (paginationControls) paginationControls.classList.add('hidden');
                 }
             }
 
-            if(searchInput) searchInput.addEventListener('input', renderMembers);
-            if(sortSelect) sortSelect.addEventListener('change', renderMembers);
-            
-            // =========================================================
-            // FITUR FETCH GET DARI GOOGLE SHEETS
-            // =========================================================
-            const GOOGLE_SCRIPT_URL_GET = 'Ihttps://script.google.com/macros/s/AKfycbyb-B83yzl76DerA1gdLNjVDJlI23I_4wfA9ZBuiQKoKCFs3YBfS_52SSSObbfYiGClpA/exec'; // Pastikan URL ini benar
+            // Reset ke halaman 1 setiap kali mencari atau mengurutkan
+            if(searchInput) searchInput.addEventListener('input', () => { currentPage = 1; renderMembers(); });
+            if(sortSelect) sortSelect.addEventListener('change', () => { currentPage = 1; renderMembers(); });
 
+            // --- EVENT LISTENER UNTUK TOMBOL PAGINASI ---
+            if (prevPageBtn) {
+                prevPageBtn.addEventListener('click', () => {
+                    if (currentPage > 1) {
+                        currentPage--;
+                        renderMembers();
+                        // Scroll otomatis ke awal bagian members
+                        document.getElementById('members').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            }
+
+            if (nextPageBtn) {
+                nextPageBtn.addEventListener('click', () => {
+                    const query = searchInput ? searchInput.value.toLowerCase() : '';
+                    let filtered = membersData.filter(m => m.name.toLowerCase().includes(query) || m.ig.toLowerCase().includes(query));
+                    const totalPages = Math.ceil(filtered.length / itemsPerPage);
+                    if (currentPage < totalPages) {
+                        currentPage++;
+                        renderMembers();
+                        // Scroll otomatis ke awal bagian members
+                        document.getElementById('members').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            }
+            
+            // FUNGSI MENGAMBIL DATA UNTUK DITAMPILKAN DI WEB
             async function fetchMembersFromDatabase() {
                 if(!membersGrid) return;
-                
                 membersGrid.innerHTML = `
                     <div class="col-span-full text-center text-neon-cyan py-12">
                         <i class="fas fa-satellite-dish fa-spin text-5xl mb-4"></i>
                         <p class="font-orbitron tracking-widest animate-pulse mt-2">Menerima sinyal data dari pusat...</p>
                     </div>
                 `;
+                
+                if (paginationControls) paginationControls.classList.add('hidden');
 
                 try {
-                    // MENGAMBIL DATA ASLI DARI GOOGLE SHEETS
-                    const response = await fetch(GOOGLE_SCRIPT_URL_GET);
+                    const urlWithCacheBuster = URL_DATABASE_VR + '?t=' + new Date().getTime();
+                    const response = await fetch(urlWithCacheBuster, { method: 'GET', redirect: 'follow' });
                     const data = await response.json();
                     
+                    membersData = [];
+                    idCounter = 1;
+
                     if (data && data.length > 0) {
-                        membersData = []; // Kosongkan data awal
-                        idCounter = 1;
-                        
                         data.forEach(row => {
-                            membersData.push({
-                                id: idCounter++,
-                                name: row.nama || 'Unknown',
-                                ig: row.ig || '-',
-                                city: row.alamat || 'Unknown Base',
-                                status: row.status_grup === 'sudah' ? 'Member' : 'Pending'
-                            });
+                            if(row.nama || row.Nama) {
+                                membersData.push({
+                                    id: idCounter++,
+                                    name: row.nama || row.Nama || 'Unknown',
+                                    ig: row.ig || row.IG || row.username_ig || '-',
+                                    city: row.alamat || row.Alamat || row.kota || 'Unknown Base',
+                                    status: (row.status_grup === 'sudah' || row.Status === 'sudah') ? 'Member' : 'Pending',
+                                    role: row.role || row.Role || row.peran || 'Member'
+                                });
+                            }
                         });
                     }
-                    
-                    renderMembers(); // Render data asli
-                    
+                    renderMembers();
                 } catch (error) {
                     console.error("Gagal mengambil data dari orbit:", error);
-                    renderMembers(); // Tampilkan data awal (fallback) jika gagal
+                    renderMembers(); // Tampilkan kosong jika gagal
                 }
             }
-            // Panggil fungsi GET saat halaman pertama kali dimuat
-            fetchMembersFromDatabase();
+            fetchMembersFromDatabase(); // Inisialisasi awal
 
-            // Add Member Modal Logic
+            // ===========================================================================================
+            // Modal Form Penambahan Anggota (Ke Database Web)
+            // ===========================================================================================
             const addMemberModal = document.getElementById('add-member-modal');
             const groupStatusSelect = document.getElementById('add-group-status');
             const addQrContainer = document.getElementById('add-qr-container');
@@ -1597,8 +1605,6 @@
                 addMemberModal.classList.remove('hidden');
                 void addMemberModal.offsetWidth;
                 addMemberModal.classList.add('opacity-100');
-                
-                // Animasi Pop-up Konten
                 const content = addMemberModal.querySelector('.relative.z-\\[101\\]');
                 if(content) {
                     content.classList.add('transform', 'scale-75', 'opacity-0', 'transition-all', 'duration-500');
@@ -1611,13 +1617,13 @@
 
             window.closeAddMemberModal = function() {
                 addMemberModal.classList.remove('opacity-100');
-                setTimeout(() => {
-                    addMemberModal.classList.add('hidden');
-                }, 300);
+                setTimeout(() => { addMemberModal.classList.add('hidden'); }, 300);
             };
 
             if(groupStatusSelect && addQrContainer) {
                 groupStatusSelect.addEventListener('change', function() {
+                    if (isAdmin) { addQrContainer.classList.add('hidden'); return; }
+
                     if (this.value === 'belum') {
                         addQrContainer.classList.remove('hidden');
                         if (!addQrObj && typeof QRCode !== 'undefined') {
@@ -1625,11 +1631,7 @@
                             qrDiv.innerHTML = '';
                             addQrObj = new QRCode(qrDiv, {
                                 text: "https://chat.whatsapp.com/Cu64WbV0fgt5MtPY0uUHWi?mode=hq2tcla",
-                                width: 100,
-                                height: 100,
-                                colorDark : "#030712",
-                                colorLight : "#ffffff",
-                                correctLevel : QRCode.CorrectLevel.L
+                                width: 100, height: 100, colorDark : "#030712", colorLight : "#ffffff", correctLevel : QRCode.CorrectLevel.L
                             });
                         }
                     } else {
@@ -1638,73 +1640,164 @@
                 });
             }
 
-            // Google Sheets Simulation Logic (Add Member Database)
             const addMemberForm = document.getElementById('add-member-form');
             if(addMemberForm) {
                 addMemberForm.addEventListener('submit', function(e) {
                     e.preventDefault();
-                    
                     const btn = addMemberForm.querySelector('button[type="submit"]');
                     const originalText = btn.innerHTML;
-                    btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> MENGIRIM DATA...';
+                    btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> MEMPROSES...';
                     btn.disabled = true;
 
-                    // Mengambil data form menggunakan FormData
                     const formData = new FormData(addMemberForm);
-                    
-                    // =========================================================
-                    // CARA MENGHUBUNGKAN KE GOOGLE SHEETS ASLI:
-                    // Masukkan URL Web App tersebut ke variabel GOOGLE_SCRIPT_URL di bawah ini:
-                    // =========================================================
-                    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyb-B83yzl76DerA1gdLNjVDJlI23I_4wfA9ZBuiQKoKCFs3YBfS_52SSSObbfYiGClpA/exec'; 
+                    formData.set('action', 'add'); // Beri tahu apps script untuk Menambah data
 
-                    // MENGIRIM DATA ASLI KE GOOGLE SHEETS
-                    fetch(GOOGLE_SCRIPT_URL, {
+                    // MENGIRIM DATA KE LINK DATABASE WEB
+                    fetch(URL_DATABASE_VR, {
                         method: 'POST',
                         body: formData
                     })
                     .then(response => response.json())
                     .then(data => { 
-                        console.log('Sukses:', data);
-                        
-                        // Setelah sukses simpan, muat ulang data dari server
-                        fetchMembersFromDatabase();
-
+                        fetchMembersFromDatabase(); // Tarik data web baru
                         btn.innerHTML = originalText;
                         btn.disabled = false;
                         addMemberForm.reset();
                         addQrContainer.classList.add('hidden');
-                        
                         closeAddMemberModal();
-                        
-                        setTimeout(() => {
-                            showSuccessModal('Sinyal pendaftaran akun Anda telah diteruskan ke Database VR Lovers.');
-                        }, 400);
+                        setTimeout(() => { showSuccessModal('Akun Anda telah ditambahkan ke Database Anggota Publik.'); }, 400);
                     })
                     .catch(error => { 
-                        console.error('Error:', error); 
+                        console.error('Error Add to Web:', error); 
                         btn.innerHTML = originalText;
                         btn.disabled = false;
-                        alert("Gagal mengirim data. Periksa koneksi Anda.");
+                        alert("Gagal menambahkan data ke Web.");
                     });
                 });
             }
             
             // =========================================================
-            // FUNGSI GLOBAL SUCCESS MODAL
+            // FUNGSI ADMIN: LOGIN, LOGOUT & DELETE (Di URL_DATABASE_VR)
             // =========================================================
+            const loginModal = document.getElementById('login-modal');
+            const loginForm = document.getElementById('login-form');
+            
+            window.openLoginModal = function() {
+                if (mobileMenu && mobileMenu.classList.contains('active')) mobileMenuBtn.click(); 
+                loginModal.classList.remove('hidden');
+                void loginModal.offsetWidth;
+                loginModal.classList.add('opacity-100');
+            };
+
+            window.closeLoginModal = function() {
+                loginModal.classList.remove('opacity-100');
+                setTimeout(() => {
+                    loginModal.classList.add('hidden');
+                    document.getElementById('login-error').classList.add('hidden');
+                }, 300);
+            };
+
+            if(loginForm) {
+                loginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const user = document.getElementById('admin-user').value;
+                    const pass = document.getElementById('admin-pass').value;
+                    
+                    if(user === 'admin' && pass === 'vrlovers2026') {
+                        isAdmin = true;
+                        closeLoginModal();
+                        document.getElementById('admin-login-link').classList.add('hidden');
+                        document.getElementById('admin-logout-link').classList.remove('hidden');
+                        document.getElementById('admin-panel-controls').classList.remove('hidden');
+                        loginForm.reset();
+                        renderMembers(); 
+                        showSuccessModal('Akses Admin Diberikan. Anda sekarang memiliki kontrol penuh.');
+                    } else {
+                        document.getElementById('login-error').classList.remove('hidden');
+                    }
+                });
+            }
+
+            window.adminLogout = function() {
+                if (mobileMenu && mobileMenu.classList.contains('active')) mobileMenuBtn.click(); 
+                isAdmin = false;
+                document.getElementById('admin-login-link').classList.remove('hidden');
+                document.getElementById('admin-logout-link').classList.add('hidden');
+                document.getElementById('admin-panel-controls').classList.add('hidden');
+                renderMembers(); 
+                showSuccessModal('Akses Admin Ditutup.');
+            };
+
+            window.deleteMember = function(memberName) {
+                if(confirm(`PERINGATAN! Apakah Anda yakin ingin menghapus akun '${memberName}' dari database web?`)) {
+                    membersGrid.innerHTML = `
+                        <div class="col-span-full text-center text-red-500 py-12">
+                            <i class="fas fa-trash fa-spin text-5xl mb-4"></i>
+                            <p class="font-orbitron tracking-widest mt-2">Menghapus data dari orbit...</p>
+                        </div>
+                    `;
+
+                    const formData = new FormData();
+                    formData.append('action', 'delete');
+                    formData.append('nama', memberName);
+
+                    // MENGHAPUS DATA DARI LINK DATABASE WEB
+                    fetch(URL_DATABASE_VR, {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        fetchMembersFromDatabase(); 
+                        showSuccessModal(`Akun ${memberName} telah berhasil dihapus dari website.`);
+                    })
+                    .catch(error => {
+                        console.error('Error Menghapus:', error);
+                        alert("Gagal menghapus data. Periksa koneksi Anda.");
+                        fetchMembersFromDatabase(); 
+                    });
+                }
+            };
+
+            // FUNGSI MENGUBAH ROLE (ADMIN ONLY)
+            window.updateRole = function(memberName, newRole) {
+                // Optimistic UI Update (Langsung ganti di layar agar cepat)
+                const memberIndex = membersData.findIndex(m => m.name === memberName);
+                if (memberIndex !== -1) {
+                    membersData[memberIndex].role = newRole;
+                    renderMembers();
+                }
+
+                // Kirim perubahan ke Google Apps Script Database
+                const formData = new FormData();
+                formData.append('action', 'update_role');
+                formData.append('nama', memberName);
+                formData.append('role', newRole);
+
+                fetch(URL_DATABASE_VR, {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    showSuccessModal(`Pangkat ${memberName} berhasil diubah menjadi ${newRole}.`);
+                })
+                .catch(error => {
+                    console.error('Error Mengubah Role:', error);
+                    // Meskipun error, UI sudah berubah optimis
+                });
+            };
+
+            // Global Success Modal
             window.showSuccessModal = function(message) {
                 const modal = document.getElementById('success-modal');
                 const content = document.getElementById('success-modal-content');
                 const msgEl = document.getElementById('success-modal-msg');
-                
                 if (modal && content && msgEl) {
                     msgEl.textContent = message;
                     modal.classList.remove('hidden');
-                    void modal.offsetWidth; // Trigger reflow
+                    void modal.offsetWidth; 
                     modal.classList.add('opacity-100');
-                    
-                    // Pop up animation
                     setTimeout(() => {
                         content.classList.remove('scale-75', 'opacity-0');
                         content.classList.add('scale-100', 'opacity-100');
@@ -1715,16 +1808,12 @@
             window.closeSuccessModal = function() {
                 const modal = document.getElementById('success-modal');
                 const content = document.getElementById('success-modal-content');
-                
                 if (modal && content) {
                     content.classList.remove('scale-100', 'opacity-100');
                     content.classList.add('scale-75', 'opacity-0');
-                    
                     setTimeout(() => {
                         modal.classList.remove('opacity-100');
-                        setTimeout(() => {
-                            modal.classList.add('hidden');
-                        }, 300);
+                        setTimeout(() => { modal.classList.add('hidden'); }, 300);
                     }, 300);
                 }
             };
