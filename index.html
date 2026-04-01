@@ -1096,16 +1096,17 @@
 
     <script>
         // =======================================================================
-        // KONFIGURASI LINK GOOGLE SHEETS (HARAP DIISI DENGAN URL APPS SCRIPT ANDA)
+        // KONFIGURASI LINK GOOGLE SHEETS
         // =======================================================================
         
-        // 1. URL untuk menampung Pendaftaran Baru (Form Join Mission Bawah) 
-        // Data yang masuk ke sini TIDAK AKAN DITAMPILKAN di website
+        // 1. URL untuk Pendaftaran Baru
         const URL_PENDAFTARAN = 'https://script.google.com/macros/s/AKfycbwSS5RLEnat8s2fc3hEjlfS1kbApL6PkyJO1Br8qENC-qunCKoco-T-iVUpBim8ii33/exec';
 
-        // 2. URL untuk Database Anggota Resmi (Form Tambah Web & Fitur Hapus Admin)
-        // Data yang masuk ke sini AKAN MUNCUL di bagian Database Anggota Resmi di website
+        // 2. URL untuk Database Anggota Resmi
         const URL_DATABASE_VR = 'https://script.google.com/macros/s/AKfycbw43qfPY-csEPVkTuaaiBi43lI44vtZyyQWLbnioJfD3sHHBjU-xGrSr9kNobUcZYTiGA/exec';
+
+        // 3. URL untuk Data Berita (GANTI SETELAH PUBLISH APPS SCRIPT BERITA)
+        const URL_API_BERITA = 'https://script.google.com/macros/s/AKfycby8yUtnJybj910dsyHugfjmD9ATSRHF4sxquis4yQSXfnqHv-tQcsozfO6MsSLaXcXJOA/exec';
 
         // =======================================================================
 
@@ -1318,7 +1319,7 @@
             setInterval(() => { updateCountdown(bdayTarget, 'bday'); updateCountdown(annivTarget, 'anniv'); }, 1000);
 
             // ===========================================================================================
-            // 7. FORM PENDAFTARAN RAHASIA (JOIN MISSION) -> Mengarah ke URL_PENDAFTARAN
+            // 7. FORM PENDAFTARAN RAHASIA (JOIN MISSION) 
             // ===========================================================================================
             const formJoin = document.getElementById('join-form');
             const qrModal = document.getElementById('qr-modal');
@@ -1335,7 +1336,6 @@
 
                     const formData = new FormData(formJoin);
 
-                     // MENGIRIM DATA KE LINK PENDAFTARAN (TIDAK MUNCUL DI WEB)
                     fetch(URL_PENDAFTARAN, {
                         method: 'POST',
                         body: formData
@@ -1361,7 +1361,6 @@
                             }
                         }
 
-                        // Buat QR grup WA
                         qrcodeContainer.innerHTML = '';
                         if (typeof QRCode !== 'undefined') {
                             qrCodeObj = new QRCode(qrcodeContainer, {
@@ -1385,7 +1384,7 @@
                         setTimeout(() => {
                             promptModal.classList.add('hidden');
                             if (action === 'sekarang') {
-                                openAddMemberModal(); // Buka form untuk masuk Web
+                                openAddMemberModal();
                             } else if (action === 'nanti') {
                                 qrModal.classList.remove('hidden');
                                 void qrModal.offsetWidth;
@@ -1403,13 +1402,12 @@
 
 
             // ===========================================================================================
-            // 8. DATABASE ANGGOTA RESMI & ADMIN KONTROL -> Mengarah ke URL_DATABASE_VR
+            // 8. DATABASE ANGGOTA RESMI & ADMIN KONTROL
             // ===========================================================================================
             let idCounter = 1;
-            let membersData = []; // Kosong secara default sebelum di fetch
+            let membersData = [];
             let isAdmin = false;
             
-            // Variabel untuk Paginasi (Maksimal 10 akun)
             let currentPage = 1; 
             const itemsPerPage = 10; 
 
@@ -1418,7 +1416,6 @@
             const membersGrid = document.getElementById('members-grid');
             const notFoundDiv = document.getElementById('not-found-msg');
             
-            // Elemen UI Paginasi
             const paginationControls = document.getElementById('pagination-controls'); 
             const prevPageBtn = document.getElementById('prev-page'); 
             const nextPageBtn = document.getElementById('next-page'); 
@@ -1442,10 +1439,8 @@
                 if (filtered.length > 0) {
                     notFoundDiv.classList.add('hidden');
                     
-                    // --- LOGIKA PAGINASI (MAX 10 AKUN) ---
                     const totalPages = Math.ceil(filtered.length / itemsPerPage);
                     
-                    // Memastikan currentPage tidak keluar dari batas
                     if (currentPage > totalPages) currentPage = totalPages;
                     if (currentPage < 1) currentPage = 1;
                     
@@ -1483,7 +1478,6 @@
 
                         let roleControlHTML = `<span class="${roleColorClass} px-2 py-0.5 rounded flex items-center gap-1">${roleIcon}${m.role}</span>`;
                         
-                        // --- PENGATURAN ROLE (ADMIN) ---
                         if (isAdmin) {
                             roleControlHTML = `
                                 <select onchange="updateRole('${m.name}', this.value)" class="bg-space-dark border border-gray-600 rounded px-1 py-1 text-[10px] md:text-xs text-white outline-none focus:border-neon-purple cursor-pointer">
@@ -1510,7 +1504,6 @@
                         membersGrid.appendChild(card);
                     });
 
-                    // --- MEMPERBARUI TAMPILAN TOMBOL PAGINASI ---
                     if (totalPages > 1) {
                         if (paginationControls) paginationControls.classList.remove('hidden');
                         if (pageInfo) pageInfo.textContent = `Halaman ${currentPage} / ${totalPages}`;
@@ -1526,17 +1519,14 @@
                 }
             }
 
-            // Reset ke halaman 1 setiap kali mencari atau mengurutkan
             if(searchInput) searchInput.addEventListener('input', () => { currentPage = 1; renderMembers(); });
             if(sortSelect) sortSelect.addEventListener('change', () => { currentPage = 1; renderMembers(); });
 
-            // --- EVENT LISTENER UNTUK TOMBOL PAGINASI ---
             if (prevPageBtn) {
                 prevPageBtn.addEventListener('click', () => {
                     if (currentPage > 1) {
                         currentPage--;
                         renderMembers();
-                        // Scroll otomatis ke awal bagian members
                         document.getElementById('members').scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
                 });
@@ -1550,17 +1540,14 @@
                     if (currentPage < totalPages) {
                         currentPage++;
                         renderMembers();
-                        // Scroll otomatis ke awal bagian members
                         document.getElementById('members').scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
                 });
             }
             
-            // FUNGSI MENGAMBIL DATA UNTUK DITAMPILKAN DI WEB
             async function fetchMembersFromDatabase() {
                 if(!membersGrid) return;
                 
-                // Jika membersData masih kosong, tampilkan loading animasi
                 if (membersData.length === 0) {
                     membersGrid.innerHTML = `
                         <div class="col-span-full text-center text-neon-cyan py-12">
@@ -1596,14 +1583,11 @@
                     renderMembers();
                 } catch (error) {
                     console.error("Gagal mengambil data dari orbit:", error);
-                    renderMembers(); // Tampilkan sesuai isi membersData saat ini jika gagal fetch
+                    renderMembers(); 
                 }
             }
-            fetchMembersFromDatabase(); // Inisialisasi awal
+            fetchMembersFromDatabase();
 
-            // ===========================================================================================
-            // Modal Form Penambahan Anggota (Ke Database Web)
-            // ===========================================================================================
             const addMemberModal = document.getElementById('add-member-modal');
             const groupStatusSelect = document.getElementById('add-group-status');
             const addQrContainer = document.getElementById('add-qr-container');
@@ -1658,40 +1642,35 @@
                     btn.disabled = true;
 
                     const formData = new FormData(addMemberForm);
-                    formData.set('action', 'add'); // Beri tahu apps script untuk Menambah data
-                    formData.set('role', 'Member'); // Pastikan role diset sebagai 'Member' secara default
+                    formData.set('action', 'add'); 
+                    formData.set('role', 'Member'); 
 
-                    // MENGIRIM DATA KE LINK DATABASE WEB
                     fetch(URL_DATABASE_VR, {
                         method: 'POST',
                         body: formData
                     })
                     .then(response => response.json())
                     .then(data => { 
-                        
-                        // --- OPTIMISTIC UI: Otomatis memunculkan di layar tanpa harus reload
                         const newName = formData.get('nama');
                         const newIG = formData.get('ig') || '-';
                         const newCity = formData.get('alamat');
                         const newStatus = formData.get('status_grup');
 
-                        // Cek jika data tidak duplikat di sesi yang sama, lalu tambahkan di urutan teratas
                         const exists = membersData.find(m => m.name === newName);
                         if (!exists) {
                             membersData.unshift({
-                                id: Date.now(), // ID sementara (besar) agar muncul paling pertama
+                                id: Date.now(), 
                                 name: newName,
                                 ig: newIG,
                                 city: newCity,
                                 status: newStatus === 'sudah' ? 'Member' : 'Pending',
                                 role: 'Member'
                             });
-                            currentPage = 1; // Pindah langsung ke halaman pertama
+                            currentPage = 1; 
                             renderMembers();
                             document.getElementById('members').scrollIntoView({ behavior: 'smooth', block: 'start' });
                         }
 
-                        // Reset formulir
                         btn.innerHTML = originalText;
                         btn.disabled = false;
                         addMemberForm.reset();
@@ -1699,9 +1678,6 @@
                         closeAddMemberModal();
                         
                         setTimeout(() => { showSuccessModal('Akun Anda telah ditambahkan ke Database Anggota Publik.'); }, 400);
-
-                        // Ambil data asli dari server Google Sheets secara diam-diam setelah jeda 3 detik
-                        // (Untuk memastikan Google Apps script selesai mensinkronisasi cache json-nya)
                         setTimeout(fetchMembersFromDatabase, 3000); 
                     })
                     .catch(error => { 
@@ -1713,9 +1689,6 @@
                 });
             }
             
-            // =========================================================
-            // FUNGSI ADMIN: LOGIN, LOGOUT, DELETE & UPDATE ROLE 
-            // =========================================================
             const loginModal = document.getElementById('login-modal');
             const loginForm = document.getElementById('login-form');
             
@@ -1749,6 +1722,8 @@
                         loginForm.reset();
                         renderMembers(); 
                         showSuccessModal('Akses Admin Diberikan. Anda sekarang memiliki kontrol penuh.');
+                        
+                        setTimeout(checkAdminNewsState, 100);
                     } else {
                         document.getElementById('login-error').classList.remove('hidden');
                     }
@@ -1763,12 +1738,12 @@
                 document.getElementById('admin-panel-controls').classList.add('hidden');
                 renderMembers(); 
                 showSuccessModal('Akses Admin Ditutup.');
+                
+                setTimeout(checkAdminNewsState, 100);
             };
 
             window.deleteMember = function(memberName) {
                 if(confirm(`PERINGATAN! Apakah Anda yakin ingin menghapus akun '${memberName}' dari database web?`)) {
-                    
-                    // Optimistic Delete: Langsung hilangkan dari layar
                     membersData = membersData.filter(m => m.name !== memberName);
                     renderMembers();
 
@@ -1776,7 +1751,6 @@
                     formData.append('action', 'delete');
                     formData.append('nama', memberName);
 
-                    // MENGHAPUS DATA DARI LINK DATABASE WEB
                     fetch(URL_DATABASE_VR, {
                         method: 'POST',
                         body: formData
@@ -1794,16 +1768,13 @@
                 }
             };
 
-            // FUNGSI MENGUBAH ROLE (ADMIN ONLY)
             window.updateRole = function(memberName, newRole) {
-                // Optimistic UI Update (Langsung ganti di layar agar cepat)
                 const memberIndex = membersData.findIndex(m => m.name === memberName);
                 if (memberIndex !== -1) {
                     membersData[memberIndex].role = newRole;
-                    renderMembers(); // Memuat ulang grid agar lencana baru (icon) dapat terlihat
+                    renderMembers(); 
                 }
 
-                // Kirim perubahan ke Google Apps Script Database
                 const formData = new FormData();
                 formData.append('action', 'update_role');
                 formData.append('nama', memberName);
@@ -1819,11 +1790,9 @@
                 })
                 .catch(error => {
                     console.error('Error Mengubah Role:', error);
-                    // Meskipun di background ada error koneksi, tampilannya di web telah berganti secara "optimis"
                 });
             };
 
-            // Global Success Modal
             window.showSuccessModal = function(message) {
                 const modal = document.getElementById('success-modal');
                 const content = document.getElementById('success-modal-content');
@@ -1852,6 +1821,401 @@
                     }, 300);
                 }
             };
+
+            // ===========================================================================================
+            // SISTEM CRUD BERITA LOKAL & GOOGLE SHEETS
+            // ===========================================================================================
+            
+            const NEWS_STORAGE_KEY = 'vr_news_data';
+            let newsDataArray = [];
+
+            // 1. Inisialisasi Data Berita
+            function initNewsSystem() {
+                const storedNews = localStorage.getItem(NEWS_STORAGE_KEY);
+                
+                if (storedNews && storedNews !== "[]") {
+                    newsDataArray = JSON.parse(storedNews);
+                    renderNewsGrid();
+                } else {
+                    const existingArticles = document.querySelectorAll('#news .grid article');
+                    existingArticles.forEach((article, index) => {
+                        const imgEl = article.querySelector('img');
+                        const dateEl = article.querySelector('.text-neon-cyan');
+                        const titleEl = article.querySelector('h3 a');
+                        
+                        if (imgEl && titleEl && dateEl) {
+                            newsDataArray.push({
+                                id: 'news_' + Date.now() + '_' + index,
+                                title: titleEl.innerText.trim(),
+                                description: "Klik untuk mengunjungi sumber berita. " + titleEl.innerText.trim(),
+                                image: imgEl.src,
+                                link: titleEl.href,
+                                date: dateEl.innerText.trim()
+                            });
+                        }
+                    });
+                    saveNewsData();
+                }
+
+                injectNewsModals();
+                injectAddNewsButton();
+                renderNewsGrid();
+                checkAdminNewsState();
+                
+                // Ambil data terbaru dari Google Sheets
+                if (URL_API_BERITA !== 'https://script.google.com/macros/s/AKfycby8yUtnJybj910dsyHugfjmD9ATSRHF4sxquis4yQSXfnqHv-tQcsozfO6MsSLaXcXJOA/exec') {
+                    fetch(URL_API_BERITA)
+                        .then(res => res.json())
+                        .then(data => {
+                            if(data && data.length > 0) {
+                                newsDataArray = data.reverse(); 
+                                saveNewsData();
+                                renderNewsGrid();
+                            }
+                        })
+                        .catch(err => console.error("Gagal sinkronisasi data berita", err));
+                }
+            }
+
+            // 2. Simpan Data Berita Lokal
+            function saveNewsData() {
+                localStorage.setItem(NEWS_STORAGE_KEY, JSON.stringify(newsDataArray));
+            }
+
+            // 3. Render Daftar Berita ke Layar
+            function renderNewsGrid() {
+                const gridContainer = document.querySelector('#news .grid');
+                if (!gridContainer) return;
+                
+                gridContainer.innerHTML = ''; 
+
+                newsDataArray.forEach((news, index) => {
+                    const article = document.createElement('article');
+                    article.className = 'glass-panel rounded-2xl overflow-hidden hover-glow gsap-slide-up flex flex-col h-full relative group cursor-pointer';
+                    
+                    article.onclick = (e) => {
+                        if(e.target.closest('.admin-news-btn') || e.target.closest('.news-ext-link')) return;
+                        openNewsDetail(news.id);
+                    };
+
+                    let adminButtons = '';
+                    let editIndicator = '';
+                    
+                    if (isAdmin) {
+                        editIndicator = '<div class="absolute top-0 right-0 bg-yellow-500 text-black text-[10px] font-bold px-2 py-0.5 z-20 rounded-bl-lg"><i class="fas fa-wrench"></i> EDIT MODE</div>';
+                        adminButtons = `
+                            <div class="absolute top-3 left-3 z-20 flex gap-2 admin-news-btn">
+                                <button onclick="editNews('${news.id}')" class="bg-yellow-500 text-black w-8 h-8 rounded-full shadow-lg flex items-center justify-center hover:bg-yellow-400 hover:scale-110 transition-all"><i class="fas fa-edit"></i></button>
+                                <button onclick="deleteNews('${news.id}')" class="bg-red-600 text-white w-8 h-8 rounded-full shadow-lg flex items-center justify-center hover:bg-red-500 hover:scale-110 transition-all"><i class="fas fa-trash"></i></button>
+                            </div>
+                        `;
+                    }
+
+                    const badgeHTML = index === 0 ? '<div class="absolute top-3 right-3 md:top-4 md:right-4 bg-neon-purple text-[10px] md:text-xs font-bold px-2 py-1 md:px-3 md:py-1 rounded-full text-white font-orbitron z-10">NEW</div>' : '';
+
+                    article.innerHTML = `
+                        ${editIndicator}
+                        ${adminButtons}
+                        <div class="block h-40 md:h-48 bg-gray-800 relative overflow-hidden">
+                            <img src="${news.image}" alt="Cover Berita" onerror="this.src='https://placehold.co/600x400/0b1d3a/00f3ff?text=Berita'" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            ${badgeHTML}
+                        </div>
+                        <div class="p-5 md:p-6 flex flex-col flex-grow relative">
+                            <p class="text-[10px] md:text-xs text-neon-cyan font-rajdhani mb-2"><i class="far fa-calendar-alt"></i> ${news.date}</p>
+                            <h3 class="font-orbitron text-base md:text-lg font-bold mb-3 line-clamp-2">
+                                <a href="${news.link}" target="_blank" class="hover:text-neon-cyan transition-colors news-ext-link">${news.title}</a>
+                            </h3>
+                            <div class="mt-auto pt-3 md:pt-4">
+                                <span class="text-xs md:text-sm text-neon-pink hover:text-white transition-colors flex items-center gap-2 w-max">
+                                    Baca Selengkapnya <i class="fas fa-arrow-right text-[10px] md:text-xs"></i>
+                                </span>
+                            </div>
+                        </div>
+                    `;
+                    gridContainer.appendChild(article);
+                });
+            }
+
+            // 4. Tambah Tombol Admin di Header Berita
+            function injectAddNewsButton() {
+                const newsHeader = document.querySelector('#news .flex-col.md\\:flex-row');
+                if (!newsHeader) return;
+
+                const btnWrapper = document.createElement('div');
+                btnWrapper.id = 'admin-add-news-wrapper';
+                btnWrapper.className = 'hidden mt-4 md:mt-0';
+                btnWrapper.innerHTML = `
+                    <button onclick="openNewsForm()" class="btn-cosmic px-5 py-2.5 rounded-full font-orbitron text-sm md:text-base font-bold text-white flex items-center gap-2 shadow-[0_0_15px_rgba(0,243,255,0.4)] hover:scale-105 transition-transform">
+                        <i class="fas fa-plus"></i> Tambah Berita
+                    </button>
+                `;
+                newsHeader.appendChild(btnWrapper);
+            }
+
+            // 5. Suntikkan Modal Form dan Detail ke Body
+            function injectNewsModals() {
+                const modals = `
+                    <!-- Modal Form Berita -->
+                    <div id="crud-news-modal" class="fixed inset-0 z-[200] hidden flex justify-center items-center opacity-0 transition-opacity duration-300">
+                        <div class="absolute inset-0 bg-black/90 backdrop-blur-lg" onclick="closeNewsForm()"></div>
+                        <div class="relative z-[201] p-6 md:p-8 glass-panel border border-neon-cyan rounded-3xl w-full max-w-lg mx-4 max-h-[90vh] overflow-y-auto">
+                            <h3 id="crud-news-title" class="font-orbitron text-xl md:text-2xl font-bold text-white mb-6 text-glow flex items-center gap-2">
+                                <i class="fas fa-edit text-neon-cyan"></i> <span>Tambah Berita</span>
+                            </h3>
+                            <form id="crud-news-form" class="space-y-4 text-left">
+                                <input type="hidden" id="crud-news-id">
+                                <div>
+                                    <label class="block font-rajdhani text-[10px] md:text-xs text-neon-cyan mb-1 tracking-widest uppercase">Judul Berita</label>
+                                    <input type="text" id="crud-news-title-input" required class="w-full bg-space-dark/60 border border-gray-600 rounded-lg p-3 text-sm text-white input-glow focus:border-neon-cyan" placeholder="Tulis judul berita...">
+                                </div>
+                                <div>
+                                    <label class="block font-rajdhani text-[10px] md:text-xs text-neon-cyan mb-1 tracking-widest uppercase">Gambar (Wajib Landscape)</label>
+                                    <input type="file" id="crud-news-image-file" accept="image/*" class="w-full bg-space-dark/60 border border-gray-600 rounded-lg p-2 text-sm text-white input-glow focus:border-neon-cyan">
+                                    <input type="hidden" id="crud-news-image-base64">
+                                    <div id="image-preview-container" class="mt-2 hidden">
+                                        <img id="image-preview" src="" class="h-32 w-full object-cover rounded border border-gray-600">
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block font-rajdhani text-[10px] md:text-xs text-neon-cyan mb-1 tracking-widest uppercase">Tanggal</label>
+                                        <input type="text" id="crud-news-date" required class="w-full bg-space-dark/60 border border-gray-600 rounded-lg p-3 text-sm text-white input-glow focus:border-neon-cyan" placeholder="cth: 15 Agu 2026">
+                                    </div>
+                                    <div>
+                                        <label class="block font-rajdhani text-[10px] md:text-xs text-neon-cyan mb-1 tracking-widest uppercase">Link Eksternal</label>
+                                        <input type="text" id="crud-news-link" required class="w-full bg-space-dark/60 border border-gray-600 rounded-lg p-3 text-sm text-white input-glow focus:border-neon-cyan" placeholder="https://...">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block font-rajdhani text-[10px] md:text-xs text-neon-cyan mb-1 tracking-widest uppercase">Deskripsi Lengkap</label>
+                                    <textarea id="crud-news-desc" required rows="4" class="w-full bg-space-dark/60 border border-gray-600 rounded-lg p-3 text-sm text-white input-glow focus:border-neon-cyan" placeholder="Isi berita lengkap..."></textarea>
+                                </div>
+                                <div class="flex gap-3 mt-6">
+                                    <button type="button" onclick="closeNewsForm()" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white py-3 rounded-xl font-orbitron font-bold text-sm transition-colors">BATAL</button>
+                                    <button id="btn-submit-news" type="submit" class="flex-1 btn-cosmic py-3 rounded-xl font-orbitron font-bold text-sm text-white tracking-wider">SIMPAN</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Modal Detail Berita -->
+                    <div id="detail-news-modal" class="fixed inset-0 z-[200] hidden flex justify-center items-center opacity-0 transition-opacity duration-300">
+                        <div class="absolute inset-0 bg-black/95 backdrop-blur-xl" onclick="closeNewsDetail()"></div>
+                        <div class="relative z-[201] glass-panel border border-neon-purple rounded-3xl w-full max-w-2xl mx-4 max-h-[90vh] overflow-hidden flex flex-col shadow-[0_0_50px_rgba(157,78,221,0.2)]">
+                            <button onclick="closeNewsDetail()" class="absolute top-4 right-4 bg-black/60 w-10 h-10 rounded-full text-white hover:text-neon-pink transition-colors z-10 flex items-center justify-center text-xl backdrop-blur-sm"><i class="fas fa-times"></i></button>
+                            <div class="w-full h-48 md:h-64 relative">
+                                <img id="detail-news-img" src="" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-gradient-to-t from-[#030712] to-transparent"></div>
+                            </div>
+                            <div class="p-6 md:p-8 overflow-y-auto flex-grow">
+                                <p id="detail-news-date" class="text-xs text-neon-cyan font-rajdhani mb-2 tracking-widest uppercase"></p>
+                                <h2 id="detail-news-title" class="font-orbitron text-xl md:text-3xl font-bold text-white mb-4 leading-snug"></h2>
+                                <p id="detail-news-desc" class="font-inter text-gray-300 text-sm md:text-base leading-relaxed mb-8 whitespace-pre-line"></p>
+                                <a id="detail-news-link" href="" target="_blank" class="btn-cosmic px-6 py-3 rounded-full font-orbitron text-sm font-bold inline-flex items-center gap-2 text-white shadow-lg">
+                                    Buka Link Asli <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                document.body.insertAdjacentHTML('beforeend', modals);
+
+                document.getElementById('crud-news-form').addEventListener('submit', handleNewsFormSubmit);
+                
+                // Event listener validasi gambar landscape
+                document.getElementById('crud-news-image-file').addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    if (!file) return;
+                    
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        const img = new Image();
+                        img.onload = function() {
+                            if (img.width <= img.height) {
+                                alert("Gambar harus berbentuk landscape (lebar harus lebih besar dari tinggi).");
+                                e.target.value = '';
+                                document.getElementById('image-preview-container').classList.add('hidden');
+                                document.getElementById('crud-news-image-base64').value = '';
+                                return;
+                            }
+                            
+                            // Kompres gambar otomatis
+                            const canvas = document.createElement('canvas');
+                            const MAX_WIDTH = 800;
+                            const scaleSize = MAX_WIDTH / img.width;
+                            canvas.width = MAX_WIDTH;
+                            canvas.height = img.height * scaleSize;
+                            
+                            const ctx = canvas.getContext('2d');
+                            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                            
+                            const base64 = canvas.toDataURL('image/jpeg', 0.7);
+                            
+                            document.getElementById('crud-news-image-base64').value = base64;
+                            document.getElementById('image-preview').src = base64;
+                            document.getElementById('image-preview-container').classList.remove('hidden');
+                        };
+                        img.src = event.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+
+            // 6. Cek Status Tombol Admin
+            window.checkAdminNewsState = function() {
+                const addWrapper = document.getElementById('admin-add-news-wrapper');
+                if (addWrapper) {
+                    if (isAdmin) {
+                        addWrapper.classList.remove('hidden');
+                    } else {
+                        addWrapper.classList.add('hidden');
+                    }
+                }
+                renderNewsGrid();
+            };
+
+            // 7. Buka Tutup Modal Form Berita
+            window.openNewsForm = function(id = null) {
+                const modal = document.getElementById('crud-news-modal');
+                const form = document.getElementById('crud-news-form');
+                const titleSpan = document.querySelector('#crud-news-title span');
+
+                form.reset();
+                document.getElementById('crud-news-id').value = '';
+                document.getElementById('crud-news-image-base64').value = '';
+                document.getElementById('image-preview-container').classList.add('hidden');
+                
+                // Required attribute disesuaikan berdasarkan edit atau baru
+                const fileInput = document.getElementById('crud-news-image-file');
+
+                if (id) {
+                    const news = newsDataArray.find(n => n.id === id);
+                    if (news) {
+                        titleSpan.innerText = 'Edit Berita';
+                        document.getElementById('crud-news-id').value = news.id;
+                        document.getElementById('crud-news-date').value = news.date;
+                        document.getElementById('crud-news-link').value = news.link;
+                        document.getElementById('crud-news-desc').value = news.description;
+                        document.getElementById('crud-news-title-input').value = news.title;
+                        
+                        document.getElementById('image-preview').src = news.image;
+                        document.getElementById('image-preview-container').classList.remove('hidden');
+                        fileInput.required = false; 
+                    }
+                } else {
+                    titleSpan.innerText = 'Tambah Berita';
+                    const today = new Date();
+                    const options = { day: 'numeric', month: 'long', year: 'numeric' };
+                    document.getElementById('crud-news-date').value = today.toLocaleDateString('id-ID', options);
+                    fileInput.required = true;
+                }
+
+                modal.classList.remove('hidden');
+                setTimeout(() => modal.classList.add('opacity-100'), 10);
+            };
+
+            window.closeNewsForm = function() {
+                const modal = document.getElementById('crud-news-modal');
+                modal.classList.remove('opacity-100');
+                setTimeout(() => modal.classList.add('hidden'), 300);
+            };
+
+            // 8. Proses Simpan Berita Baru atau Edit ke Local & Cloud
+            function handleNewsFormSubmit(e) {
+                e.preventDefault();
+                const id = document.getElementById('crud-news-id').value;
+                const base64Image = document.getElementById('crud-news-image-base64').value;
+                
+                const existingNews = id ? newsDataArray.find(n => n.id === id) : null;
+                const finalImage = base64Image || (existingNews ? existingNews.image : 'https://placehold.co/600x400/0b1d3a/00f3ff?text=Berita');
+
+                const newData = {
+                    id: id || 'news_' + Date.now(),
+                    title: document.getElementById('crud-news-title-input').value,
+                    image: finalImage,
+                    date: document.getElementById('crud-news-date').value,
+                    link: document.getElementById('crud-news-link').value,
+                    description: document.getElementById('crud-news-desc').value
+                };
+
+                if (id) {
+                    const index = newsDataArray.findIndex(n => n.id === id);
+                    if (index !== -1) newsDataArray[index] = newData;
+                    showSuccessModal("Berita berhasil diperbarui.");
+                } else {
+                    newsDataArray.unshift(newData); 
+                    showSuccessModal("Berita baru berhasil ditambahkan.");
+                }
+
+                saveNewsData();
+                renderNewsGrid();
+                closeNewsForm();
+
+                // Sinkronisasi ke Google Sheets
+                if(URL_API_BERITA !== 'https://script.google.com/macros/s/AKfycby8yUtnJybj910dsyHugfjmD9ATSRHF4sxquis4yQSXfnqHv-tQcsozfO6MsSLaXcXJOA/exec') {
+                    const formData = new FormData();
+                    formData.append('action', id ? 'update' : 'add');
+                    formData.append('id', newData.id);
+                    formData.append('title', newData.title);
+                    formData.append('image', newData.image);
+                    formData.append('date', newData.date);
+                    formData.append('link', newData.link);
+                    formData.append('description', newData.description);
+
+                    fetch(URL_API_BERITA, {
+                        method: 'POST',
+                        body: formData
+                    }).catch(err => console.error("Gagal mengirim ke cloud:", err));
+                }
+            }
+
+            // 9. Tombol Edit
+            window.editNews = function(id) {
+                openNewsForm(id);
+            };
+
+            // 10. Tombol Hapus (Lokal & Cloud)
+            window.deleteNews = function(id) {
+                if (confirm('Hapus berita ini dari galaksi? Tindakan ini tidak bisa dibatalkan.')) {
+                    newsDataArray = newsDataArray.filter(n => n.id !== id);
+                    saveNewsData();
+                    renderNewsGrid();
+                    showSuccessModal("Berita berhasil dihapus.");
+
+                    if(URL_API_BERITA !== 'https://script.google.com/macros/s/AKfycby8yUtnJybj910dsyHugfjmD9ATSRHF4sxquis4yQSXfnqHv-tQcsozfO6MsSLaXcXJOA/exec') {
+                        const formData = new FormData();
+                        formData.append('action', 'delete');
+                        formData.append('id', id);
+                        fetch(URL_API_BERITA, { method: 'POST', body: formData }).catch(e => console.error(e));
+                    }
+                }
+            };
+
+            // 11. Buka Tutup Modal Detail Berita
+            window.openNewsDetail = function(id) {
+                const news = newsDataArray.find(n => n.id === id);
+                if (!news) return;
+
+                document.getElementById('detail-news-img').src = news.image;
+                document.getElementById('detail-news-title').innerText = news.title;
+                document.getElementById('detail-news-date').innerHTML = `<i class="far fa-calendar-alt"></i> ${news.date}`;
+                document.getElementById('detail-news-desc').innerText = news.description;
+                document.getElementById('detail-news-link').href = news.link;
+
+                const modal = document.getElementById('detail-news-modal');
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+                setTimeout(() => modal.classList.add('opacity-100'), 10);
+            };
+
+            window.closeNewsDetail = function() {
+                const modal = document.getElementById('detail-news-modal');
+                modal.classList.remove('opacity-100');
+                document.body.style.overflow = 'auto';
+                setTimeout(() => modal.classList.add('hidden'), 300);
+            };
+
+            setTimeout(initNewsSystem, 500);
 
         });
     </script>
