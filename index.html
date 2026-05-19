@@ -6,7 +6,7 @@
     <title>VR LOVERS INDONESIA | Alvaro Kendang Cilik Universe</title>
     
     <!-- Favicon & App Icons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="image/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="image\favicon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="image/favicon.png">
     <link rel="icon" type="image/png" sizes="16x16" href="image/favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="image/favicon.ico">
@@ -18,6 +18,7 @@
             favicons.forEach(link => {
                 const img = new Image();
                 img.onerror = function() {
+                    // Jika file gambar gagal dimuat, fallback ke icon roket universal
                     link.href = 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>';
                 };
                 img.src = link.href;
@@ -54,9 +55,9 @@
                 extend: {
                     colors: {
                         space: {
-                            dark: '#030712', 
-                            navy: '#0b1d3a', 
-                            blue: '#1d4ed8', 
+                            dark: '#030712', // Very dark black
+                            navy: '#0b1d3a', // Midnight blue
+                            blue: '#1d4ed8', // Cosmic blue
                         },
                         neon: {
                             cyan: '#00f3ff',
@@ -408,7 +409,7 @@
         }
 
         /* ========================================================
-           PETA LEAFLET OVERRIDES & HYBRID CLUSTER STYLING
+           PETA LEAFLET OVERRIDES & CUSTOM MARKERS (VR LOGO)
            ======================================================== */
         .leaflet-popup-content-wrapper {
             background: rgba(3, 7, 18, 0.95) !important;
@@ -428,12 +429,6 @@
             font-family: 'Orbitron', 'Inter', sans-serif !important;
             background-color: #030712 !important;
         }
-        
-        /* Filter Satelit agar UI Neon makin jelas terlihat */
-        .leaflet-tile-pane {
-            filter: brightness(0.85) contrast(1.15) saturate(1.1);
-        }
-
         .leaflet-popup-close-button {
             color: var(--neon-pink) !important;
             text-shadow: 0 0 5px var(--neon-pink);
@@ -446,35 +441,35 @@
             overflow: visible !important;
         }
         
-        /* Group Marker Container (Smart Cluster) */
+        /* Group Marker Container */
         .city-marker-group {
             display: flex;
             flex-direction: column;
             align-items: center;
+            /* Mentranslate anchor titik agar tepat di ujung bawah connector */
             transform: translate(-50%, -100%);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             pointer-events: auto;
             cursor: pointer;
-            z-index: 400 !important;
         }
         .city-marker-group:hover {
-            transform: translate(-50%, -110%) scale(1.15);
+            transform: translate(-50%, -110%) scale(1.1);
             z-index: 1000 !important;
         }
 
-        /* Container deretan VR Logo (Flexible Width) */
+        /* Container deretan VR Logo */
         .logos-wrapper {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 2px;
+            gap: 4px;
             background: rgba(11, 29, 58, 0.85);
             backdrop-filter: blur(5px);
             border: 1px solid var(--neon-cyan);
             border-radius: 12px;
-            padding: 4px;
+            padding: 6px;
             box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
-            max-width: 140px; 
+            max-width: 200px; /* Batasan agar rapi menjadi grid jika sangat banyak */
             transition: all 0.3s ease;
         }
         .city-marker-group:hover .logos-wrapper {
@@ -483,56 +478,34 @@
             background: rgba(3, 7, 18, 0.95);
         }
 
-        /* Individual Member VR Logo dalam Cluster */
+        /* Individual Member VR Logo */
         .member-logo-img {
-            width: 26px;
-            height: 26px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             border: 1.5px solid var(--neon-purple);
             object-fit: cover;
             transition: all 0.3s ease;
             background-color: var(--space-dark);
-            margin: -2px; /* Overlap effect for compact look */
-        }
-        .member-logo-img:first-child {
-            margin-left: 0;
         }
         .member-logo-img:hover {
-            transform: scale(1.3);
+            transform: scale(1.4);
             border-color: var(--neon-cyan);
             box-shadow: 0 0 10px var(--neon-cyan);
-            z-index: 30 !important;
-            position: relative;
-        }
-        .cluster-badge {
-            width: 26px;
-            height: 26px;
-            border-radius: 50%;
-            border: 1.5px solid var(--neon-cyan);
-            background: var(--space-navy);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 10px;
-            font-weight: bold;
-            color: var(--neon-cyan);
-            box-shadow: 0 0 10px rgba(0,243,255,0.5);
-            margin-left: -6px;
-            z-index: 25;
+            z-index: 20;
             position: relative;
         }
 
         /* Garis penunjuk wilayah */
         .marker-connector {
             width: 2px;
-            height: 20px;
+            height: 25px;
             background: linear-gradient(to bottom, var(--neon-cyan) 0%, rgba(0,243,255,0) 100%);
             box-shadow: 0 0 5px var(--neon-cyan);
             transition: all 0.3s ease;
         }
         .city-marker-group:hover .marker-connector {
-            height: 30px;
+            height: 35px;
             background: linear-gradient(to bottom, var(--neon-pink) 0%, rgba(255,0,255,0) 100%);
             box-shadow: 0 0 8px var(--neon-pink);
         }
@@ -540,16 +513,16 @@
         /* Nama Wilayah */
         .city-label {
             font-family: 'Orbitron', sans-serif;
-            font-size: 10px;
+            font-size: 11px;
             font-weight: 600;
             color: var(--neon-cyan);
             text-shadow: 0 0 5px var(--space-dark), 0 0 10px var(--neon-cyan);
             background: rgba(3, 7, 18, 0.9);
-            padding: 3px 6px;
+            padding: 3px 8px;
             border-radius: 6px;
             border: 1px solid rgba(0, 243, 255, 0.3);
             white-space: nowrap;
-            margin-top: -3px; 
+            margin-top: -5px; 
             transition: all 0.3s ease;
         }
         .city-marker-group:hover .city-label {
@@ -557,7 +530,6 @@
             border-color: var(--neon-pink);
             text-shadow: 0 0 10px var(--neon-pink);
             box-shadow: 0 0 15px rgba(255,0,255,0.4);
-            font-size: 11px;
         }
         
         /* Custom Scrollbar untuk Popup List Member */
@@ -1329,10 +1301,15 @@
     <script>
         // =======================================================================
         // KONFIGURASI LINK GOOGLE SHEETS
+        // PENTING: ISI URL_API_BERITA AGAR FITUR BERITA BISA TERSIMPAN KE GOOGLE SHEETS
         // =======================================================================
+        
         const URL_PENDAFTARAN = 'https://script.google.com/macros/s/AKfycbwSS5RLEnat8s2fc3hEjlfS1kbApL6PkyJO1Br8qENC-qunCKoco-T-iVUpBim8ii33/exec';
         const URL_DATABASE_VR = 'https://script.google.com/macros/s/AKfycbw43qfPY-csEPVkTuaaiBi43lI44vtZyyQWLbnioJfD3sHHBjU-xGrSr9kNobUcZYTiGA/exec';
+        
+        // MASUKKAN URL DEPLOYMENT APLIKASI WEB BERITA KAMU DI SINI
         const URL_API_BERITA = 'https://script.google.com/macros/s/AKfycby8yUtnJybj910dsyHugfjmD9ATSRHF4sxquis4yQSXfnqHv-tQcsozfO6MsSLaXcXJOA/exec'; 
+        
         // =======================================================================
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -1699,7 +1676,7 @@
 
 
             // ===========================================================================================
-            // 8. DATABASE ANGGOTA RESMI & ADMIN KONTROL & MAP INTERAKTIF (SMART CLUSTER)
+            // 8. DATABASE ANGGOTA RESMI & ADMIN KONTROL & MAP INTERAKTIF
             // ===========================================================================================
             let idCounter = 1;
             let membersData = [];
@@ -1718,12 +1695,11 @@
             const nextPageBtn = document.getElementById('next-page'); 
             const pageInfo = document.getElementById('page-info'); 
 
-            // --- Integrasi Peta Leaflet & Smart Clustering ---
+            // --- Mulai Integrasi Map Interaktif ---
             let vrMap = null;
             let markersLayer = null;
-            let debounceUpdateTimeout;
             
-            // Database ekstensif dan presisi untuk seluruh Indonesia
+            // Database ekstensif koordinat absolut kota-kota besar/provinsi Indonesia
             const cityCoordinates = {
                 // DKI Jakarta (Presisi Pusat Kota)
                 "jakarta pusat": [-6.1805, 106.8284], "jakarta selatan": [-6.2615, 106.8106], 
@@ -1803,179 +1779,125 @@
                 "biak": [-1.1833, 136.0833], "wamena": [-8.1000, 138.9500]
             };
 
-            // Shorten string key sorting
+            // Urutkan key berdasarkan panjang dari terpanjang ke terpendek agar spesifik diprioritaskan
             const sortedCityKeys = Object.keys(cityCoordinates).sort((a, b) => b.length - a.length);
 
-            // Validasi string luar angkasa
-            const foreignKeywords = ['malaysia', 'taiwan', 'hongkong', 'singapore', 'singapura', 'arab', 'saudi', 'korea', 'japan', 'jepang', 'brunei', 'macau', 'timor', 'aus', 'luar negeri', 'london'];
+            // Keyword pencarian member di luar Indonesia / Unmapped
+            const foreignKeywords = ['malaysia', 'taiwan', 'hongkong', 'singapore', 'singapura', 'arab', 'saudi', 'korea', 'japan', 'jepang', 'brunei', 'macau', 'timor', 'aus', 'luar negeri'];
 
             function initVRMap() {
                 if (typeof L === 'undefined' || !document.getElementById('vr-indonesia-map')) return;
                 
-                // Set initial view di tengah Indonesia
+                // Titik tengah default pada kepulauan Indonesia
                 vrMap = L.map('vr-indonesia-map').setView([-2.5489, 118.0149], 5);
                 
-                // Gunakan Tile Satelit Google (Tanpa mengubah style, tapi lebih realistis dan bersih)
-                L.tileLayer('https://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
-                    maxZoom: 20,
-                    subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
-                    attribution: '&copy; Google Maps'
+                // Dark Mode Map Tile via CARTO
+                L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                    attribution: '&copy; <a href="https://carto.com/attributions">CARTO</a>',
+                    subdomains: 'abcd',
+                    maxZoom: 20
                 }).addTo(vrMap);
 
                 markersLayer = L.layerGroup().addTo(vrMap);
-                
-                // Event listener untuk Smart Clustering (Debounced)
-                vrMap.on('moveend', () => {
-                    clearTimeout(debounceUpdateTimeout);
-                    debounceUpdateTimeout = setTimeout(window.updateMapMarkers, 150);
-                });
-                vrMap.on('zoomend', () => {
-                    clearTimeout(debounceUpdateTimeout);
-                    debounceUpdateTimeout = setTimeout(window.updateMapMarkers, 150);
-                });
             }
 
-            // Fungsi utama pemetaan Marker berdasar batas tampilan dan cluster pintar
+            // Fungsi ini dipanggil realtime setelah membersData diupdate
             window.updateMapMarkers = function() {
                 if (!vrMap || !markersLayer) return;
                 markersLayer.clearLayers();
 
+                const cityGroups = {};
                 const foreignMembers = [];
-                const validMappedMembers = [];
                 const mapEmptyState = document.getElementById('map-empty-state');
 
                 if(membersData.length === 0) {
-                    if(mapEmptyState) mapEmptyState.classList.remove('hidden', 'opacity-0');
+                    if(mapEmptyState) {
+                        mapEmptyState.classList.remove('hidden');
+                        setTimeout(() => mapEmptyState.classList.remove('opacity-0'), 10);
+                    }
+                    // Sembunyikan foreign jika 0
                     const foreignSection = document.getElementById('outside-orbit-section');
                     if(foreignSection) foreignSection.classList.add('hidden');
                     return;
                 } else {
-                    if(mapEmptyState) mapEmptyState.classList.add('hidden');
+                    if(mapEmptyState) {
+                        mapEmptyState.classList.add('opacity-0');
+                        setTimeout(() => mapEmptyState.classList.add('hidden'), 300);
+                    }
                 }
 
-                // Filtering Data dan Assign Koordinat Absolut
                 membersData.forEach(member => {
+                    // Cek ketersediaan data kota (Fallback validasi JSON)
                     if (!member.city || typeof member.city !== 'string' || member.city.trim() === '') {
                         member.city = 'Lokasi Tidak Diketahui';
                     }
 
                     let rawCity = member.city.toLowerCase().replace(/[^a-z0-9\s]/g, '');
                     
+                    // Filter Outside Indonesia dari keywords manual
                     let isForeign = false;
                     for(let fk of foreignKeywords) {
-                        if(rawCity.includes(fk)) { isForeign = true; break; }
+                        if(rawCity.includes(fk)) { 
+                            isForeign = true; 
+                            break; 
+                        }
                     }
 
                     if (isForeign) {
                         foreignMembers.push(member);
-                        return;
+                        return; // Bypass map rendering
                     }
 
+                    // Mapping Indonesia Cities based on precise database
                     let matchedKey = null;
                     let coords = null;
                     
                     for (let key of sortedCityKeys) {
                         if (rawCity.includes(key)) {
                             matchedKey = key;
+                            // Gunakan koordinat absolut presisi
                             coords = [...cityCoordinates[key]]; 
                             break;
                         }
                     }
 
+                    // Jika kota benar-benar tidak ditemukan di database akurat, pindah ke Outside Orbit
                     if (!coords) {
                         foreignMembers.push(member);
                         return;
                     }
 
                     let displayCityName = member.city.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ');
-                    
-                    validMappedMembers.push({
-                        coords: coords,
-                        displayName: displayCityName,
-                        member: member
-                    });
+
+                    if (!cityGroups[matchedKey]) {
+                        cityGroups[matchedKey] = {
+                            coords: coords,
+                            displayName: displayCityName,
+                            members: []
+                        };
+                    }
+                    cityGroups[matchedKey].members.push(member);
                 });
 
-                // ==========================================
-                // HYBRID SMART CLUSTERING ALGORITHM
-                // ==========================================
-                const zoom = vrMap.getZoom();
-                const bounds = vrMap.getBounds().pad(0.3); // Pre-load slightly outside viewport
-                let clusters = [];
-                
-                // Tentukan radius (pixel) gabungan berdasarkan tingkat zoom
-                let clusterRadius = 0;
-                if (zoom < 6) clusterRadius = 80;
-                else if (zoom < 8) clusterRadius = 50;
-                else if (zoom < 10) clusterRadius = 30;
-                else clusterRadius = 0; // Zoom tinggi, pisah semua jika koordinat persis beda
+                // Render Map Markers (Indonesia)
+                for (let key in cityGroups) {
+                    const group = cityGroups[key];
 
-                validMappedMembers.forEach(item => {
-                    // Lazy Rendering: Skip render if totally outside bounds
-                    if (!bounds.contains(item.coords)) return;
-
-                    let point = vrMap.latLngToContainerPoint(item.coords);
-                    let addedToCluster = false;
-
-                    // Cek jika berdekatan dengan cluster yg ada di layar
-                    for (let c of clusters) {
-                        if (clusterRadius > 0) {
-                            let clusterPoint = vrMap.latLngToContainerPoint(c.anchorCoords);
-                            let distance = Math.sqrt(Math.pow(point.x - clusterPoint.x, 2) + Math.pow(point.y - clusterPoint.y, 2));
-
-                            if (distance < clusterRadius) {
-                                c.members.push(item.member);
-                                // Jaga nama kota dominan di cluster jika bersatu
-                                if (!c.displayNames.includes(item.displayName)) c.displayNames.push(item.displayName);
-                                addedToCluster = true;
-                                break;
-                            }
-                        } else {
-                            // Walau zoom tinggi, jika koordinat kota SAMA PERSIS (identik), tetap wajib digabung dalam 1 pin
-                            if (c.anchorCoords[0] === item.coords[0] && c.anchorCoords[1] === item.coords[1]) {
-                                c.members.push(item.member);
-                                if (!c.displayNames.includes(item.displayName)) c.displayNames.push(item.displayName);
-                                addedToCluster = true;
-                                break;
-                            }
-                        }
-                    }
-
-                    if (!addedToCluster) {
-                        clusters.push({
-                            anchorCoords: item.coords, // Pakai koordinat kota asli agar pin tidak geser ke laut
-                            displayNames: [item.displayName],
-                            members: [item.member]
-                        });
-                    }
-                });
-
-                // Render Clusters to Map
-                clusters.forEach(cluster => {
                     let logosHTML = '';
-                    const maxLogos = 6; // Max 6 foto yang tampil di marker
-                    const displayMembers = cluster.members.slice(0, maxLogos);
-                    const hiddenCount = cluster.members.length - maxLogos;
-
-                    displayMembers.forEach(m => {
-                        logosHTML += `<img src="image/LogoVRLoversID.png" alt="${m.name}" title="${m.name}" class="member-logo-img" onerror="this.src='https://placehold.co/100x100/0b1d3a/00f3ff?text=VR'">`;
+                    group.members.forEach(m => {
+                        logosHTML += `<img src="image\LogoVRLoversID.png" alt="${m.name}" title="${m.name} (${m.role})" class="member-logo-img" onerror="this.src='https://placehold.co/100x100/0b1d3a/00f3ff?text=VR'">`;
                     });
 
-                    // Add +N Badge
-                    let extraBadgeHTML = hiddenCount > 0 ? `<div class="cluster-badge">+${hiddenCount}</div>` : '';
-                    
-                    // Prioritaskan nama region pertama atau format "Wilayah & sekitarnya" jika tergabung banyak kota
-                    let labelName = cluster.displayNames[0];
-                    if (cluster.displayNames.length > 1) labelName += ' & sekitarnya';
+                    let countBadge = group.members.length > 1 ? `<div class="absolute -top-2 -right-2 bg-neon-pink text-white text-[9px] font-bold w-5 h-5 flex items-center justify-center rounded-full shadow-[0_0_10px_#ff00ff] z-30">${group.members.length}</div>` : '';
 
                     const customHtml = `
                         <div class="city-marker-group">
-                            <div class="logos-wrapper">
+                            <div class="logos-wrapper relative">
                                 ${logosHTML}
-                                ${extraBadgeHTML}
+                                ${countBadge}
                             </div>
                             <div class="marker-connector"></div>
-                            <div class="city-label">${labelName}</div>
+                            <div class="city-label">${group.displayName}</div>
                         </div>
                     `;
 
@@ -1986,7 +1908,7 @@
                         iconAnchor: [0, 0]
                     });
 
-                    let popupList = cluster.members.map(m => `
+                    let popupList = group.members.map(m => `
                         <div class="border-b border-gray-700/50 py-1.5 flex justify-between items-center gap-2">
                             <span class="text-neon-cyan font-bold text-[11px] font-orbitron truncate" title="${m.name}">${m.name}</span>
                             <span class="text-[9px] text-gray-400 font-inter uppercase bg-space-navy px-1.5 py-0.5 rounded shrink-0">${m.role}</span>
@@ -1995,15 +1917,15 @@
                     
                     let popupContent = `
                         <div class="max-h-[150px] overflow-y-auto px-1 scrollbar-custom min-w-[160px] max-w-[85vw] sm:max-w-[300px]">
-                            <p class="font-orbitron font-bold text-sm text-neon-pink mb-2 sticky top-0 bg-[#030712] z-10 py-1 border-b border-neon-purple"><i class="fas fa-map-marker-alt"></i> ${labelName}</p>
+                            <p class="font-orbitron font-bold text-sm text-neon-pink mb-2 sticky top-0 bg-[#030712] z-10 py-1 border-b border-neon-purple"><i class="fas fa-map-marker-alt"></i> ${group.displayName}</p>
                             ${popupList}
                         </div>
                     `;
 
-                    L.marker(cluster.anchorCoords, {icon: groupIcon})
+                    L.marker(group.coords, {icon: groupIcon})
                      .addTo(markersLayer)
                      .bindPopup(popupContent);
-                });
+                }
                 
                 // Render Outside Indonesia Section
                 const foreignSection = document.getElementById('outside-orbit-section');
@@ -2018,7 +1940,7 @@
                         foreignGrid.classList.remove('hidden');
                         foreignGrid.innerHTML = foreignMembers.map(m => `
                             <div class="glass-panel p-3 rounded-xl flex items-center gap-3 hover-glow cursor-default border border-gray-700/50 hover:border-neon-purple transition-all">
-                                <img src="image/LogoVRLoversID.png" alt="VR Logo" class="w-8 h-8 md:w-10 md:h-10 rounded-full border border-neon-cyan object-cover bg-space-dark shrink-0" onerror="this.src='https://placehold.co/100x100/0b1d3a/00f3ff?text=VR'">
+                                <img src="image\LogoVRLoversID.png" alt="VR Logo" class="w-8 h-8 md:w-10 md:h-10 rounded-full border border-neon-cyan object-cover bg-space-dark shrink-0" onerror="this.src='https://placehold.co/100x100/0b1d3a/00f3ff?text=VR'">
                                 <div class="overflow-hidden w-full">
                                     <h4 class="font-orbitron text-xs md:text-sm font-bold text-white truncate" title="${m.name}">${m.name}</h4>
                                     <p class="font-inter text-[9px] md:text-[10px] text-neon-pink truncate mt-0.5" title="${m.city}"><i class="fas fa-globe"></i> ${m.city}</p>
@@ -2070,7 +1992,7 @@
                         let deleteBtnHTML = '';
                         if (isAdmin) {
                             deleteBtnHTML = `
-                                <button onclick="deleteMember('${m.name}')" class="absolute top-3 right-3 w-8 h-8 bg-red-500/20 text-red-500 border border-red-500/50 rounded-full flex justify-center items-center hover:bg-red-500 hover:text-white transition-colors cursor-pointer z-30" title="Hapus Anggota">
+                                <button onclick="deleteMember('${m.name}')" class="absolute top-3 right-3 w-8 h-8 bg-red-500/20 text-red-500 border border-red-500/50 rounded-full flex justify-center items-center hover:bg-red-500 hover:text-white transition-colors cursor-pointer z-10" title="Hapus Anggota">
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
                             `;
@@ -2081,15 +2003,14 @@
                         let roleIcon = '';
                         let avatarBadge = '';
                         
-                        // Perbaikan posisi z-index dan overflow pada badge
                         if (currentRole === 'captain') {
                             roleColorClass = 'bg-yellow-500/20 text-yellow-500 border border-yellow-500/50';
                             roleIcon = '<i class="fas fa-star text-[10px]"></i> ';
-                            avatarBadge = '<div class="absolute -top-1 -right-1 bg-yellow-500 text-space-dark rounded-full w-6 h-6 flex items-center justify-center text-[10px] shadow-[0_0_10px_#eab308] z-20"><i class="fas fa-star"></i></div>';
+                            avatarBadge = '<div class="absolute -top-1 -right-1 bg-yellow-500 text-space-dark rounded-full w-6 h-6 flex items-center justify-center text-[10px] shadow-[0_0_10px_#eab308]"><i class="fas fa-star"></i></div>';
                         } else if (currentRole === 'admin') {
                             roleColorClass = 'bg-neon-pink/20 text-neon-pink border border-neon-pink/50';
                             roleIcon = '<i class="fas fa-shield-alt text-[10px]"></i> ';
-                            avatarBadge = '<div class="absolute -top-1 -right-1 bg-neon-pink text-white rounded-full w-6 h-6 flex items-center justify-center text-[10px] shadow-[0_0_10px_#ff00ff] z-20"><i class="fas fa-shield-alt"></i></div>';
+                            avatarBadge = '<div class="absolute -top-1 -right-1 bg-neon-pink text-white rounded-full w-6 h-6 flex items-center justify-center text-[10px] shadow-[0_0_10px_#ff00ff]"><i class="fas fa-shield-alt"></i></div>';
                         }
 
                         let roleControlHTML = `<span class="${roleColorClass} px-2 py-0.5 rounded flex items-center gap-1">${roleIcon}${m.role}</span>`;
@@ -2104,14 +2025,11 @@
                             `;
                         }
 
-                        // Re-strukturisasi container avatar via JS untuk mencegah badge terpotong oleh overflow-hidden
                         card.innerHTML = `
                             ${deleteBtnHTML}
-                            <div class="relative w-16 h-16 mx-auto mb-4">
-                                <div class="w-full h-full bg-space-dark rounded-full border-2 border-neon-cyan flex items-center justify-center shadow-[0_0_15px_rgba(0,243,255,0.4)] overflow-hidden group-hover:border-neon-pink transition-colors">
-                                    <img src="image/LogoVRLoversID.png" alt="VR Logo" class="w-full h-full object-cover p-1 opacity-80 group-hover:opacity-100 transition-opacity" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                                    <i class="fas fa-user-astronaut text-2xl text-neon-cyan hidden absolute"></i>
-                                </div>
+                            <div class="w-16 h-16 bg-space-dark rounded-full border-2 border-neon-cyan flex items-center justify-center mb-4 shadow-[0_0_15px_rgba(0,243,255,0.4)] relative overflow-hidden group-hover:border-neon-pink transition-colors">
+                                <img src="image\LogoVRLoversID.png" alt="VR Logo" class="w-full h-full object-cover p-1 opacity-80 group-hover:opacity-100 transition-opacity" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <i class="fas fa-user-astronaut text-2xl text-neon-cyan hidden absolute"></i>
                                 ${avatarBadge}
                             </div>
                             <h4 class="font-orbitron font-bold text-lg text-white mb-1 line-clamp-1">${m.name}</h4>
@@ -2436,6 +2354,7 @@
             const NEWS_STORAGE_KEY = 'vr_news_data';
             let newsDataArray = [];
 
+            // 1. Inisialisasi Data Berita
             function initNewsSystem() {
                 const storedNews = localStorage.getItem(NEWS_STORAGE_KEY);
                 
@@ -2468,6 +2387,7 @@
                 renderNewsGrid();
                 checkAdminNewsState();
                 
+                // Ambil data terbaru dari Google Sheets
                 if (URL_API_BERITA && URL_API_BERITA !== '') {
                     const urlNews = URL_API_BERITA + '?t=' + new Date().getTime();
                     fetch(urlNews)
@@ -2483,10 +2403,12 @@
                 }
             }
 
+            // 2. Simpan Data Berita Lokal
             function saveNewsData() {
                 localStorage.setItem(NEWS_STORAGE_KEY, JSON.stringify(newsDataArray));
             }
 
+            // 3. Render Daftar Berita ke Layar
             function renderNewsGrid() {
                 const gridContainer = document.querySelector('#news .grid');
                 if (!gridContainer) return;
@@ -2540,6 +2462,7 @@
                 });
             }
 
+            // 4. Tambah Tombol Admin di Header Berita
             function injectAddNewsButton() {
                 const newsHeader = document.querySelector('#news .flex-col.md\\:flex-row');
                 if (!newsHeader) return;
@@ -2555,6 +2478,7 @@
                 newsHeader.appendChild(btnWrapper);
             }
 
+            // 5. Suntikkan Modal Form dan Detail ke Body
             function injectNewsModals() {
                 const modals = `
                     <!-- Modal Form Berita -->
@@ -2661,6 +2585,7 @@
                 });
             }
 
+            // 6. Cek Status Tombol Admin
             window.checkAdminNewsState = function() {
                 const addWrapper = document.getElementById('admin-add-news-wrapper');
                 if (addWrapper) {
@@ -2673,6 +2598,7 @@
                 renderNewsGrid();
             };
 
+            // 7. Buka Tutup Modal Form Berita
             window.openNewsForm = function(id = null) {
                 const modal = document.getElementById('crud-news-modal');
                 const form = document.getElementById('crud-news-form');
@@ -2717,6 +2643,7 @@
                 setTimeout(() => modal.classList.add('hidden'), 300);
             };
 
+            // 8. Proses Simpan Berita Baru atau Edit ke Local & Cloud
             function handleNewsFormSubmit(e) {
                 e.preventDefault();
                 const id = document.getElementById('crud-news-id').value;
@@ -2764,10 +2691,12 @@
                 }
             }
 
+            // 9. Tombol Edit
             window.editNews = function(id) {
                 openNewsForm(id);
             };
 
+            // 10. Tombol Hapus (Lokal & Cloud)
             window.deleteNews = function(id) {
                 showConfirmModal('Hapus berita ini dari galaksi? Tindakan ini tidak bisa dibatalkan.', () => {
                     newsDataArray = newsDataArray.filter(n => n.id !== id);
@@ -2784,6 +2713,7 @@
                 });
             };
 
+            // 11. Buka Tutup Modal Detail Berita
             window.openNewsDetail = function(id) {
                 const news = newsDataArray.find(n => n.id === id);
                 if (!news) return;
